@@ -5,31 +5,40 @@ import {
     Group,
     WhiteContainer,
     Container,
-    Video,
-  } from "./Styles";
+    Video, // Mantendo Styled Components para estilização
+} from "./Styles";
+import { useGetArchives } from "../../hooks/query/archives";
+import { ClipLoader } from "react-spinners";
 
 export default function VideoPage() {
-
   const location = useLocation();
-
   const data = location.state;
-    
-    return (
-      <Container>
-        <WhiteContainer>
-          <Group>
-            <Line>{data.name}</Line>
-          </Group>
-          <VideoContainer>
+
+  const { data: archiveData, isLoading } = useGetArchives({
+    id: data.archives,
+    name: data.title,
+    onError: () => {},
+  });
+  console.log(archiveData)
+  return (
+    <Container>
+      <WhiteContainer>
+        <Group>
+          <Line>{data.title}</Line>
+        </Group>
+        <VideoContainer>
+          {isLoading && <ClipLoader color="#FFA500" size={50} />}
+          {!isLoading && (
             <Video
-              src={data.linkVideo}
-              title={data.name}
+              src={`data:video/mp4;base64,${archiveData?.videoFile}`} // Vídeo Base64
+              title={data.title}
+              controls
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              ></Video>
-          </VideoContainer>
-        </WhiteContainer>
-      </Container>
-    );
-  }
-  
+            />
+          )}
+        </VideoContainer>
+      </WhiteContainer>
+    </Container>
+  );
+}

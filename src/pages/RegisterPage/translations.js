@@ -143,6 +143,43 @@ export function TranslateText( globalLanguage ) {
         passwordStringLoginError = "¡Introduce una contraseña!";
         passwordMinLoginError = "¡Rellena el campo de la contraseña!";
     }
+    if (globalLanguage === "GE") {
+        name = "Name";
+        birthday = "Geburtstag";
+        phone = "Telefon (Bsp: 55XX9XXXXXXXX)";
+        password = "Passwort";
+        acceptTerms = "Ich stimme den Datenschutzrichtlinien zu";
+        toastCreate = "Benutzer erfolgreich registriert!";
+        toastLogin = "Erfolgreich eingeloggt!";
+        titleLogin = "Hast du bereits ein Konto? Wenn ja, logge dich ein:";
+        forgotPassword = "Passwort vergessen? Wiederherstellen";
+        here = "hier";
+        titleRegister = "Wenn nicht, erstelle es jetzt:";
+        buttonLogin = "Login";
+        buttonRegister = "Registrieren";
+    
+        nameStringError = "Name ist erforderlich";
+        nameMinError = "Der Name muss mindestens 2 Zeichen lang sein";
+        nameMaxError = "Der Name darf 60 Zeichen nicht überschreiten";
+        birthdayStringError = "Geburtsdatum ist erforderlich";
+        birthdayCorrectDateError = "Wählen Sie ein Geburtsdatum";
+        birthdayValidDateError = "Ungültiges Geburtsdatum";
+        emailStringError = "E-Mail ist erforderlich";
+        emailMinError = "Geben Sie eine E-Mail-Adresse ein!";
+        emailError = "Die E-Mail muss gültig sein!";
+        passwordStringError = "Passwort ist erforderlich";
+        passwordMinError = "Das Passwort muss mindestens 4 Zeichen lang sein!";
+        passwordMaxError = "Das Passwort darf 16 Zeichen nicht überschreiten!";
+        phoneStringError = "Telefonnummer ist erforderlich";
+        phoneError = "Geben Sie eine gültige Telefonnummer ein";
+        acceptTermsError = "Sie müssen den Nutzungsbedingungen zustimmen";
+        emailStringLoginError = "Geben Sie eine E-Mail-Adresse ein!";
+        emailMinLoginError = "Füllen Sie das E-Mail-Feld aus!";
+        emailLoginError = "Geben Sie eine gültige E-Mail-Adresse ein!";
+        passwordStringLoginError = "Geben Sie ein Passwort ein!";
+        passwordMinLoginError = "Füllen Sie das Passwort-Feld aus!";
+    }
+    
     return {
         name,
         birthday,

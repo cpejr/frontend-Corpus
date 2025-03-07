@@ -23,7 +23,7 @@ export const Line = styled.hr`
   display: flex;
   margin: 0;
   max-width: 25%;
-  background-color: ${colors.background.primary};
+  background-color: ${colors.font.title};
   box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.6);
   border: none;
   height: 4px;
@@ -74,12 +74,14 @@ export const Title = styled.div`
 
 export const ConteinerTS = styled.div`
   display: flex;
+
   flex-direction: column;
   margin-top: 1rem;
 `;
 
 export const ConteinerTable = styled.div`
   display: flex;
+
   flex-direction: column;
   width: 90%;
   align-self: center;
@@ -90,9 +92,10 @@ export const TypeSelect = styled(Select)`
   width: 130px;
   .ant-select-selector {
     background-color: ${colors.background.primary} !important;
-    color: ${colors.font.primary} !important;
+    color: #debc96 !important;
     border-radius: 4px;
     border: 2px solid #fff;
+    border-color: #debc96 !important;
     height: 4vh;
     text-align: center;
     justify-content: center;
@@ -102,14 +105,12 @@ export const TypeSelect = styled(Select)`
     border: 1px solid orange;
   }
   .ant-select-selection-item {
-    color: ${colors.font.primary} !important;
+    color: #debc96 !important;
   }
   .ant-select-arrow {
     display: none;
   }
   .ant-select-dropdown {
-    background-color: ${colors.background.secondary};
-    color: ${colors.font.primary};
     align-items: center;
   }
 

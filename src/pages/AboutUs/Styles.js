@@ -24,7 +24,7 @@ export const BackgroundTitle = styled.div`
 `;
 
 export const Title = styled.div`
-  color: ${colors.font.title};
+  color: #ccd5ae;
   font-size: 36px;
   margin-left: 3%;
   justify-self: left;
@@ -42,6 +42,7 @@ export const Title = styled.div`
 `;
 
 export const Line = styled.div`
+  color: #ccd5ae;
   display: flex;
   flex-direction: row;
   width: 70%;
@@ -56,6 +57,7 @@ export const Line = styled.div`
 `;
 
 export const ImageLine = styled.div`
+  color: #ccd5ae;
   display: flex;
   flex-direction: row;
   width: 70%;
@@ -77,7 +79,7 @@ export const TextColumn = styled.div`
   > img {
     width: 80%;
     height: auto;
-    border: 6px solid ${colors.font.primary};
+    border: 6px solid #ccd5ae;
     border-bottom-width: 12px;
     @media (max-width: ${breakpoints.smallTablet}) {
       border-color: ${colors.font.secondary};
@@ -106,7 +108,7 @@ export const PintaColumn = styled.div`
   flex-direction: column;
   width: 30%;
   > img {
-    border: 6px solid ${colors.font.primary};
+    border: 6px solid #ccd5ae;
     border-bottom-width: 12px;
     @media (max-width: ${breakpoints.smallTablet}) {
       border-color: ${colors.font.secondary};

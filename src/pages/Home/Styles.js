@@ -9,7 +9,7 @@ export const Container = styled.div`
 export const Overlay = styled.div`
   background: linear-gradient(
     180deg,
-    rgba(107, 144, 128, 1),
+    rgba(204, 213, 174, 1),
     rgba(1000, 1000, 1000, 0.4)
   );
   max-height: 70vh;
@@ -41,6 +41,7 @@ export const TitleLogo = styled.h1`
   max-width: 100%;
   font-size: 4vw;
   font-weight: normal;
+  color: rgba(242, 251, 243, 255);
   text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.7);
 `;
 
@@ -48,6 +49,7 @@ export const SubTitleLogo = styled.h3`
   font-size: 2vw;
   margin: 0px;
   font-weight: 100;
+  color: rgba(242, 251, 243, 255);
 `;
 
 export const Section = styled.div`
@@ -70,8 +72,8 @@ export const Button1 = styled(Button)`
   height: 4.5rem;
   padding: 5px;
   border-radius: 12px;
-  background-color: ${colors.background.header};
-  color: ${colors.font.primary};
+  background-color: #d4a373;
+  color: #f5eadf;
   text-transform: capitalize;
   font-size: 2rem;
   cursor: pointer;
@@ -115,7 +117,7 @@ export const Column = styled.div`
 export const Image = styled.img`
   max-width: 50%;
   margin: 50px;
-  border: solid 10px;
+  border: solid #ccd5ae 10px;
   @media (max-width: ${breakpoints.mobile}) {
     display: none;
   }
@@ -123,10 +125,12 @@ export const Image = styled.img`
 
 export const ImageMobile = styled.img`
   display: none;
+  border: solid #ccd5ae 10px;
   @media (max-width: ${breakpoints.mobile}) {
     display: block;
     margin: 20px;
     max-width: 80%;
-    border: solid 10px;
+
+    color: #ccd5ae;
   }
 `;

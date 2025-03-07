@@ -4,6 +4,8 @@ import { colors } from "../../../styles/stylesVariables";
 
 export const Input = styled(AutoComplete)`
   margin-top: 30px;
+  margin-left: 3%;
+  margin-right: 3%;
   width: ${(props) => (props.width ? props.width : "95%")};
   align-self: center;
   .p-autocomplete-input {
@@ -14,7 +16,7 @@ export const Input = styled(AutoComplete)`
     background-color: ${colors.background.primary};
 
     border-radius: 25px;
-    border: solid 1px ${colors.font.title};
+    border: solid #d4a373 1px;
     padding-left: 10px;
     font-size: 1.2rem;
     margin-bottom: 2rem;
@@ -25,10 +27,10 @@ export const Input = styled(AutoComplete)`
     color: ${colors.font.primary};
 
     &::placeholder {
-      color: ${colors.font.primary};
+      color: #d4a373;
     }
-  &:hover {
-    border-color: #f19709;
-  }
+    &:hover {
+      border-color: #f19709;
+    }
   }
 `;

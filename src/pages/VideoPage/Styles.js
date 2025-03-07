@@ -59,7 +59,7 @@ export const VideoContainer = styled.div`
   }
 `;
 
-export const Video = styled.iframe`
+export const Video = styled.video`
   width: 80%;
   height: 90%;
 `;

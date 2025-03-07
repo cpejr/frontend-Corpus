@@ -10,7 +10,7 @@ export const TableShape = styled(DataTable)`
   width: 90%;
 
   min-height: 70%;
-  color: ${colors.font.primary};
+
   margin-top: 20px;
   .p-paginator-bottom .p-paginator-pages .p-paginator-page,
   .p-paginator-bottom .p-paginator-prev .p-paginator-icon,

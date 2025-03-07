@@ -1,58 +1,59 @@
+import { Container, Text, Title } from "./Styles";
+import { CloseOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
+import { useGlobalLanguage } from "../../../../stores/globalLanguage";
+import { TranslateText, TranslateToastError } from "./translations";
 import Button from "../../../common/Button/Button";
-import { colors } from "../../../../styles/stylesVariables";
-import { Container, Message, ModalStyle } from "./Styles";
+import { Modal } from "antd";
+import { useDeleteVideos } from "../../../../hooks/query/videos";
 
-export default function ModalDeleteVideos({
-  handleVideosDelete,
-  id,
-  modal,
-  closeModal,
-  modalCloseIcon,
-}) {
+export default function ModalDeleteVideo({ openModal, closeModal, id }) {
+  const { globalLanguage } = useGlobalLanguage();
+  const translation = TranslateText(globalLanguage);
+  const { mutate: deleteVideo } = useDeleteVideos({
+    onSuccess: () => {
+      toast.success(translation.successToast);
+      closeModal();
+    },
+    onError: (err) => {
+      toast.error(TranslateToastError(globalLanguage, err.response.status));
+      closeModal();
+    },
+  });
+
+  const onConfirm = () => {
+    deleteVideo(id);
+  };
+
   return (
-    <ModalStyle
-      open={modal}
+    <Modal
+      open={openModal}
       onCancel={closeModal}
-      closeIcon={modalCloseIcon}
-      width={500}
-      height={250}
-      padding={0}
       footer={null}
-      centered
+      closeIcon={<CloseOutlined />}
       destroyOnClose
+      centered
     >
       <Container>
-        <Message>Tem certeza que deseja excluir esse Video?</Message>
+        <Title>{translation.title}</Title>
+        <Text>{translation.text}</Text>
         <Button
-          onClick={() => {
-            handleVideosDelete(id);
-            closeModal();
-          }}
-          type="button"
-          backgroundcolor="transparent"
-          color={colors.font.primary}
-          border="1px solid"
-          borderRadius="0.5rem"
-          marginTop="1.5rem"
-          fontSize="1.8rem"
-          fontWeight="500"
-          lineHeight="2.2rem"
-          hoverBackgroundColor={colors.modals.modalButton}
-          hoverColor={colors.font.secondary}
-          borderColor={colors.modals.modalButton}
+          color="white"
+          border-color="white"
+          fontSize="1.2em"
+          width="40% !important"
+          onClick={onConfirm}
         >
-          Excluir
+          {translation.button}
         </Button>
       </Container>
-    </ModalStyle>
+    </Modal>
   );
 }
 
-ModalDeleteVideos.propTypes = {
-  handleVideosDelete: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  modal: PropTypes.bool.isRequired,
+ModalDeleteVideo.propTypes = {
+  openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  modalCloseIcon: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
 };

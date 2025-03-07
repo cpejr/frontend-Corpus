@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { MultiSelect } from "primereact/multiselect";
 import { breakpoints, colors } from "../../../../styles/stylesVariables";
 import { Modal } from "antd";
 import { Calendar as PrimeCalendar } from "primereact/calendar";
@@ -27,11 +26,11 @@ export const Message = styled.h1`
 
 export const ModalStyle = styled(Modal)`
   .ant-modal-content {
-    background-color: ${colors.modals.background};
+    background-color: #fefae0;
     padding: 1rem;
     align-items: center;
     justify-content: center;
-    color: ${colors.font.primary};
+    color: red;
     padding: 6;
     margin: 0;
     border-radius: none;
@@ -89,31 +88,5 @@ export const Calendar = styled(PrimeCalendar)`
   }
   @media (max-width: ${breakpoints.smallDevice}) {
     width: 50%;
-  }
-`;
-
-export const MultipleSelect = styled(MultiSelect)`
-  background-color: "white";
-  border: 0.1rem black solid;
-  color: ${(props) => props?.color};
-  .p-multiselect-label {
-    width: 215px;
-  }
-  @media (max-width: ${breakpoints.tablet}) {
-    width: 50%;
-  }
-  @media (max-width: ${breakpoints.smallTablet}) {
-    width: 50%;
-  }
-  @media (max-width: ${breakpoints.mobile}) {
-    display: flex;
-    flex-direction: row;
-    width: 33%;
-  }
-  @media (max-width: ${breakpoints.smallDevice}) {
-    width: 50%;
-  }
-  &:hover {
-    border-color: #f19709;
   }
 `;

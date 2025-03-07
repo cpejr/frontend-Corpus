@@ -27,7 +27,7 @@ export const Line = styled.hr`
   display: flex;
   margin: 0;
   max-width: 25%;
-  background-color: ${colors.background.primary};
+  background-color: #ccd5ae;
   box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.6);
   border: none;
   height: 4px;

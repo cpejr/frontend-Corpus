@@ -56,7 +56,6 @@ export default function ModalForgotPassword({ openModal, closeModal }) {
         <FormSubmit onSubmit={onSubmit} inputs={inputs} schema={validationSchema()} loading={isPending} buttonText={translation.button}/>
         {isPending && 
           (<>
-            <Text>{translation.loading}</Text>
             <TailSpin></TailSpin>
           </>)}
       </Container>

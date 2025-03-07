@@ -9,8 +9,13 @@ export const getCategoryPrice = async (filters = {}) => {
 
 // Videos
 
-export const getVideos = async (filters = {}) => {
-  const { data } = await api.get(`/video`, { params: filters });
+export const getVideos = async () => {
+  const { data } = await api.get(`/video`);
+  return data;
+};
+export const getVideosByParameters = async (filters = {}) => {
+  const { data } = await api.get(`/videofilter`, { params: filters });
+
   return data;
 };
 export const deleteVideos = async (_id) => {
@@ -95,4 +100,11 @@ export async function refresh() {
   setAuth(data.accessToken);
 
   return data;
+}
+
+// archive
+export async function getArchives(_id) {
+  const {data} = await api.get(`/archive/${_id}`)
+
+  return data
 }

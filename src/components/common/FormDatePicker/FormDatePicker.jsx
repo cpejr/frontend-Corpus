@@ -21,7 +21,7 @@ export default function FormDatePicker({
   const [date, setDate] = useState(defaultValue || null);
 
   const handleChange = (dateChange) => {
-    setValue("data_nascimento", dateChange.toLocaleDateString("pt-BR"), {
+    setValue(label, dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
 

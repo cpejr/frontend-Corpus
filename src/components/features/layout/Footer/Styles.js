@@ -5,7 +5,7 @@ import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 export const Container = styled.div`
   display: flex;
   max-width: 100%;
-  height: 10rem;
+  height: 100%;
   align-items: center;
   text-align: center;
   justify-content: space-between;
@@ -16,7 +16,7 @@ export const Container = styled.div`
 `;
 
 export const LogoFooter = styled.img`
-  width: 200px;
+  width: 10%;
   display: flex;
   cursor: pointer;
   @media (max-width: ${breakpoints.mobile}) {
@@ -28,6 +28,7 @@ export const SocialContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 50px;
+  color: #f5eadf;
   gap: 10px;
 
   p {
@@ -44,6 +45,7 @@ export const SocialIcon = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  color: #f5eadf;
   justify-content: center;
   gap: 40px;
   @media (max-width: ${breakpoints.mobile}) {

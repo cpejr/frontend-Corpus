@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form as FormContainer,
   ErrorMessage,
@@ -8,17 +8,19 @@ import {
   CheckSection,
   Checkbox,
   CheckText,
+  UploadSection,
 } from "./Styles";
 import { LoadingOutlined } from "@ant-design/icons";
 import FormInput from "../../common/FormInput/FormInput";
 import Button from "../../common/Button/Button";
 import FormSelect from "../../common/FormSelect/FormSelect";
-
+import UploadButton from "../../common/UploadButton/UploadButton";
+import TimePicker from "../../common/FormTimePicker/TimePicker";
 import CalendarFunction from "../../common/Calendar/Calendar";
 export default function FormSubmit({
   inputs,
   onSubmit,
-  schema,
+  //schema,
   color,
   loading,
   requestError,
@@ -35,6 +37,8 @@ export default function FormSubmit({
   } = useForm({
     resolver: zodResolver(schema),
   });
+
+
   function submitHandler(data) {
     onSubmit(data);
     reset();
@@ -100,7 +104,7 @@ export default function FormSubmit({
                 defaultValue={input?.defaultValue}
                 isSubmitSuccessful={isSubmitSuccessful}
                 onChange={(date) =>
-                  setValue(input.key, date, { shouldValidate: true })
+                  setValue(input.label, date, { shouldValidate: true })
                 }
                 color={color}
               />
@@ -124,6 +128,48 @@ export default function FormSubmit({
                 />
                 <CheckText>{input?.placeholder}</CheckText>
               </CheckSection>
+              {errors[input.key]?.message && (
+                <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
+              )}
+            </InputKeep>
+          );
+        } else if (input.type == "file") {
+          return (
+            <InputKeep key={input.key}>
+              <UploadSection>
+                <UploadButton
+                  inputKey={input.key}
+                  label={input.label}
+                  placeholder={input.placeholder}
+                  icon={input.icon}
+                  color={input.color}
+                  error={errors[input.key] ? true : false || requestError}
+                  allowedMimeTypes=".jpg, .png, .pdf, video/mp4,video/x-msvideo,video/quicktime,video/webm"
+                  setValue={setValue}
+                  {...register(input.key)}
+                  multiple={false}
+                  messageError1={input.errors[0]}
+                  messageError2={input.errors[1]}
+                />
+              </UploadSection>
+              {errors[input.key]?.message && (
+                <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
+              )}
+            </InputKeep>
+          );
+        } else if (input.type == "time") {
+          return (
+            <InputKeep key={input.key}>
+              <TimePicker
+                inputKey={input.key}
+                label={input.label}
+                format="HH:mm:ss"
+                placeholder={input.placeholder}
+                error={errors[input.key] ? true : false || requestError}
+                setValue={setValue}
+                control={control}
+                {...register(input.key)}
+              />
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
               )}

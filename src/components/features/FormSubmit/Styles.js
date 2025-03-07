@@ -57,11 +57,17 @@ export const CheckSection = styled.div`
   align-items: center;
 `;
 
+export const UploadSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const Checkbox = styled.input`
   width: 20px;
   height: 20px;
   margin-right: 10px;
-  @media (max-width: ${breakpoints.smallMobile}){
+  @media (max-width: ${breakpoints.smallMobile}) {
     width: 15px;
     height: 15px;
   }
@@ -69,7 +75,7 @@ export const Checkbox = styled.input`
 
 export const CheckText = styled.p`
   font-size: 20px;
-  @media (max-width: ${breakpoints.smallMobile}){
+  @media (max-width: ${breakpoints.smallMobile}) {
     font-size: 15px;
   }
 `;

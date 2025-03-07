@@ -27,7 +27,7 @@ export const Container = styled.div`
 `;
 
 export const LogoHeader = styled.img`
-  width: 150px;
+  width: 10%;
   display: flex;
   cursor: pointer;
   @media (max-width: ${breakpoints.mobile}) {
@@ -43,7 +43,7 @@ export const Header = styled(Menubar)`
   width: 100%;
 
   .p-menuitem {
-    color: ${colors.font.primary};
+    color: #f5eadf;
     padding: 10px;
     background-color: ${colors.background.header};
   }
@@ -51,7 +51,7 @@ export const Header = styled(Menubar)`
   .p-menuitem-text {
     text-decoration: none;
     font-size: 125%;
-    color: ${colors.font.primary};
+    color: #f5eadf;
 
     &:hover {
       text-decoration: underline;

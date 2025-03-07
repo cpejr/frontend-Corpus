@@ -1,30 +1,47 @@
 import { z } from "zod";
+import { TranslateText } from "./translations";
+import { useGlobalLanguage } from "../../stores/globalLanguage";
+
 // Form Validation
-export const newValidationSchema = z
-  .object({
-    name: z
-      .string({ required_error: "O nome é obrigatório" })
-      .min(2, { message: "O nome deve ter pelo menos 2 caracteres" })
-      .max(60, { message: "O nome não pode exceder 60 caracteres" }),
+export const validationSchema = () => {
+  // Translations
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { globalLanguage } = useGlobalLanguage();
+  const translation = TranslateText(globalLanguage);
 
-    shortDescription: z
-      .string({ required_error: "A descrição curta é obrigatória" })
-      .min(2, { message: "A descrição curta deve ter pelo menos 2 caracteres" })
-      .max(60, { message: "A descrição curta não pode exceder 60 caracteres" }),
-
-    longDescription: z
-      .string({ required_error: "A descrição é obrigatória" })
-      .min(20, {
-        message: "A descrição longa deve ter pelo menos 20 caracteres",
-      })
-      .max(500, {
-        message: "A descrição longa não pode exceder 500 caracteres",
-      }),
-
-    link: z
-      .string({ required_error: "O link é obrigatório" })
-      .min(1, { message: "O link não pode estár vazio" }),
-
-    select: z.string().nonempty("Não deixe essa opção vazia"),
-  })
-  .nonstrict();
+  return z.object({
+    title: z
+      .string({ required_error: translation.error3 })
+      .min(1, { message: translation.error3 }),
+    ShortDescription: z
+      .string({ required_error: translation.error4 })
+      .min(1, { message: translation.error4 }),
+    videoFile: z
+      .string({ required_error: translation.error5 })
+      .min(1, { message: translation.error5 }),
+    code: z
+      .string({ required_error: translation.error6 })
+      .min(1, { message: translation.error6 }),
+    context: z
+      .string({ required_error: translation.error7 })
+      .min(1, { message: translation.error7 }),
+    responsibles: z
+      .string({ required_error: translation.error8 })
+      .min(1, { message: translation.error8 }),
+    totalParticipants: z
+      .string({ required_error: translation.error9 })
+      .min(1, { message: translation.error9 }),
+    country: z
+      .string({ required_error: translation.error10 })
+      .min(1, { message: translation.error10 }),
+    language: z
+      .string({ required_error: translation.error11 })
+      .min(1, { message: translation.error11 }),
+    duration: z
+      .string({ required_error: translation.error12 })
+      .min(1, { message: translation.error12 }),
+    date: z
+      .string({ required_error: translation.error13 })
+      .min(1, { message: translation.error13 }),
+  });
+};

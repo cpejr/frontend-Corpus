@@ -12,8 +12,8 @@ export function TranslateText({ globalLanguage }) {
   let textButton3;
 
   if (globalLanguage === "PT") {
-    titleLogo = "NÚCLEO DE ESTUDOS DE COMUNICAÇÃO";
-    subtitleLogo = "(Inter-)Cultural em Interação";
+    titleLogo = "Comunicação Intercultural";
+    subtitleLogo = "em Interações Multimodais";
     title1 = "Sobre nós";
     paragraph1 =
       "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
@@ -28,8 +28,8 @@ export function TranslateText({ globalLanguage }) {
     textButton3 = "saiba mais!";
   }
   if (globalLanguage === "EN") {
-    titleLogo = "CORE OF COMMUNICATION STUDIES";
-    subtitleLogo = "(Inter-)Cultural in Interaction";
+    titleLogo = "Intercultural Communication";
+    subtitleLogo = "in Multimodal Interactions";
     title1 = "About us";
     paragraph1 =
       "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
@@ -44,8 +44,8 @@ export function TranslateText({ globalLanguage }) {
     textButton3 = "learn more!";
   }
   if (globalLanguage === "ES") {
-    titleLogo = "NÚCLEO DE ESTUDIOS DE COMUNICACIÓN";
-    subtitleLogo = "(Inter-)Cultural en Interacción";
+    titleLogo = "Comunicación Intercultural";
+    subtitleLogo = "en Interacciones Multimodales";
     title1 = "Sobre nosotros";
     paragraph1 =
       "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
@@ -59,6 +59,23 @@ export function TranslateText({ globalLanguage }) {
       "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
     textButton3 = "aprende más!";
   }
+  if (globalLanguage === "GE") {
+    titleLogo = "Interkulturelle Kommunikation";
+    subtitleLogo = "in multimodalen Interaktionen";
+    title1 = "Über uns";
+    paragraph1 =
+      "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
+    textButton1 = "mehr erfahren!";
+    title2 = "Videos";
+    paragraph2 =
+      "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
+    textButton2 = "mehr erfahren!";
+    title3 = "Datenschutzrichtlinien";
+    paragraph3 =
+      "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
+    textButton3 = "mehr erfahren!";
+}
+
   return {
     titleLogo,
     subtitleLogo,

@@ -9,8 +9,7 @@ import {
 } from "react-router-dom";
 import { AppLayout } from "./components";
 import {
-  AboutUs,
-  PrivacyPolicy,
+
   Videos,
   RegisterPage,
   Home,
@@ -46,14 +45,15 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="video" element={<Videos />} />
       <Route path="videos/:name" element={<VideoPage />} />
-      <Route path="politica-de-privacidade" element={<PrivacyPolicy />} />
-      <Route path="sobre-nos" element={<AboutUs />} />
+      {/* <Route path="politica-de-privacidade" element={<PrivacyPolicy />} />
+      <Route path="sobre-nos" element={<AboutUs />} /> */}
     </Route>
     <Route path="register" element={<RegisterPage />} />
     <Route path="redefine-password/:token" element={<RedefinePassword />} />
+    <Route path="manage-videos" element={<ManageVideos />} />
     <Route element={<PrivateAdminRoutes />}>
       <Route path="manage-users" element={<ManageUser />} />
-      <Route path="manage-videos" element={<ManageVideos />} />
+      
     </Route>
   </Route>
   ),

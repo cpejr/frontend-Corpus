@@ -1,60 +1,50 @@
 import styled from "styled-components";
-import { breakpoints, colors } from "../../styles/stylesVariables";
-import { MultiSelect } from "primereact/multiselect";
-import { image } from "../../assets/index";
-import { Calendar as PrimeCalendar } from "primereact/calendar";
-
+import { breakpoints, colors, fonts } from "../../styles/stylesVariables";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 export const Container = styled.div`
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  width: 100%;
-  height: auto;
-
-  gap: 3rem;
-
-  @media (max-width: 700px) {
-    height: auto;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    margin-bottom: 3rem;
-  }
+  padding: 3rem 0;
 `;
 
-export const Title = styled.div`
-  color: ${colors.font.title};
-  font-size: 36px;
-  margin-left: 3%;
-  text-decoration: underline ${colors.underline};
-  text-underline-offset: 0.5rem;
-  text-decoration-thickness: 3px;
-  @media (max-width: ${breakpoints.tablet}) {
-    font-size: 34px;
-  }
+export const DivTitle = styled.div`
+  width: 450px;
+  border-bottom: 4px solid ${colors.background.secondary};
+  margin-bottom: ${(props) => (props.margin ? props.margin : "50px")};
   @media (max-width: ${breakpoints.mobile}) {
-    font-size: 28px;
-    margin-left: 8%;
+    width: 350px;
+  }
+  @media (max-width: ${breakpoints.smallMobile}) {
+    width: 250px;
+  }
+  @media (max-width: ${breakpoints.miniDevice}) {
+    width: 150px;
   }
 `;
 
-export const Form = styled.form`
-  align-items: center;
+export const Title = styled.h1`
+  color: #ccd5ae;
+  font-size: 36px;
+  text-transform: uppercase;
+  font-family: ${fonts.Cabin};
+  font-weight: bold;
+  margin: 0% 0% 1% 10%;
+  text-shadow: 2px 2px 4px black;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 30px;
+  }
+  @media (max-width: ${breakpoints.smallMobile}) {
+    font-size: 24px;
+  }
+`;
+
+
+export const ContainerSearchBar = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
-  gap: 2rem;
-  height: 100%;
-
-  @media (max-width: 700px) {
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    gap: 0%;
-  }
-
-  @media (min-width: 1440px) {
-    max-width: 144rem;
-  }
+  align-items: center;
 `;
 
 export const Section = styled.section`
@@ -71,74 +61,70 @@ export const Section = styled.section`
     font-weight: 400;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: ${breakpoints.mobile}) {
     width: 80%;
   }
 `;
 
-export const Buttons = styled.div`
+export const SectionList = styled.section`
   display: flex;
-  gap: 8px;
-`;
-export const Calendar = styled(PrimeCalendar)`
-  display: flex;
-  width: 215px;
-  justify-content: center;
-  .p-inputtext {
-    background-color: ${colors.background.primary};
-    border: solid 1px ${colors.font.primary};
-    cursor: pointer;
-    color: ${colors.font.primary} !important;
-    &:hover {
-      border: 1px solid ${colors.accent.primary};
-      color: ${colors.font.secondary};
-    }
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    font-size: 1rem;
-  }
-`;
-export const MultipleSelect = styled(MultiSelect)`
-  background-color: ${colors.background.primary};
-  color: ${colors.font.primary};
-  width: 215px;
-
-  .p-placeholder {
-    color: ${colors.font.primary};
-  }
-  .p-multiselect-label {
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    font-size: 1rem;
-  }
-  &:hover {
-    border-color: #f19709;
-  }
-`;
-export const Selects = styled.div`
-  display: flex;
-  color: blue;
-  flex-direction: row;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
-  gap: 3rem;
-  justify-content: center;
-
-  @media (max-width: 850px) {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 2rem;
+  margin-bottom: 30px;
+  ::placeholder {
+    color: black;
+    font-weight: 400;
   }
 `;
 
-export const LoadingStyles = styled.div`
-  display: "block";
-  font-size: 24px;
-  margin: 20px auto;
+export const CardVideo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 93%;
 `;
-export const BackgroundTitle = styled.div`
-  background-image: url(${image});
-  height: 150px;
-  padding-top: 4rem;
+
+export const VideoTitle = styled.div`
+  cursor: pointer;
+  font-size: 25px;
+
+  @media (max-width: ${breakpoints.smallMobile}) {
+    font-size: 18px;
+  }
+`;
+
+export const ListLine = styled.div`
+  border-bottom: 2px solid white;
+  flex-grow: 1;
+  height: 17px;
+  margin-left: 15px;
+  margin-right: 15px;
+
+  @media (max-width: ${breakpoints.smallMobile}) {
+    height: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+`;
+
+export const Buttons = styled.div`
+`;
+
+export const StyledEditOutlined = styled(EditOutlined)`
+  color: #d4a373;
+  width: 50px;
+  font-size: 24px;
+`;
+
+export const StyledDeleteOutlined = styled(DeleteOutlined)`
+  color: #d4a373;
+  width: 50px;
+  font-size: 24px;
+`;
+export const Modals = styled.div`
+  width: 100%;
 `;

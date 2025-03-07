@@ -7,7 +7,8 @@ import {
   SocialIcon,
   Whatsapp,
 } from "./Styles";
-import { logoFooter } from "../../../../assets";
+//import { logoFooter } from "../../../../assets";
+import { logo } from "../../../../assets";
 
 import { useGlobalLanguage } from "../../../../stores/globalLanguage";
 import { TranslateText } from "./translations";
@@ -21,7 +22,7 @@ export default function Footer() {
 
   return (
     <Container>
-      <LogoFooter src={logoFooter} onClick={() => navigate("/")}></LogoFooter>
+      <LogoFooter src={logo} onClick={() => navigate("/")}></LogoFooter>
       <SocialContainer>
         <p>{translation.footer1}</p>
         <SocialIcon>

@@ -10,6 +10,9 @@ export function TranslateText({ globalLanguage }) {
   if (globalLanguage === "ES") {
     footer1 = "¿Preguntas? Contáctenos:";
   }
+  if (globalLanguage === "GE") {
+    footer1 = "Fragen? Kontaktieren Sie uns:";
+  }
   return {
     footer1,
   };

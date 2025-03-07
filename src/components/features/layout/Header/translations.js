@@ -46,6 +46,19 @@ export function TranslateText({ globalLanguage }) {
     home = "Hogar";
     logoutSuccess = "¡Cierre de sesión con éxito!";
   }
+
+  if (globalLanguage === "GE") {
+    headerText1 = "Über uns";
+    headerText2 = "Videos verwalten";
+    headerText3 = "Videos";
+    headerText4 = "Datenschutzrichtlinien";
+    headerText5 = "Benutzer verwalten";
+    headerAdmText1 = "Text";
+    headerAdmText2 = "Text";
+    headerAdmText3 = "Text";
+    home = "Startseite";
+    logoutSuccess = "Erfolgreich abgemeldet!";
+  }
   return {
     headerText1,
     headerText2,

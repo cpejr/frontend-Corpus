@@ -10,7 +10,7 @@ export const StyledCard = styled(Card)`
   align-items: center;
   border-radius: 24px;
   gap: 3.33rem;
-  background-color: white;
+  background-color: #e9edc9;
   margin-bottom: 4rem;
   &:hover {
   }
@@ -35,8 +35,8 @@ export const StyledCard = styled(Card)`
 
 export const Image = styled.div`
   display: flex;
+  width: 250px;  
   height: auto;
-  width: 100%;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -61,6 +61,32 @@ export const Line = styled.div`
     font-size: 24px;
   }
 `;
+export const DescriptionLine = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  height: auto;
+  font-size: 20px;
+  color: ${colors.black};
+  font-family: ${fonts.Cabin};
+  cursor: pointer;
+  @media (max-width: ${breakpoints.smallMobile}) {
+    font-size: 24px;
+  }
+`;
+export const CodeLine = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  font-size: 10px;
+  color: ${colors.black};
+  font-family: ${fonts.Cabin};
+  cursor: pointer;
+  @media (max-width: ${breakpoints.smallMobile}) {
+    font-size: 24px;
+  }
+`;
 
 export const Group = styled.div`
   display: flex;
@@ -77,7 +103,7 @@ export const ButtonDiv = styled.div`
 export const OrangeButton = styled(Button)`
   width: 10rem;
   height: 2.5rem;
-  background-color: ${colors.background.primary};
+  background-color: #d4a373;
   border: none;
   margin-top: 1rem;
   border-radius: 10px;

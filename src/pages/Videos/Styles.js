@@ -2,8 +2,6 @@ import styled from "styled-components";
 import { breakpoints, colors, fonts } from "../../styles/stylesVariables";
 import { image } from "../../assets/index";
 
-import { Calendar as PrimeCalendar } from "primereact/calendar";
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,14 +23,14 @@ export const DivTitle = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: ${colors.white};
+  color: #ccd5ae;
   font-size: 36px;
   text-transform: uppercase;
   font-family: ${fonts.Cabin};
   font-weight: bold;
   margin: 0% 0% 1% 10%;
   text-shadow: 2px 2px 4px black;
-  
+
   @media (max-width: ${breakpoints.mobile}) {
     font-size: 30px;
   }
@@ -40,7 +38,12 @@ export const Title = styled.h1`
     font-size: 24px;
   }
 `;
-
+export const ButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
 export const DivLine = styled.div`
   display: flex;
   flex-direction: column;
@@ -56,63 +59,26 @@ export const ContainerSearchFilter = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
+  color: #d4a373;
 `;
 
 export const ContainerSearchBar = styled.div`
   display: flex;
+  color: #d4a373;
   flex-direction: row;
   width: 100%;
   align-items: center;
-  margin-left: 5%;
 `;
 
 export const DivSelect = styled.div`
   display: flex;
+  gap: 20px;
   justify-content: center;
   flex-direction: row;
   align-items: center;
   border-radius: 5px;
-  width: 200px;
-`;
-
-export const Calendar = styled(PrimeCalendar)`
-  width: ${(props) => (props.width ? props.width : "95%")};
-  align-self: center;
-  display: flex;
-  justify-content: center;
-  border-radius: 25px;
-
-  @media (max-width: ${breakpoints.smallMobile}) {
-    margin-top: 0px;
-  }
-
-  .p-inputtext {
-    width: 100%;
-    height: 3rem;
-    background-color: ${colors.background.primary};
-    color: ${colors.font.primary};
-    border: solid 1px ${colors.font.title};
-    padding-left: 10px;
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-
-    &:focus {
-      outline: none;
-    }
-
-    &::placeholder {
-      color: ${colors.font.primary};
-    }
-
-    &:hover {
-      border-color: ${colors.accent.primary};
-    }
-
-  }
-
-  .p-datepicker {
-    border: 2px solid black;
-  }
+  width: 500px;
+  color: #d4a373;
 `;
 
 export const LoadingStyles = styled.div`
@@ -120,7 +86,6 @@ export const LoadingStyles = styled.div`
   font-size: 24px;
   margin: 20px auto;
 `;
-
 
 export const MemorialNotFound = styled.div`
   background-image: url(${image});

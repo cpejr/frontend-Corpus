@@ -96,9 +96,9 @@ export default function ManageUser() {
     setUsers(
       formatUsersList(
         allUsers.filter((obj) =>
-          obj.name.toLowerCase().includes(value.toLowerCase()),
-        ),
-      ),
+          obj.name.toLowerCase().includes(value.toLowerCase())
+        )
+      )
     );
   };
 
@@ -136,6 +136,7 @@ export default function ManageUser() {
       ),
       delete: (
         <RiDeleteBin5Line
+          color="#debc96"
           cursor={"pointer"}
           onClick={() => {
             setUserId(user._id);

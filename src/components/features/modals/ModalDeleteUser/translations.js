@@ -18,6 +18,11 @@ export function TranslateText(globalLanguage) {
     text = "¿Estás seguro de que deseas eliminar este usuario?";
     button = "Eliminar";
   }
+  if (globalLanguage === "GE") {
+    title = "Benutzer löschen";
+    text = "Sind Sie sicher, dass Sie diesen Benutzer löschen möchten?";
+    button = "Löschen";
+  }
   return {
     title,
     text,

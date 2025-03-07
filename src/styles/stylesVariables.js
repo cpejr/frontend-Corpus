@@ -2,22 +2,22 @@
 export const colors = {
   blue: {
     background: "#080B10",
-    accent: "#6B9080",
+    accent: "#CCD5AE",
     light: "#639dff",
     accentShadow: "rgba(1, 60, 157, 0.25)",
     dark: "#232A36",
     hover: "#1655BC",
   },
   font: {
-    primary: "#F6FFF8",
+    primary: "#000000",
     secondary: "#FFF",
-    title: "#F6FFF8",
+    title: "#ccd5ae",
     line: "#FFD599",
   },
   background: {
-    primary: "#A4C3B2",
-    secondary: "#6B9080",
-    header: "#6B9080",
+    primary: "#FEFAE0",
+    secondary: "#CCD5AE",
+    header: "#CCD5AE",
     hover: "#53190a",
     menu: "cyan",
     white: "#FFF",

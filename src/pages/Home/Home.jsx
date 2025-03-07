@@ -21,7 +21,6 @@ import {
 } from "../../assets/index";
 
 import { Button1 } from "./Styles";
-
 import { useNavigate } from "react-router-dom";
 
 import { useGlobalLanguage } from "../../stores/globalLanguage";

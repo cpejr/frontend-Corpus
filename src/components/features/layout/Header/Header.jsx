@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useGlobalLanguage } from "../../../../stores/globalLanguage";
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import { flagEN, flagES, flagPT } from "../../../../assets";
+import { flagEN, flagES, flagPT, flagGE } from "../../../../assets";
 import { TranslateText } from "./translations";
 import { useLogout } from "../../../../hooks/query/session";
 import { toast } from "react-toastify";
@@ -29,6 +29,7 @@ export default function Head() {
     { code: "PT", flag: flagPT },
     { code: "EN", flag: flagEN },
     { code: "ES", flag: flagES },
+    { code: "GE", flag: flagGE },
   ];
 
   const isAdmin = useAuthStore((state) => state?.auth?.user?.type);
@@ -38,18 +39,12 @@ export default function Head() {
   const translations = TranslateText({ globalLanguage });
 
   const items = [
-    {
-      label: translations.headerText1,
-      url: "/sobre-nos",
-    },
+
     {
       label: translations.headerText3,
       url: "/video",
     },
-    {
-      label: translations.headerText4,
-      url: "/politica-de-privacidade",
-    },
+
 
     ...(isAdmin === "admin"
       ? [

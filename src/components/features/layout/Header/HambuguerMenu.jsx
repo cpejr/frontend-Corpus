@@ -33,8 +33,6 @@ export default function HamburguerMenu() {
       <MenuOutlined style={{ fontSize: "25px", color: "white" }} />,
       [
         getItem(translations.home, "/"),
-        getItem(translations.headerText1, "/sobre-nos"),
-        getItem(translations.headerText4, "/politica-de-privacidade"),
         getItem(translations.headerText3, "/video"),
 
         ...(isAdmin === "admin"
