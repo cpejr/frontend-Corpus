@@ -35,7 +35,7 @@ export default function FormSubmit({
     control,
     setValue,
   } = useForm({
-    //resolver: zodResolver(schema),
+    resolver: zodResolver(schema),
   });
 
 
