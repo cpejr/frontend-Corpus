@@ -93,6 +93,8 @@ export default function ManageVideosPage() {
         key: "date",
         placeholder: translation.placeholder11,
         label: "date",
+        dateFormat: "yy",
+        view: "year",
       },
       {
         type: "time",

@@ -55,6 +55,21 @@ export function TranslateText( globalLanguage ) {
         confirmationError = "Confirma tu contraseña";
         differentPasswords = "Las contraseñas no coinciden";
     }
+    if (globalLanguage === "GE") {
+        title = "Passwortwiederherstellung";
+        text = "Wählen Sie ein neues Passwort";
+        button = "Speichern";
+        successToast = "Passwort erfolgreich geändert!";
+        newPassword = "Neues Passwort";
+        confirmationPassword = "Bestätigung des neuen Passworts";
+    
+        passwordStringError = "Passwort ist erforderlich";
+        passwordMinError = "Das Passwort muss mindestens 6 Zeichen lang sein";
+        passwordMaxError = "Das Passwort darf nicht länger als 16 Zeichen sein";
+        confirmationError = "Bestätigen Sie Ihr Passwort";
+        differentPasswords = "Passwörter stimmen nicht überein";
+    }
+    
     return {
         title,
         text,

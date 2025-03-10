@@ -40,6 +40,7 @@ export default function RegisterPage() {
         key: "birthday",
         placeholder: translation.birthday,
         label: "birthday",
+        dateFormat: "dd/mm/yy",
       },
       {
         type: "text",
@@ -90,7 +91,7 @@ export default function RegisterPage() {
     },
     onError: (err) => {
       toast.error(
-        TranslateRegisterToastError(globalLanguage, err.response.status),
+        TranslateRegisterToastError(globalLanguage, err.response.status)
       );
     },
   });
@@ -107,7 +108,7 @@ export default function RegisterPage() {
     },
     onError: (err) => {
       toast.error(
-        TranslateLoginToastError(globalLanguage, err.response.status),
+        TranslateLoginToastError(globalLanguage, err.response.status)
       );
     },
   });

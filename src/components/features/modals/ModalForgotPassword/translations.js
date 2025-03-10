@@ -43,6 +43,17 @@ export function TranslateText( globalLanguage ) {
         emailMinError = "¡Ingresa un correo electrónico!";
         emailError = "¡El correo electrónico debe ser válido!";
     }
+    if (globalLanguage === "GE") {
+        title = "E-Mail-Bestätigung";
+        text = "Geben Sie die E-Mail-Adresse ein, mit der Sie Ihr Passwort wiederherstellen möchten:";
+        button = "Senden";
+        loading = "E-Mail wird gesendet...";
+        successToast = "Wiederherstellungs-E-Mail erfolgreich gesendet!";
+    
+        emailStringError = "E-Mail ist erforderlich.";
+        emailMinError = "Bitte geben Sie eine E-Mail-Adresse ein!";
+        emailError = "Geben Sie eine gültige E-Mail-Adresse im Format email@email.com ein.";
+    }
     return {
         title,
         text,

@@ -8,6 +8,8 @@ export default function CalendarFunction({
   control,
   setValue,
   error,
+  dateFormat,
+  view,
   color,
   placeholder,
   isSubmitSuccessful,
@@ -38,8 +40,8 @@ export default function CalendarFunction({
             selected={date}
             placeholder={placeholder}
             onChange={(e) => handleChange(e.value)}
-            dateFormat="yy"
-            view="year"
+            dateFormat={dateFormat}
+            view={view}
             color={color}
             value={date}
           />
@@ -57,6 +59,8 @@ CalendarFunction.propTypes = {
   error: PropTypes.bool,
   icon: PropTypes.elementType,
   label: PropTypes.string,
+  view: PropTypes.string,
+  dateFormat: PropTypes.string,
   control: PropTypes.func,
   setValue: PropTypes.func,
   isSubmitSuccessful: PropTypes.bool,

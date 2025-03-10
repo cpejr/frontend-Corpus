@@ -23,6 +23,12 @@ export function TranslateText( globalLanguage ) {
         button = "Eliminar";
         successToast = "¡Video eliminado exitosamente!";
     }
+    if (globalLanguage === "GE") {
+        title = "Datei löschen";
+        text = "Sind Sie sicher, dass Sie diese Datei löschen möchten?";
+        button = "LÖSCHEN";
+        successToast = "Video erfolgreich gelöscht!";
+    }
     return {
         title,
         text,
