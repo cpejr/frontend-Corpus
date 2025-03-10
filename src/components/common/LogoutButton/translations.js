@@ -10,6 +10,9 @@ export function TranslateText({ globalLanguage }) {
   if (globalLanguage === "ES") {
     logoutButton = "Salir";
   }
+  if (globalLanguage === "GE") {
+    logoutButton = "Abmelden";
+  }
   return {
     logoutButton,
   };

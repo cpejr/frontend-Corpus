@@ -122,6 +122,38 @@ export function TranslateText({ globalLanguage }) {
     error12 = "La duración es obligatoria";
     error13 = "La fecha es obligatoria";
   }
+  if (globalLanguage === "GE") {
+    title1 = "VIDEOS HINZUFÜGEN";
+    title2 = "VIDEOS VERWALTEN";
+    successToast = "Video erfolgreich hinzugefügt!";
+    placeholderSearch = "Suche";
+    placeholder1 = "Titel";
+    placeholder2 = "Kurzbeschreibung";
+    placeholder3 = "Datei auswählen";
+    error1 = "Fehler beim Hochladen!";
+    error2 = "Keine Datei ausgewählt.";
+    placeholder4 = "Code";
+    placeholder5 = "Kontext";
+    placeholder6 = "Verantwortliche der Sammlung";
+    placeholder7 = "Anzahl der Teilnehmer";
+    placeholder8 = "Herkunftsland";
+    placeholder9 = "Sprache";
+    placeholder10 = "Dauer der Integration";
+    placeholder11 = "Datum der Sammlung";
+    button1 = "Absenden";
+    error3 = "Titel ist erforderlich";
+    error4 = "Kurzbeschreibung ist erforderlich";
+    error5 = "Video ist erforderlich";
+    error6 = "Code ist erforderlich";
+    error7 = "Kontext ist erforderlich";
+    error8 = "Verantwortliche Parteien sind erforderlich";
+    error9 = "Gesamtzahl der Teilnehmer ist erforderlich";
+    error10 = "Herkunftsland ist erforderlich";
+    error11 = "Gesprochene Sprache ist erforderlich";
+    error12 = "Dauer ist erforderlich";
+    error13 = "Datum ist erforderlich";
+}
+
   return {
     title1,
     title2,

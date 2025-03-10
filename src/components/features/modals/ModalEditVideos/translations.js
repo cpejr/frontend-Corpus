@@ -116,6 +116,35 @@ export function TranslateText( globalLanguage ) {
         error10 = "La transcripción debe tener más de 1 carácter";
 
     }
+    if (globalLanguage === "GE") {
+        title = "Videoaktualisierung";
+        text = "Geben Sie unten den Wert ein, den Sie ändern möchten:";
+        button = "Ändern";
+        loading = "Änderung wird vorgenommen...";
+        successToast = "Änderung erfolgreich durchgeführt";
+    
+        placeholder1 = "Titel";
+        placeholder2 = "Beschreibung";
+        placeholder3 = "Kontext";
+        placeholder4 = "Sammlungsteam";
+        placeholder5 = "Anzahl der Teilnehmer";
+        placeholder6 = "Herkunftsland";
+        placeholder7 = "Sprache";
+        placeholder8 = "Integrationsdauer";
+        placeholder9 = "Sammlungsdatum";
+        placeholder10 = "Transkription";
+    
+        error1 = "Der Titel muss mehr als 1 Zeichen haben";
+        error2 = "Die Beschreibung muss mehr als 1 Zeichen haben";
+        error3 = "Der Kontext muss mehr als 1 Zeichen haben";
+        error4 = "Das Sammlungsteam muss mehr als 1 Zeichen haben";
+        error5 = "Die Gesamtzahl der Teilnehmer muss mehr als 1 Zeichen haben";
+        error6 = "Das Herkunftsland muss mehr als 1 Zeichen haben";
+        error7 = "Die gesprochene Sprache muss mehr als 1 Zeichen haben";
+        error8 = "Die Dauer muss mehr als 1 Zeichen haben";
+        error9 = "Das Datum muss mehr als 1 Zeichen haben";
+        error10 = "Die Transkription muss mehr als 1 Zeichen haben";
+    }
     return {
         title,
         text,

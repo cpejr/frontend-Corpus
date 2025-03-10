@@ -22,6 +22,12 @@ export function TranslateText({ globalLanguage }) {
     calendar = "Filtrar por fecha";
     buttonCard = "Asistir";
   }
+  if (globalLanguage === "GE") {
+    title = "Videos";
+    placeholder = "Suchen";
+    calendar = "Nach Datum filtern";
+    buttonCard = "Ansehen";
+}
   return {
     title,
     placeholder,

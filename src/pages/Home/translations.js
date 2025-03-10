@@ -59,6 +59,23 @@ export function TranslateText({ globalLanguage }) {
       "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
     textButton3 = "aprende más!";
   }
+  if (globalLanguage === "GE") {
+    titleLogo = "Interkulturelle Kommunikation";
+    subtitleLogo = "in multimodalen Interaktionen";
+    title1 = "Über uns";
+    paragraph1 =
+      "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
+    textButton1 = "mehr erfahren!";
+    title2 = "Videos";
+    paragraph2 =
+      "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
+    textButton2 = "mehr erfahren!";
+    title3 = "Datenschutzrichtlinien";
+    paragraph3 =
+      "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt.";
+    textButton3 = "mehr erfahren!";
+}
+
   return {
     titleLogo,
     subtitleLogo,

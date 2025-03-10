@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   Form as FormContainer,
@@ -20,7 +21,7 @@ import CalendarFunction from "../../common/Calendar/Calendar";
 export default function FormSubmit({
   inputs,
   onSubmit,
-  //schema,
+  schema,
   color,
   loading,
   requestError,
@@ -35,7 +36,7 @@ export default function FormSubmit({
     control,
     setValue,
   } = useForm({
-    //resolver: zodResolver(schema),
+    resolver: zodResolver(schema),
   });
 
   function submitHandler(data) {

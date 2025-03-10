@@ -5,13 +5,7 @@ export function TranslateText({ globalLanguage }) {
   let durationPlaceholder;
   let calendarPlaceholder;
 
-  if (globalLanguage === "PT") {
-    totalParticipantsPlaceholder = "Total de Participantes";
-    countryPlaceholder = "Nacionalidade";
-    languagePlaceholder = "Idioma";
-    durationPlaceholder = "Tempo de Duração";
-    calendarPlaceholder = "Data da Interação";
-  }
+ 
   if (globalLanguage === "EN") {
     totalParticipantsPlaceholder = "Total Participants";
     countryPlaceholder = "Nacionality";
@@ -27,6 +21,20 @@ export function TranslateText({ globalLanguage }) {
     calendarPlaceholder = "Fecha de Interacción";
   }
 
+   if (globalLanguage === "PT") {
+    totalParticipantsPlaceholder = "Total de Participantes";
+    countryPlaceholder = "Nacionalidade";
+    languagePlaceholder = "Idioma";
+    durationPlaceholder = "Tempo de Duração";
+    calendarPlaceholder = "Data da Interação";
+  }
+  if (globalLanguage === "GE") {
+    totalParticipantsPlaceholder = "Gesamtzahl der Teilnehmer";
+    countryPlaceholder = "Nationalität";
+    languagePlaceholder = "Sprache";
+    durationPlaceholder = "Dauer";
+    calendarPlaceholder = "Datum der Interaktion";
+  }
   return {
     totalParticipantsPlaceholder,
     countryPlaceholder,

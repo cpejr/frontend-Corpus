@@ -164,6 +164,7 @@ export default function ManageVideosPage() {
     },
   });
 
+
   const handleSubmit = async (data) => {
     const { birthday, ...rest } = data;
     const updatedObj = { ...rest, date: birthday };
@@ -175,6 +176,7 @@ export default function ManageVideosPage() {
       translateTitles();
     }
   }, [videos, globalLanguage]);
+
 
   return (
     <Container>

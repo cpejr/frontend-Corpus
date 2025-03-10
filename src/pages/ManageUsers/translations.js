@@ -54,6 +54,21 @@ export function TranslateText({ globalLanguage }) {
     toastOnSuccessChange = "El tipo de usuario se cambió correctamente";
     toastOnErroChange = "Error al cambiar el tipo de usuario";
   }
+  if (globalLanguage === "GE") {
+    title1 = "Benutzer verwalten";
+    placeholderSearch = "Benutzer suchen";
+    typeAdm = "Administrator";
+    typeInvited = "Eingeladen";
+    typeExt = "Extern";
+    tableHeaderName = "Name";
+    tableHeaderEmail = "E-Mail";
+    tableHeaderType = "Typ";
+    toastOnSuccessDelete = "Benutzer erfolgreich gelöscht";
+    toastOnErroDelete = "Fehler beim Löschen des Benutzers";
+    toastOnSuccessChange = "Benutzertyp erfolgreich geändert";
+    toastOnErroChange = "Fehler beim Ändern des Benutzertyps";
+}
+
   return {
     title1,
     placeholderSearch,
