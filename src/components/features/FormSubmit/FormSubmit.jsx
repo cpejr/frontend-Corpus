@@ -20,7 +20,7 @@ import CalendarFunction from "../../common/Calendar/Calendar";
 export default function FormSubmit({
   inputs,
   onSubmit,
-  //schema,
+  schema,
   color,
   loading,
   requestError,
