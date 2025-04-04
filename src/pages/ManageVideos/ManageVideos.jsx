@@ -93,8 +93,6 @@ export default function ManageVideosPage() {
         key: "date",
         placeholder: translation.placeholder11,
         label: "date",
-        dateFormat: "yy",
-        view: "year",
       },
       {
         type: "time",
@@ -167,10 +165,7 @@ export default function ManageVideosPage() {
   });
 
   const handleSubmit = async (data) => {
-    const { birthday, ...rest } = data;
-    const updatedObj = { ...rest, date: birthday };
-
-    createVideo(updatedObj);
+    createVideo(data);
   };
   useEffect(() => {
     if (videos) {

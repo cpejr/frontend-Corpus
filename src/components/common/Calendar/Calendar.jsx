@@ -18,7 +18,7 @@ export default function CalendarFunction({
   const [date, setDate] = useState(defaultValue || "");
 
   const handleChange = (dateChange) => {
-    setValue("birthday", dateChange.toLocaleDateString("pt-BR"), {
+    setValue(dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
 
@@ -34,16 +34,20 @@ export default function CalendarFunction({
         name={inputKey}
         control={control}
         defaultValue={date}
-        render={() => (
+        render={({ field }) => (
           <StyledCalendar
+            {...field}
             error={error}
             selected={date}
             placeholder={placeholder}
-            onChange={(e) => handleChange(e.value)}
+            onChange={(e) => {
+              handleChange(e.value);
+              field.onChange(e);
+            }}
             dateFormat={dateFormat}
             view={view}
             color={color}
-            value={date}
+            value={setDate}
           />
         )}
       />
