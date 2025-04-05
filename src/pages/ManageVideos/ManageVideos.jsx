@@ -168,7 +168,7 @@ export default function ManageVideosPage() {
     const { birthday, ...rest } = data; 
     const updatedObj = { ...rest, date: birthday }; 
   
-    createVideo(updatedObj);
+    createVideo(data);
   };
   useEffect(() => {
     if (videos) { 

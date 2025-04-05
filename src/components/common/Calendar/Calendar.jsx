@@ -15,7 +15,7 @@ export default function CalendarFunction({
 }) {
   const [date, setDate] = useState(defaultValue || '');
 
-  const handleChange = (dateChange) => {
+  const handleChange = (dateChange) => { 
     setValue("birthday", dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
