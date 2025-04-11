@@ -90,10 +90,10 @@ export default function ManageVideosPage() {
       },
       {
         type: "date",
-        key: "date",
+        key: "Birthday",
         placeholder: translation.placeholder11,
         dateFormat: "dd/mm/yy",
-        label: "date",
+        label: "Birthday",
       },
       {
         type: "time",

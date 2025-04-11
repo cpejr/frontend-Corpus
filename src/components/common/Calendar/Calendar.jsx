@@ -8,8 +8,6 @@ export default function CalendarFunction({
   control,
   setValue,
   error,
-  dateFormat,
-  view,
   color,
   placeholder,
   isSubmitSuccessful,
@@ -18,7 +16,7 @@ export default function CalendarFunction({
   const [date, setDate] = useState(defaultValue || "");
 
   const handleChange = (dateChange) => {
-    setValue(dateChange.toLocaleDateString("pt-BR"), {
+    setValue("Birthday", dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
 
@@ -42,12 +40,12 @@ export default function CalendarFunction({
             placeholder={placeholder}
             onChange={(e) => {
               handleChange(e.value);
-              field.onChange(e);
+
+              field.onChange(e.value);
             }}
-            dateFormat={dateFormat}
-            view={view}
+            dateFormat="dd/mm/yy"
             color={color}
-            value={setDate}
+            value={field.value}
           />
         )}
       />
@@ -63,11 +61,9 @@ CalendarFunction.propTypes = {
   error: PropTypes.bool,
   icon: PropTypes.elementType,
   label: PropTypes.string,
-  view: PropTypes.string,
-  dateFormat: PropTypes.string,
   control: PropTypes.func,
   setValue: PropTypes.func,
   isSubmitSuccessful: PropTypes.bool,
-  defaultValue: PropTypes.date,
+  defaultValue: PropTypes.instanceOf(Date),
   color: PropTypes.string,
 };

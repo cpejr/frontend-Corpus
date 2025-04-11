@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FormSubmit from "../../components/features/FormSubmit/FormSubmit";
 import { Container, Title, DivContainer, TextClick, Text } from "./Styles";
-import { validationSchemaLogin, validationSchemaRegister } from "./utils";
+import { validationSchemaLogin } from "./utils";
 import { useCreateUsers } from "../../hooks/query/user";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,9 +37,9 @@ export default function RegisterPage() {
       },
       {
         type: "date",
-        key: "birthday",
+        key: "Birthday",
         placeholder: translation.birthday,
-        label: "birthday",
+        label: "Birthday",
         dateFormat: "dd/mm/yy",
       },
       {
@@ -137,7 +137,6 @@ export default function RegisterPage() {
         <Title>{translation.titleRegister}</Title>
         <FormSubmit
           onSubmit={registerSubmit}
-          schema={validationSchemaRegister()}
           loading={registerLoading}
           inputs={inputsRegister}
           buttonText={translation.buttonRegister}
