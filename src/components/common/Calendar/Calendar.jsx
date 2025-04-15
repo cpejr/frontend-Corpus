@@ -22,6 +22,7 @@ export default function CalendarFunction({
 
     setDate(dateChange);
   };
+
   useEffect(() => {
     if (isSubmitSuccessful) setDate(null);
   }, [isSubmitSuccessful]);
@@ -32,24 +33,29 @@ export default function CalendarFunction({
         name={inputKey}
         control={control}
         defaultValue={date}
-        render={() => (
+        render={({ field }) => (
           <StyledCalendar
             error={error}
             selected={date}
             placeholder={placeholder}
-            onChange={(e) => handleChange(e.value)}
+            onChange={(e) => {
+              setDate(e.value);  // Atualiza o estado com a data
+              field.onChange(e);  // Passa o evento para o react-hook-form
+            }}
             dateFormat="dd/mm/yy"
             color={color}
-            value={date}
+            value={date}  // O valor correto aqui é 'date'
           />
         )}
       />
     </Container>
   );
 }
+
 CalendarFunction.defaultProps = {
   width: "70%",
 };
+
 CalendarFunction.propTypes = {
   inputKey: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,

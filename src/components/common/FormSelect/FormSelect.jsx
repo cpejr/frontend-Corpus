@@ -16,7 +16,7 @@ export default function FormSelect({
   color,
   width,
   placeholdercolor,
-  ...props
+  ...props //objectFilter
 }) {
   const [selectedValue, setSelectedValue] = useState(defaultValue || "");
 
@@ -32,7 +32,7 @@ export default function FormSelect({
         )}
         <StyledSelect
           id={inputKey}
-          inputKey={inputKey}
+          inputKey={inputKey} //options = {objectFilter}
           type={type}
           autoComplete="off"
           {...(register && { ...register(inputKey) })}
@@ -48,7 +48,7 @@ export default function FormSelect({
           color={color}
           placeholdercolor={placeholdercolor}
           width={width}
-          value={selectedValue}
+          value={selectedValue} //substituir por options
           {...props}
         >
           {" "}
@@ -56,7 +56,7 @@ export default function FormSelect({
             {placeholder}
           </option>
           {options?.map((option) => (
-            <option key={option.name}>{option.name}</option>
+            <option key={option.name}>{option.name}</option> //objectFilter.name
           ))}
         </StyledSelect>
       </IconContainer>

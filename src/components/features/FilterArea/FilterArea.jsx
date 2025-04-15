@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import { useGlobalLanguage } from "../../../stores/globalLanguage";
+import { getLanguages, getCountries, getVideosByParameters } from "../../../services/endpoints";  
 
 import {
   FlagSelector,
@@ -25,9 +26,10 @@ export default function FilterArea({ onSubmit }) {
   const [language, setLanguage] = useState(null);
   const [duration, setDuration] = useState("");
   const [dates, setDates] = useState(null);
+  const [languages, setLanguages] = useState([]);
+  const [countries, setCountries] = useState([]); 
 
-  function submitHandler(data) {
-
+  async function submitHandler(data) {
     const toFilter = {
       ...data,
       totalParticipants: selectTotalParticipants,
@@ -36,14 +38,44 @@ export default function FilterArea({ onSubmit }) {
       duration,
       dates,
     };
-    reset();
-    setCountry(null);
-    setLanguage(null);
-    setDuration("");
-    setSelectTotalParticipants(null)
-    onSubmit(toFilter);
+
+    // Fazendo a requisição com GET ao invés de POST
+    try {
+      const videos = await getVideosByParameters(toFilter); 
+      onSubmit(videos);  
+      reset();  
+      setCountry(null);
+      setLanguage(null);
+      setDuration("");
+      setSelectTotalParticipants(null);
+    } catch (error) {
+      console.error("Erro ao buscar vídeos filtrados:", error);
+    }
   }
-  //Array de opções para o select de Total de Participantes
+
+  // Carregar as linguas do backend
+  useEffect(() => {
+    getLanguages()
+      .then((languages) => {
+        setLanguages(languages); 
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar idiomas:", error);
+      });
+  }, []);
+
+  // Carregar os países do backend
+  useEffect(() => {
+    getCountries()
+      .then((countries) => {
+        setCountries(countries); 
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar países:", error);
+      });
+  }, []);
+
+  
   const options = [
     { value: { min: 1, max: 5 }, label: "1 a 5" },
     { value: { min: 6, max: 10 }, label: "6 a 10" },
@@ -52,6 +84,7 @@ export default function FilterArea({ onSubmit }) {
 
   const { globalLanguage } = useGlobalLanguage();
   const translateText = TranslateText({ globalLanguage });
+
   return (
     <StyledForm onSubmit={handleSubmit(submitHandler)}>
       <TotalParticipantsSelectSection>
@@ -66,7 +99,7 @@ export default function FilterArea({ onSubmit }) {
               onChange={(e) => {
                 setSelectTotalParticipants(e.value);
                 field.onChange(e);
-              }}              
+              }}
               isSearchable={false}
               placeholder={translateText.totalParticipantsPlaceholder}
               options={options}
@@ -74,6 +107,7 @@ export default function FilterArea({ onSubmit }) {
           )}
         />
       </TotalParticipantsSelectSection>
+
       <FlagSelectorSection>
         <Controller
           name="country"
@@ -84,44 +118,41 @@ export default function FilterArea({ onSubmit }) {
               {...field}
               selected={country}
               onSelect={(e) => {
-                setCountry(e);
+               
+                const selectedCountry = countries.find((c) => c.name === e);
+                setCountry(selectedCountry ? selectedCountry._id : null); // Armazenar o ID
                 field.onChange(e);
               }}
-              countries={["US", "GB", "FR", "DE", "IT"]}
-              customLabels={{
-                US: "EN-US",
-                GB: "EN-GB",
-                FR: "FR",
-                DE: "DE",
-                IT: "IT",
-              }}
+              countries={countries && countries.map((country) => country.name)} 
+              customLabels={countries && countries.reduce((acc, country) => {
+                acc[country.name] = country.name;
+                return acc;
+              }, {})}
               placeholder={translateText.countryPlaceholder}
             />
           )}
         />
       </FlagSelectorSection>
+
       <SelectLanguageSection>
         <Controller
           name="language"
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <FlagSelector
+            <StyledSelect
               {...field}
               selected={language}
-              onSelect={(e) => {
+              onChange={(e) => {
                 setLanguage(e);
                 field.onChange(e);
               }}
-              countries={["US", "GB", "FR", "DE", "IT"]}
-              customLabels={{
-                US: "EN-US",
-                GB: "EN-GB",
-                FR: "FR",
-                DE: "DE",
-                IT: "IT",
-              }}
+              isSearchable={false}
               placeholder={translateText.languagePlaceholder}
+              options={languages && languages.length > 0 ? languages.map((lang) => ({
+                value: lang.name,  
+                label: lang.name,  
+              })) : []}  
             />
           )}
         />
@@ -142,10 +173,11 @@ export default function FilterArea({ onSubmit }) {
                 field.onChange(e.value);
               }}
               value={duration}
-            ></StyledInput>
+            />
           )}
         />
       </PickTimeSection>
+
       <PickDateSection>
         <Controller
           name="dates"
@@ -167,6 +199,7 @@ export default function FilterArea({ onSubmit }) {
           )}
         />
       </PickDateSection>
+
       <button type="submit">Aplicar Filtros</button>
     </StyledForm>
   );

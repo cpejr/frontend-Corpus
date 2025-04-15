@@ -22,19 +22,21 @@ export default function FormInput({
           <Icon style={{ width: "2rem", height: "3.5rem", color: color }} />
         )}
         <StyledInput
-          id={inputKey}
-          inputKey={inputKey}
-          type={type}
-          autoComplete="off"
-          {...(register && { ...register(inputKey) })}
-          placeholder={placeholder}
-          defaultValue={defaultValue}
-          error={error}
-          color={color}
-          placeholdercolor={placeholdercolor}
-          width={width}
-          {...props}
-        />
+  id={inputKey}
+  inputKey={inputKey}
+  type={type}
+  autoComplete="off"
+  {...(register && { ...register(inputKey) })}
+  placeholder={placeholder}
+  defaultValue={defaultValue}
+  className={error ? "error" : ""}  // Corrigido: passando a classe "error" apenas se "error" for verdadeiro
+  color={color}
+  placeholdercolor={placeholdercolor}
+  width={width}
+  {...props}
+/>
+
+
       </IconContainer>
     </Container>
   );

@@ -26,6 +26,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import translateText from "../../services/others/translateAPI";
 import { TranslateToastError } from "./translations";
+
 export default function ManageVideosPage() {
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText({ globalLanguage });
@@ -131,7 +132,6 @@ export default function ManageVideosPage() {
 
   const [videoId, setVideoId] = useState("");
 
-
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
   };
@@ -159,23 +159,19 @@ export default function ManageVideosPage() {
     },
     onError: (err) => {
       console.log(err);
-       toast.error(TranslateToastError(globalLanguage, err.response.status));
+      toast.error(TranslateToastError(globalLanguage, err.response.status));
     },
   });
 
-
   const handleSubmit = async (data) => {
-    const { birthday, ...rest } = data; 
-    const updatedObj = { ...rest, date: birthday }; 
-  
-    createVideo(updatedObj);
+    createVideo(data); // Passa os dados para criar o vídeo
   };
+
   useEffect(() => {
     if (videos) { 
       translateTitles();
     }
-  }, [videos, globalLanguage]); 
-
+  }, [videos, globalLanguage]);
 
   return (
     <Container>
@@ -207,33 +203,33 @@ export default function ManageVideosPage() {
       </ContainerSearchBar>
 
       <SectionList>
-        {allVideos // trocar para allVideos
-        .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()),)
-        .map((video) => (
-          <CardVideo key={video.id}>
-            <VideoTitle onClick={() => { navigate(`/videos/${video.title}`, { state: video } )}}> 
-              {video.title}
-            </VideoTitle>
-            <ListLine/>
-            <Buttons>
-              <StyledEditOutlined onClick={() => handleEdit(video?._id)} />
-              <StyledDeleteOutlined onClick={() => handleDelete(video?._id)} />
-            </Buttons>
-          </CardVideo>
-        ))}
+        {allVideos // troca para allVideos
+          .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
+          .map((video) => (
+            <CardVideo key={video._id}> {/* Adicionando a chave única */}
+              <VideoTitle onClick={() => { navigate(`/videos/${video.title}`, { state: video }) }}> 
+                {video.title}
+              </VideoTitle>
+              <ListLine/>
+              <Buttons>
+                <StyledEditOutlined onClick={() => handleEdit(video?._id)} />
+                <StyledDeleteOutlined onClick={() => handleDelete(video?._id)} />
+              </Buttons>
+            </CardVideo>
+          ))}
       </SectionList>
 
       <Modals>
-          <ModalDeleteVideo
-            openModal={showDeleteModal}
-            closeModal={() => setShowDeleteModal(false)}
-            id={videoId}
-          />
-          <ModalEditVideos
-            openModal={showEditModal}
-            closeModal={() => setShowEditModal(false)}
-            id={videoId}
-          />
+        <ModalDeleteVideo
+          openModal={showDeleteModal}
+          closeModal={() => setShowDeleteModal(false)}
+          id={videoId}
+        />
+        <ModalEditVideos
+          openModal={showEditModal}
+          closeModal={() => setShowEditModal(false)}
+          id={videoId}
+        />
       </Modals>
     </Container>
   );

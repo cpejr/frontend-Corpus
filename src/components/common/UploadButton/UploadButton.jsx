@@ -13,6 +13,7 @@ export default function UploadButton({
   allowedMimeTypes,
   messageError1, 
   messageError2,
+  
 }) {
   const [file, setFile] = useState(null);
 
@@ -33,13 +34,12 @@ export default function UploadButton({
           setValue(label, url);
         });
       } catch (error) {
-        toast.error(messageError1)
+        toast.error(messageError1);
       }
-    } else{
+    } else {
       setFile(null);
-      toast.error(messageError2)
+      toast.error(messageError2);
     }
-  
   };
 
   const props = {
@@ -60,6 +60,7 @@ export default function UploadButton({
     </div>
   );
 }
+
 
 UploadButton.defaultProps = {
   color: "white",

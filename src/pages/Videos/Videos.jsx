@@ -28,14 +28,17 @@ export default function Videos() {
     duration: null,
     date: null,
   });
+  
   const { data: videos = [] } = useGetVideosByParameters({
     filters,
   });
 
   const handleFilterSubmit = (data) => {
-    setFilters(data);
+    setFilters(data);  // Atualiza os filtros
+    console.log(data); // Verificar os filtros aplicados
   };
 
+  // Filtrando os vídeos com base nos dados de busca e filtros
   const SearchBarFilter = useMemo(() => {
     return videos.filter((video) => {
       const title = video.title?.toLowerCase() || "";
@@ -72,19 +75,23 @@ export default function Videos() {
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages - 1));
   };
+
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
-    setCurrentPage(0);
+    setCurrentPage(0);  // Resetar a página ao buscar
   };
 
   const navigate = useNavigate();
+  
   const paginatedVideos = SearchBarFilter.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
+
   useEffect(() => {
     setTotalPages(Math.ceil(SearchBarFilter.length / itemsPerPage));
   }, [SearchBarFilter.length]);
+
   return (
     <Container>
       <DivTitle>
@@ -106,27 +113,33 @@ export default function Videos() {
         </DivSelect>
       </ContainerSearchFilter>
 
-      {paginatedVideos.map((video) => (
-        <DivLine key={video._id}>
-          <Card
-          archives={video.archives}
-            context={video.context}
-            responsibles={video.responsibles}
-            code={video.code}
-            country={video.country}
-            language={video.language}
-            duration={video.duration}
-            date={video.date}
-            totalParticipants={video.totalParticipants}
-            ShortDescription={video.ShortDescription}
-            textButton={translation.buttonCard}
-            event={() => {
-              navigate(`/videos/${video.title}`, { state: video });
-            }}
-            title={video.title}
-          />
-        </DivLine>
-      ))}
+      {/* Renderizar os vídeos filtrados */}
+      {paginatedVideos.length > 0 ? (
+        paginatedVideos.map((video) => (
+          <DivLine key={video._id}>
+            <Card
+              archives={video.archives}
+              context={video.context}
+              responsibles={video.responsibles}
+              code={video.code}
+              country={video.country}
+              language={video.language}
+              duration={video.duration}
+              date={video.date}
+              totalParticipants={video.totalParticipants}
+              ShortDescription={video.ShortDescription}
+              textButton={translation.buttonCard}
+              event={() => {
+                navigate(`/videos/${video.title}`, { state: video });
+              }}
+              title={video.title}
+            />
+          </DivLine>
+        ))
+      ) : (
+        <p>{translation.noVideosFound}</p>  
+      )}
+
       <ButtonDiv>
         <Pagination
           currentPage={currentPage}
