@@ -5,7 +5,6 @@ import { useGlobalLanguage } from "../../../stores/globalLanguage";
 import { getLanguages, getCountries, getVideosByParameters } from "../../../services/endpoints";  
 
 import {
-  FlagSelector,
   StyledForm,
   FlagSelectorSection,
   PickDateSection,
@@ -109,30 +108,34 @@ export default function FilterArea({ onSubmit }) {
       </TotalParticipantsSelectSection>
 
       <FlagSelectorSection>
-        <Controller
-          name="country"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <FlagSelector
-              {...field}
-              selected={country}
-              onSelect={(e) => {
-               
-                const selectedCountry = countries.find((c) => c.name === e);
-                setCountry(selectedCountry ? selectedCountry._id : null); // Armazenar o ID
-                field.onChange(e);
-              }}
-              countries={countries && countries.map((country) => country.name)} 
-              customLabels={countries && countries.reduce((acc, country) => {
-                acc[country.name] = country.name;
-                return acc;
-              }, {})}
-              placeholder={translateText.countryPlaceholder}
-            />
-          )}
-        />
-      </FlagSelectorSection>
+  <Controller
+    name="country"
+    control={control}
+    defaultValue=""
+    render={({ field }) => (
+      <StyledSelect
+        {...field}
+        value={country}
+        onChange={(e) => {
+          const selectedCountry = countries.find((c) => c.name === e.value);
+          setCountry(selectedCountry ? selectedCountry._id : null);
+          field.onChange(e.value);
+        }}
+        isSearchable={false}
+        placeholder={translateText.countryPlaceholder}
+        options={
+          countries && countries.length > 0
+            ? countries.map((country) => ({
+                value: country.name,
+                label: country.name,
+              }))
+            : []
+        }
+      />
+    )}
+  />
+</FlagSelectorSection>
+
 
       <SelectLanguageSection>
         <Controller
