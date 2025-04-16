@@ -90,10 +90,10 @@ export default function ManageVideosPage() {
       },
       {
         type: "date",
-        key: "Birthday",
+        key: "birthday",
         placeholder: translation.placeholder11,
-        dateFormat: "dd/mm/yy",
-        label: "Birthday",
+        dateFormat: "yy",
+        label: "birthday",
       },
       {
         type: "time",
@@ -167,6 +167,7 @@ export default function ManageVideosPage() {
 
   const handleSubmit = async (data) => {
     createVideo(data);
+    console.log(handleSubmit);
   };
   useEffect(() => {
     if (videos) {

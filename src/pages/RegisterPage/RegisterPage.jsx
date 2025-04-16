@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FormSubmit from "../../components/features/FormSubmit/FormSubmit";
 import { Container, Title, DivContainer, TextClick, Text } from "./Styles";
-import { validationSchemaLogin } from "./utils";
+import { validationSchemaLogin, validationSchemaRegister } from "./utils";
 import { useCreateUsers } from "../../hooks/query/user";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,9 +37,9 @@ export default function RegisterPage() {
       },
       {
         type: "date",
-        key: "Birthday",
+        key: "birthday",
         placeholder: translation.birthday,
-        label: "Birthday",
+        label: "birthday",
         dateFormat: "dd/mm/yy",
       },
       {
@@ -140,6 +140,7 @@ export default function RegisterPage() {
           loading={registerLoading}
           inputs={inputsRegister}
           buttonText={translation.buttonRegister}
+          schema={validationSchemaRegister()}
         ></FormSubmit>
       </DivContainer>
       <ModalForgotPassword

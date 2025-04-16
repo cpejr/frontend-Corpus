@@ -12,11 +12,12 @@ export default function CalendarFunction({
   placeholder,
   isSubmitSuccessful,
   defaultValue,
+  dateFormat,
 }) {
   const [date, setDate] = useState(defaultValue || "");
 
   const handleChange = (dateChange) => {
-    setValue("Birthday", dateChange.toLocaleDateString("pt-BR"), {
+    setValue("birthday", dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
 
@@ -31,7 +32,6 @@ export default function CalendarFunction({
       <Controller
         name={inputKey}
         control={control}
-        defaultValue={date}
         render={({ field }) => (
           <StyledCalendar
             {...field}
@@ -40,30 +40,28 @@ export default function CalendarFunction({
             placeholder={placeholder}
             onChange={(e) => {
               handleChange(e.value);
-
               field.onChange(e.value);
             }}
-            dateFormat="dd/mm/yy"
             color={color}
-            value={field.value}
+            value={date}
+            dateFormat={dateFormat}
           />
         )}
       />
     </Container>
   );
 }
-CalendarFunction.defaultProps = {
-  width: "70%",
-};
+
 CalendarFunction.propTypes = {
   inputKey: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   error: PropTypes.bool,
   icon: PropTypes.elementType,
   label: PropTypes.string,
-  control: PropTypes.func,
+  control: PropTypes.object,
   setValue: PropTypes.func,
   isSubmitSuccessful: PropTypes.bool,
   defaultValue: PropTypes.instanceOf(Date),
   color: PropTypes.string,
+  dateFormat: PropTypes.string,
 };
