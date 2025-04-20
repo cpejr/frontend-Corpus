@@ -35,6 +35,7 @@ export default function CalendarFunction({
         render={({ field }) => (
           <StyledCalendar
             {...field}
+            appendTo="self"
             error={error}
             selected={date}
             placeholder={placeholder}
@@ -45,6 +46,8 @@ export default function CalendarFunction({
             color={color}
             value={date}
             dateFormat={dateFormat}
+            view="date"
+            showButtonBar
           />
         )}
       />
