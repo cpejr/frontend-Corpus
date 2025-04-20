@@ -62,7 +62,7 @@ export const Section = styled.section`
   }
 
   @media (max-width: ${breakpoints.mobile}) {
-    width: 80%;
+    width: 100%;
   }
 `;
 

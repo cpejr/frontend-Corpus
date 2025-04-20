@@ -11,19 +11,19 @@ export const Container = styled.div`
   height: auto;
 
   @media (max-width: ${breakpoints.mobile}) {
-    width: 81%;
+    width: 79%;
   }
   @media (max-width: ${breakpoints.miniTablet}) {
-    width: 83%;
+    width: 80%;
   }
   @media (max-width: ${breakpoints.smallMobile}) {
-    width: 86%;
+    width: 84%;
   }
   @media (max-width: ${breakpoints.mediumMobile}) {
-    width: 90%;
+    width: 85%;
   }
   @media (max-width: ${breakpoints.smallDevice}) {
-    width: 92%;
+    width: 89%;
   }
   @media (max-width: ${breakpoints.miniDevice}) {
     width: 95%;
@@ -34,7 +34,6 @@ export const StyledCalendar = styled(Calendar)`
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 50px;
   border: ${(props) =>
     props?.error ? "0.1rem red solid" : `0.1rem ${colors.black} solid`};
