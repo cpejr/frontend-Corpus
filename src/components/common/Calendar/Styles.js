@@ -111,6 +111,7 @@ export const StyledCalendar = styled(Calendar)`
 
   .p-datepicker-decade {
     color: black !important;
+    font-size: 1.3rem;
   }
 
 
@@ -129,14 +130,29 @@ export const StyledCalendar = styled(Calendar)`
     }
   }
 
+
   .p-yearpicker .p-yearpicker-year {
     color: black !important;
     background-color: white !important;
+    padding: 0.25rem 0 0.25rem 0;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+
+    &:hover{
+      background-color: #dfc89e !important;
+    }
   }
 
   .p-monthpicker .p-monthpicker-month {
     color: black !important;
     background-color: white !important;
+    padding: 0.25rem 0 0.25rem 0;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+
+    &:hover{
+      background-color: #dfc89e !important;
+    }
   }
 
   .p-datepicker-calendar thead{
