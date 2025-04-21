@@ -44,6 +44,7 @@ export default function Home() {
           </ContainerText>
         </ContainerLogo>
       </Overlay>
+      
       <Section>
         <>
           <Column>
