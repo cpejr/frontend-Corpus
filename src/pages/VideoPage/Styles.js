@@ -1,6 +1,63 @@
 import styled from "styled-components";
 import { breakpoints, colors, fonts } from "../../styles/stylesVariables";
 
+
+export const DownloadButton = styled.a`
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #FFA500;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #E69500;
+  }
+`;
+
+export const TranscriptionContainer = styled.div`
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  
+  h3 {
+    margin-bottom: 1rem;
+    color: #333;
+  }
+`;
+
+export const TranscriptLine = styled.div`
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: ${props => props.active ? '#e3f2fd' : 'transparent'};
+  color: ${props => props.active ? '#1976d2' : '#333'};
+  
+  &:hover {
+    background: #e3f2fd;
+  }
+`;
+
+export const TranscriptText = styled.span`
+  color: ${props => props.active ? '#1976d2' : '#333'};
+  flex-grow: 1;
+`;
+
+export const TimeBadge = styled.span`
+  display: inline-block;
+  margin-right: 0.5rem;
+  color: #666;
+  font-size: 0.8rem;
+  min-width: 40px;
+`;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;

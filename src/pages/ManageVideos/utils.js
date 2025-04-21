@@ -41,6 +41,6 @@ export const validationSchema = () => {
       .string({ required_error: translation.error12 })
       .min(1, { message: translation.error12 }),
     date: z
-      .date({ required_error: translation.error13 })
+      .string({ required_error: translation.error13 })
   });
 };

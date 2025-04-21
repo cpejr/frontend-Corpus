@@ -108,3 +108,11 @@ export async function getArchives(_id) {
 
   return data
 }
+
+export const downloadTranscript = async (title) => {
+  const sanitizedTitle = title.replace(/[^a-zA-Z0-9-_]/g, "_");
+  const response = await api.get(`/download/transcript/${sanitizedTitle}.pdf`, {
+    responseType: "blob",
+  });
+  return response.data;
+};
