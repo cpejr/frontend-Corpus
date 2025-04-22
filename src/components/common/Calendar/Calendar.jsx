@@ -58,7 +58,7 @@ CalendarFunction.propTypes = {
   error: PropTypes.bool,
   icon: PropTypes.elementType,
   label: PropTypes.string,
-  control: PropTypes.object,
+  control: PropTypes.func,
   setValue: PropTypes.func,
   isSubmitSuccessful: PropTypes.bool,
   defaultValue: PropTypes.instanceOf(Date),
