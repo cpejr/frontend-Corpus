@@ -5,6 +5,7 @@ import {
   Image,
   Group,
   ButtonDiv,
+
   DescriptionLine,
   CodeLine,
 } from "./Styles";
@@ -45,6 +46,7 @@ export default function Card({
       </Group>
       <Group>
         <CodeLine>{code}</CodeLine>
+
       </Group>
 
       <ButtonDiv>
@@ -55,6 +57,7 @@ export default function Card({
 }
 
 Card.propTypes = {
+
   textButton: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   code: PropTypes.string.isRequired,
@@ -62,4 +65,5 @@ Card.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   ShortDescription: PropTypes.string.isRequired,
   archives: PropTypes.string
+
 };

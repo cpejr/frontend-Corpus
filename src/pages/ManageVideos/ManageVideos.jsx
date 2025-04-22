@@ -91,9 +91,10 @@ export default function ManageVideosPage() {
       },
       {
         type: "date",
-        key: "date",
+        key: "birthday",
         placeholder: translation.placeholder11,
-        label: "date",
+        dateFormat: "yy",
+        label: "birthday",
       },
       {
         type: "time",
@@ -116,7 +117,10 @@ export default function ManageVideosPage() {
   async function translateTitles() {
     const translatedTitles = await Promise.all(
       videos.map(async (video) => {
-        return { ...video, title: await translateText(video.title, translateLanguage)}; 
+        return {
+          ...video,
+          title: await translateText(video.title, translateLanguage),
+        };
       })
     );
 
@@ -145,10 +149,9 @@ export default function ManageVideosPage() {
     setVideoId(id);
     setShowEditModal(true);
   }
-  
+
   const { data: videos } = useGetVideos({
-    onError: () => {
-    },
+    onError: () => {},
   });
   const { mutate: createVideo, isPending } = useCreateVideos({
     onSuccess: () => {
@@ -164,11 +167,12 @@ export default function ManageVideosPage() {
   });
 
   const handleSubmit = async (data) => {
-    createVideo(data); // Passa os dados para criar o vídeo
+    createVideo(data);
+    console.log(data);
   };
 
   useEffect(() => {
-    if (videos) { 
+    if (videos) {
       translateTitles();
     }
   }, [videos, globalLanguage]);
@@ -203,17 +207,25 @@ export default function ManageVideosPage() {
       </ContainerSearchBar>
 
       <SectionList>
-        {allVideos // troca para allVideos
-          .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
+        {allVideos // trocar para allVideos
+          .filter((obj) =>
+            obj.title.toLowerCase().includes(searchValue.toLowerCase())
+          )
           .map((video) => (
-            <CardVideo key={video._id}> {/* Adicionando a chave única */}
-              <VideoTitle onClick={() => { navigate(`/videos/${video.title}`, { state: video }) }}> 
+            <CardVideo key={video.id}>
+              <VideoTitle
+                onClick={() => {
+                  navigate(`/videos/${video.title}`, { state: video });
+                }}
+              >
                 {video.title}
               </VideoTitle>
-              <ListLine/>
+              <ListLine />
               <Buttons>
                 <StyledEditOutlined onClick={() => handleEdit(video?._id)} />
-                <StyledDeleteOutlined onClick={() => handleDelete(video?._id)} />
+                <StyledDeleteOutlined
+                  onClick={() => handleDelete(video?._id)}
+                />
               </Buttons>
             </CardVideo>
           ))}
@@ -234,3 +246,4 @@ export default function ManageVideosPage() {
     </Container>
   );
 }
+

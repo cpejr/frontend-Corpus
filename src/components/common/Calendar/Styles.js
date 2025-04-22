@@ -10,22 +10,22 @@ export const Container = styled.div`
   width: 79%;
   height: auto;
 
-  @media (max-width: ${breakpoints.mobile}){
+  @media (max-width: ${breakpoints.mobile}) {
     width: 81%;
   }
-  @media (max-width: ${breakpoints.miniTablet}){
+  @media (max-width: ${breakpoints.miniTablet}) {
     width: 83%;
   }
-  @media (max-width: ${breakpoints.smallMobile}){
+  @media (max-width: ${breakpoints.smallMobile}) {
     width: 86%;
   }
-  @media (max-width: ${breakpoints.mediumMobile}){
+  @media (max-width: ${breakpoints.mediumMobile}) {
     width: 90%;
   }
-  @media (max-width: ${breakpoints.smallDevice}){
+  @media (max-width: ${breakpoints.smallDevice}) {
     width: 92%;
   }
-  @media (max-width: ${breakpoints.miniDevice}){
+  @media (max-width: ${breakpoints.miniDevice}) {
     width: 95%;
   }
 `;
@@ -34,21 +34,21 @@ export const StyledCalendar = styled(Calendar)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+
   height: 50px;
   border: ${(props) =>
     props?.error ? "0.1rem red solid" : `0.1rem ${colors.black} solid`};
 
   &:hover {
-      border-color: ${colors.accent.hover};
-    }
+    border-color: ${colors.accent.hover};
+  }
 
   ::placeholder {
     font-size: 20px;
     color: black;
     @media (max-width: ${breakpoints.mobile}) {
-    font-size: 16px;
-  }
+      font-size: 16px;
+    }
   }
   .p-inputtext {
     background-color: white;
@@ -72,5 +72,9 @@ export const StyledCalendar = styled(Calendar)`
     @media (max-width: ${breakpoints.smallTablet}) {
       width: 225px;
     }
+  }
+  .p-yearpicker-year {
+    color: black !important;
+    background-color: black !important;
   }
 `;

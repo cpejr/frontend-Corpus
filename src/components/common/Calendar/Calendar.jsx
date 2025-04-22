@@ -12,8 +12,9 @@ export default function CalendarFunction({
   placeholder,
   isSubmitSuccessful,
   defaultValue,
+  dateFormat,
 }) {
-  const [date, setDate] = useState(defaultValue || '');
+  const [date, setDate] = useState(defaultValue || "");
 
   const handleChange = (dateChange) => {
     setValue("birthday", dateChange.toLocaleDateString("pt-BR"), {
@@ -32,29 +33,25 @@ export default function CalendarFunction({
       <Controller
         name={inputKey}
         control={control}
-        defaultValue={date}
         render={({ field }) => (
           <StyledCalendar
+            {...field}
             error={error}
             selected={date}
             placeholder={placeholder}
             onChange={(e) => {
-              setDate(e.value);  // Atualiza o estado com a data
-              field.onChange(e);  // Passa o evento para o react-hook-form
+              handleChange(e.value);
+              field.onChange(e.value);
             }}
-            dateFormat="dd/mm/yy"
             color={color}
-            value={date}  // O valor correto aqui é 'date'
+            value={date}
+            dateFormat={dateFormat}
           />
         )}
       />
     </Container>
   );
 }
-
-CalendarFunction.defaultProps = {
-  width: "70%",
-};
 
 CalendarFunction.propTypes = {
   inputKey: PropTypes.string.isRequired,
@@ -65,6 +62,7 @@ CalendarFunction.propTypes = {
   control: PropTypes.func,
   setValue: PropTypes.func,
   isSubmitSuccessful: PropTypes.bool,
-  defaultValue: PropTypes.date,
+  defaultValue: PropTypes.instanceOf(Date),
   color: PropTypes.string,
+  dateFormat: PropTypes.string,
 };

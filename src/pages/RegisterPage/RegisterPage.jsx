@@ -40,6 +40,7 @@ export default function RegisterPage() {
         key: "birthday",
         placeholder: translation.birthday,
         label: "birthday",
+        dateFormat: "dd/mm/yy",
       },
       {
         type: "text",
@@ -90,13 +91,12 @@ export default function RegisterPage() {
     },
     onError: (err) => {
       toast.error(
-        TranslateRegisterToastError(globalLanguage, err.response.status),
+        TranslateRegisterToastError(globalLanguage, err.response.status)
       );
     },
   });
 
   const registerSubmit = (data) => {
-    
     createUser(data);
   };
 
@@ -108,7 +108,7 @@ export default function RegisterPage() {
     },
     onError: (err) => {
       toast.error(
-        TranslateLoginToastError(globalLanguage, err.response.status),
+        TranslateLoginToastError(globalLanguage, err.response.status)
       );
     },
   });
@@ -137,10 +137,10 @@ export default function RegisterPage() {
         <Title>{translation.titleRegister}</Title>
         <FormSubmit
           onSubmit={registerSubmit}
-          schema={validationSchemaRegister()}
           loading={registerLoading}
           inputs={inputsRegister}
           buttonText={translation.buttonRegister}
+          schema={validationSchemaRegister()}
         ></FormSubmit>
       </DivContainer>
       <ModalForgotPassword

@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import {
+
     Line,
     VideoContainer,
     Group,
@@ -10,9 +11,11 @@ import {
 import { useGetArchives } from "../../hooks/query/archives";
 import { ClipLoader } from "react-spinners";
 
+
 export default function VideoPage() {
   const location = useLocation();
   const data = location.state;
+
 
   const { data: archiveData, isLoading } = useGetArchives({
     id: data.archives,
@@ -20,10 +23,12 @@ export default function VideoPage() {
     onError: () => {},
   });
   console.log(archiveData)
+
   return (
     <Container>
       <WhiteContainer>
         <Group>
+
           <Line>{data.title}</Line>
         </Group>
         <VideoContainer>
@@ -37,6 +42,7 @@ export default function VideoPage() {
               allowFullScreen
             />
           )}
+
         </VideoContainer>
       </WhiteContainer>
     </Container>
