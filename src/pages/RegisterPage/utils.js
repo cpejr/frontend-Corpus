@@ -3,18 +3,18 @@ import { useGlobalLanguage } from "../../stores/globalLanguage";
 import { TranslateText } from "./translations";
 
 // Regex para validar o formato DD/MM/YYYY
-const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+//const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
 
 // Função para verificar se a data é válida
-const isValidDate = (dateString) => {
-  const [day, month, year] = dateString.split("/").map(Number);
-  const date = new Date(year, month - 1, day);
-  return (
-    date.getFullYear() === year &&
-    date.getMonth() === month - 1 &&
-    date.getDate() === day
-  );
-};
+// const isValidDate = (dateString) => {
+//   const [day, month, year] = dateString.split("/").map(Number);
+//   const date = new Date(year, month - 1, day);
+//   return (
+//     date.getFullYear() === year &&
+//     date.getMonth() === month - 1 &&
+//     date.getDate() === day
+//   );
+// };
 
 export const validationSchemaRegister = () => {
   // Translations
@@ -28,15 +28,13 @@ export const validationSchemaRegister = () => {
       .min(2, { message: translation.nameMinError })
       .max(60, { message: translation.nameMaxError }),
 
-    birthday: z
-      .string({ required_error: translation.birthdayStringError })
-      .refine((value) => dateRegex.test(value), {
-        message: translation.birthdayCorrectDateError,
-      })
-      .refine(isValidDate, {
-        message: translation.birthdayValidDateError,
-      }),
-
+    birthday: z.date({ required_error: translation.birthdayStringError }),
+    // .refine((value) => dateRegex.test(value), {
+    //   message: translation.birthdayCorrectDateError,
+    // })
+    // .refine(isValidDate, {
+    //   message: translation.birthdayValidDateError,
+    // })
     email: z
       .string({ required_error: translation.emailStringError })
       .min(1, translation.emailMinError)

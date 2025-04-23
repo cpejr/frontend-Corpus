@@ -22,7 +22,7 @@ export default function FilterArea({ onSubmit }) {
 
   const [selectTotalParticipants, setSelectTotalParticipants] = useState(null);
   const [country, setCountry] = useState(null);
-  const [language, setLanguage] = useState(null);
+  const [language, setLanguage] = useState([]);  // Alteração para armazenar um array de idiomas
   const [duration, setDuration] = useState("");
   const [dates, setDates] = useState(null);
   const [languages, setLanguages] = useState([]);
@@ -33,18 +33,17 @@ export default function FilterArea({ onSubmit }) {
       ...data,
       totalParticipants: selectTotalParticipants,
       country,
-      language,
+      language: language.map((lang) => lang.value),  // Envia os valores de idioma selecionados como array
       duration,
       dates,
     };
 
-    // Fazendo a requisição com GET ao invés de POST
     try {
       const videos = await getVideosByParameters(toFilter); 
       onSubmit(videos);  
       reset();  
       setCountry(null);
-      setLanguage(null);
+      setLanguage([]);  // Resetando o estado de idiomas
       setDuration("");
       setSelectTotalParticipants(null);
     } catch (error) {
@@ -52,29 +51,18 @@ export default function FilterArea({ onSubmit }) {
     }
   }
 
-  // Carregar as linguas do backend
   useEffect(() => {
     getLanguages()
-      .then((languages) => {
-        setLanguages(languages); 
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar idiomas:", error);
-      });
+      .then((languages) => setLanguages(languages))
+      .catch((error) => console.error("Erro ao buscar idiomas:", error));
   }, []);
 
-  // Carregar os países do backend
   useEffect(() => {
     getCountries()
-      .then((countries) => {
-        setCountries(countries); 
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar países:", error);
-      });
+      .then((countries) => setCountries(countries))
+      .catch((error) => console.error("Erro ao buscar países:", error));
   }, []);
 
-  
   const options = [
     { value: { min: 1, max: 5 }, label: "1 a 5" },
     { value: { min: 6, max: 10 }, label: "6 a 10" },
@@ -108,7 +96,7 @@ export default function FilterArea({ onSubmit }) {
       </TotalParticipantsSelectSection>
 
       <FlagSelectorSection>
-  <Controller
+  <Controller 
     name="country"
     control={control}
     defaultValue=""
@@ -137,25 +125,26 @@ export default function FilterArea({ onSubmit }) {
 </FlagSelectorSection>
 
 
-      <SelectLanguageSection>
+    <SelectLanguageSection>
         <Controller
           name="language"
           control={control}
-          defaultValue=""
+          defaultValue={[]}
           render={({ field }) => (
             <StyledSelect
               {...field}
-              selected={language}
-              onChange={(e) => {
-                setLanguage(e);
-                field.onChange(e);
+              isMulti  // Permite múltiplas seleções
+              value={language}  // Armazena os idiomas selecionados
+              onChange={(selected) => {
+                setLanguage(selected);  // Atualiza o estado de idiomas selecionados
+                field.onChange(selected);
               }}
-              isSearchable={false}
+              isSearchable={true}
               placeholder={translateText.languagePlaceholder}
-              options={languages && languages.length > 0 ? languages.map((lang) => ({
-                value: lang.name,  
-                label: lang.name,  
-              })) : []}  
+              options={languages.map((lang) => ({
+                value: lang.name,
+                label: lang.name,
+              }))}
             />
           )}
         />
