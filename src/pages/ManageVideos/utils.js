@@ -15,7 +15,8 @@ export const validationSchema = () => {
       .min(1, { message: translation.error3 }),
     ShortDescription: z
       .string({ required_error: translation.error4 })
-      .min(1, { message: translation.error4 }),
+      .min(1, { message: translation.error4 })
+      .max(500, { message: translation.error4 }),
     videoFile: z
       .string({ required_error: translation.error5 })
       .min(1, { message: translation.error5 }),

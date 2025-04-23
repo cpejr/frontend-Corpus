@@ -62,9 +62,8 @@ export const Line = styled.div`
   }
 `;
 export const DescriptionLine = styled.div`
-  display: flex;
+  display: justify;
   flex-direction: row;
-  width: 50%;
   height: auto;
   font-size: 20px;
   color: ${colors.black};
