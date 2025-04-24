@@ -62,7 +62,9 @@ export function useGetVideosByParameters({
   onSuccess = () => {},
   onError = (err) => console.error(err),
 } = {}) {
+  console.log("Oi");
   return useQuery({
+    
     queryKey: [
       "videos",
       {
@@ -75,5 +77,5 @@ export function useGetVideosByParameters({
       }),
     onSuccess,
     onError,
-  });
+  }); 
 }

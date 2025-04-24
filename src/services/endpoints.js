@@ -38,9 +38,10 @@ export const getVideos = async () => {
 // Alteração do método GET para POST no frontend
 export const getVideosByParameters = async (filters = {}) => {
   try {
-    
+    console.log(filters);
     const { data } = await api.post(`/videofilter`, filters); 
     return data;  
+    
   } catch (error) {
     console.error("Erro ao buscar vídeos filtrados:", error);  
     throw error;  

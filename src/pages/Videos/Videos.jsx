@@ -34,10 +34,13 @@ export default function Videos() {
   const { data: videos = [] } = useGetVideosByParameters({
     filters,
   });
+  console.log(videos)
+  
 
   const handleFilterSubmit = (data) => {
-    setFilters(data);  // Atualiza os filtros
-    console.log(data); // Verificar os filtros aplicados
+    setFilters(data); 
+     // Atualiza os filtros
+   
   };
 
   // Filtrando os vídeos com base nos dados de busca e filtros
@@ -93,7 +96,7 @@ export default function Videos() {
   );
 
   useEffect(() => {
-    setTotalPages(Math.ceil(SearchBarFilter.length / itemsPerPage));
+    setTotalPages(Math.ceil(SearchBarFilter.length / itemsPerPage)); console.log("Estou dentro do useEffect")
   }, [SearchBarFilter.length]);
 
   return (
