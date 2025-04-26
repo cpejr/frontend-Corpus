@@ -147,8 +147,8 @@ export default function ManageVideosPage() {
   const handleSubmit = async (data) => {
     try {
      
-      const countryDoc = countries.find(country => country.name.toLowerCase() === data.country.toLowerCase());
-      const languageDoc = languages.find(lang => lang.name.toLowerCase() === data.language.toLowerCase());
+      const countryDoc = countries.find(country => country.name.toLowerCase() === data.country);
+      const languageDoc = languages.find(lang => lang.name.toLowerCase() === data.language);
 
       
       if (!countryDoc || !languageDoc) {

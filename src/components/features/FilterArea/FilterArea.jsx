@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import { useGlobalLanguage } from "../../../stores/globalLanguage";
 import { getLanguages, getCountries } from "../../../services/endpoints";
+import { getVideosByParameters } from "../../../services/endpoints";
 import {
   StyledForm,
   TotalParticipantsSelectSection,
@@ -39,15 +40,15 @@ export default function FilterArea({ onSubmit }) {
 
         setCountryOptions(
           countries.map((country) => ({
-            value: country.name, // envia o nome
-            label: country.name, // mostra o nome
+            value: country.name, 
+            label: country.name, 
           }))
         );
 
         setLanguageOptions(
           languages.map((language) => ({
-            value: language.name, // envia o nome
-            label: language.name, // mostra o nome
+            value: language.name, 
+            label: language.name, 
           }))
         );
       } catch (error) {
@@ -85,7 +86,7 @@ export default function FilterArea({ onSubmit }) {
 
   return (
     <StyledForm onSubmit={handleSubmit(submitHandler)}>
-      {/* Total de Participantes */}
+      
       <TotalParticipantsSelectSection>
         <Controller
           name="totalParticipants"
@@ -107,7 +108,6 @@ export default function FilterArea({ onSubmit }) {
         />
       </TotalParticipantsSelectSection>
 
-      {/* País */}
       <FlagSelectorSection>
         <Controller
           name="country"
@@ -129,7 +129,7 @@ export default function FilterArea({ onSubmit }) {
         />
       </FlagSelectorSection>
 
-      {/* Língua */}
+      
       <SelectLanguageSection>
         <Controller
           name="language"
@@ -151,7 +151,7 @@ export default function FilterArea({ onSubmit }) {
         />
       </SelectLanguageSection>
 
-      {/* Duração */}
+      
       <PickTimeSection>
         <Controller
           name="duration"
@@ -172,7 +172,7 @@ export default function FilterArea({ onSubmit }) {
         />
       </PickTimeSection>
 
-      {/* Datas */}
+      
       <PickDateSection>
         <Controller
           name="dates"
