@@ -1,6 +1,30 @@
 import api from "./api";
 import useAuthStore from "../stores/auth";
 
+//Language endpoints
+export const getLanguages = async () => {
+  try {
+    const { data } = await api.get("/language/");  
+    return data;  
+  } catch (error) {
+    console.error("Erro ao buscar idiomas:", error);  
+    throw error;  
+  }
+};
+
+//Country endpoints
+export const getCountries = async () => {
+  try {
+    const { data } = await api.get("/country");  
+    return data;  
+  } catch (error) {
+    console.error("Erro ao buscar países:", error);  
+    throw error; 
+  }
+};
+
+
+
 //CategoryType endpoints
 export const getCategoryPrice = async (filters = {}) => {
   const { data } = await api.get("/categoryPrice", { params: filters });
