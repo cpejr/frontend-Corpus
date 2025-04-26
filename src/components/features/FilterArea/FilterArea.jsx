@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import { useGlobalLanguage } from "../../../stores/globalLanguage";
-
+import { getLanguages, getCountries } from "../../../services/endpoints";
 import {
-  FlagSelector,
   StyledForm,
-  FlagSelectorSection,
-  PickDateSection,
-  PickTimeSection,
-  SelectLanguageSection,
   TotalParticipantsSelectSection,
+  FlagSelectorSection,
+  SelectLanguageSection,
+  PickTimeSection,
+  PickDateSection,
   Calendar,
   StyledSelect,
   StyledInput,
@@ -26,8 +25,40 @@ export default function FilterArea({ onSubmit }) {
   const [duration, setDuration] = useState("");
   const [dates, setDates] = useState(null);
 
-  function submitHandler(data) {
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [languageOptions, setLanguageOptions] = useState([]);
 
+  const { globalLanguage } = useGlobalLanguage();
+  const translateText = TranslateText({ globalLanguage });
+
+  useEffect(() => {
+    async function fetchOptions() {
+      try {
+        const countries = await getCountries();
+        const languages = await getLanguages();
+
+        setCountryOptions(
+          countries.map((country) => ({
+            value: country.name, // envia o nome
+            label: country.name, // mostra o nome
+          }))
+        );
+
+        setLanguageOptions(
+          languages.map((language) => ({
+            value: language.name, // envia o nome
+            label: language.name, // mostra o nome
+          }))
+        );
+      } catch (error) {
+        console.error("Erro ao buscar países ou idiomas:", error);
+      }
+    }
+
+    fetchOptions();
+  }, []);
+
+  const submitHandler = (data) => {
     const toFilter = {
       ...data,
       totalParticipants: selectTotalParticipants,
@@ -36,24 +67,25 @@ export default function FilterArea({ onSubmit }) {
       duration,
       dates,
     };
+
     reset();
     setCountry(null);
     setLanguage(null);
     setDuration("");
-    setSelectTotalParticipants(null)
+    setSelectTotalParticipants(null);
+    setDates(null);
     onSubmit(toFilter);
-  }
-  //Array de opções para o select de Total de Participantes
-  const options = [
+  };
+
+  const participantOptions = [
     { value: { min: 1, max: 5 }, label: "1 a 5" },
     { value: { min: 6, max: 10 }, label: "6 a 10" },
     { value: { min: 10, max: null }, label: "10+" },
   ];
 
-  const { globalLanguage } = useGlobalLanguage();
-  const translateText = TranslateText({ globalLanguage });
   return (
     <StyledForm onSubmit={handleSubmit(submitHandler)}>
+      {/* Total de Participantes */}
       <TotalParticipantsSelectSection>
         <Controller
           name="totalParticipants"
@@ -66,67 +98,60 @@ export default function FilterArea({ onSubmit }) {
               onChange={(e) => {
                 setSelectTotalParticipants(e.value);
                 field.onChange(e);
-              }}              
-              isSearchable={false}
+              }}
+              options={participantOptions}
               placeholder={translateText.totalParticipantsPlaceholder}
-              options={options}
+              isSearchable={false}
             />
           )}
         />
       </TotalParticipantsSelectSection>
+
+      {/* País */}
       <FlagSelectorSection>
         <Controller
           name="country"
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <FlagSelector
+            <StyledSelect
               {...field}
-              selected={country}
-              onSelect={(e) => {
-                setCountry(e);
+              defaultValue={country}
+              onChange={(e) => {
+                setCountry(e.value);
                 field.onChange(e);
               }}
-              countries={["US", "GB", "FR", "DE", "IT"]}
-              customLabels={{
-                US: "EN-US",
-                GB: "EN-GB",
-                FR: "FR",
-                DE: "DE",
-                IT: "IT",
-              }}
+              options={countryOptions}
               placeholder={translateText.countryPlaceholder}
+              isSearchable
             />
           )}
         />
       </FlagSelectorSection>
+
+      {/* Língua */}
       <SelectLanguageSection>
         <Controller
           name="language"
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <FlagSelector
+            <StyledSelect
               {...field}
-              selected={language}
-              onSelect={(e) => {
-                setLanguage(e);
+              defaultValue={language}
+              onChange={(e) => {
+                setLanguage(e.value);
                 field.onChange(e);
               }}
-              countries={["US", "GB", "FR", "DE", "IT"]}
-              customLabels={{
-                US: "EN-US",
-                GB: "EN-GB",
-                FR: "FR",
-                DE: "DE",
-                IT: "IT",
-              }}
+              options={languageOptions}
               placeholder={translateText.languagePlaceholder}
+              isSearchable
             />
           )}
         />
       </SelectLanguageSection>
 
+      {/* Duração */}
       <PickTimeSection>
         <Controller
           name="duration"
@@ -137,15 +162,17 @@ export default function FilterArea({ onSubmit }) {
               {...field}
               placeholder={translateText.durationPlaceholder}
               {...register("duration")}
+              value={duration}
               onChange={(e) => {
                 setDuration(e.target.value);
-                field.onChange(e.value);
+                field.onChange(e.target.value);
               }}
-              value={duration}
-            ></StyledInput>
+            />
           )}
         />
       </PickTimeSection>
+
+      {/* Datas */}
       <PickDateSection>
         <Controller
           name="dates"
@@ -154,9 +181,10 @@ export default function FilterArea({ onSubmit }) {
           render={({ field }) => (
             <Calendar
               {...field}
-              onChange={(dates) => {
-                setDates(dates.value);
-                field.onChange(dates.value);
+              value={dates}
+              onChange={(e) => {
+                setDates(e.value);
+                field.onChange(e.value);
               }}
               placeholder={translateText.calendarPlaceholder}
               readOnlyInput
@@ -167,6 +195,7 @@ export default function FilterArea({ onSubmit }) {
           )}
         />
       </PickDateSection>
+
       <button type="submit">Aplicar Filtros</button>
     </StyledForm>
   );
