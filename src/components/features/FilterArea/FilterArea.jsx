@@ -158,6 +158,7 @@ export default function FilterArea({ onSubmit }) {
                 setDates(dates.value);
                 field.onChange(dates.value);
               }}
+              appendTo="self"
               placeholder={translateText.calendarPlaceholder}
               readOnlyInput
               hideOnRangeSelection

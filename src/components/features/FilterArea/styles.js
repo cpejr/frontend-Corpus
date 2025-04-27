@@ -36,6 +36,10 @@ export const StyledInput = styled.input`
   padding-left: 16px;
   font-size: 1.1rem;
 
+  &:focus{
+    border: 2px solid #d4a373 !important;
+  }
+
   &::placeholder {
     color: #d4a373 !important;
   }
@@ -92,6 +96,10 @@ export const TotalParticipantsSelectSection = styled.div`
 
 export const PickTimeSection = styled.div`
   width: 100%;
+
+  &:focus{
+    border: 2px solid #d4a373 !important;
+  }
 `;
 
 
@@ -117,14 +125,14 @@ export const Calendar = styled(PrimeCalendar)`
   }
 
   .p-inputtext {
-    width: 100%;
-    height: 2.7rem;
     background-color: ${colors.background.primary};
     color: #d4a373;
     border: 2px solid #d4a373;
     border-radius: 5px;
-    padding-left: 16px;
+    width: 100%;
+    height: 2.7rem;
     font-size: 1.1rem;
+    padding-left: 16px;
 
     &:focus {
       outline: none;
@@ -137,10 +145,136 @@ export const Calendar = styled(PrimeCalendar)`
     &:hover {
       border-color: #d4a373;
     }
+
+    @media (max-width: ${breakpoints.mobile}) {
+      font-size: 16px;
+    }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 100%;
+    }
+    @media (max-width: ${breakpoints.smallTablet}) {
+      width: 225px;
+    }
   }
 
+
   .p-datepicker {
+    background-color: white !important;
     border: 2px solid #d4a373;
+  }
+
+
+  .p-datepicker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #d4a373 !important;
+    padding: 0.5rem 0.5rem;
+  }
+
+
+  .p-datepicker-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+
+  .p-datepicker-month,
+  .p-datepicker-year {
+    color: black !important;
+    background-color: white !important;
+    font-size: 1.3rem;
+  }
+
+
+  .p-datepicker-decade {
+    color: black !important;
+    font-size: 1.3rem;
+  }
+
+
+  .p-datepicker-next,
+  .p-datepicker-prev {
+    color: black !important;
+    border-radius: 0.5rem !important;
+    border: none !important;
+    padding: 0.2rem 0.4rem !important;
+    background-color: #dfc89e !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: ${colors.accent.hover} !important;
+    }
+  }
+
+
+  .p-yearpicker .p-yearpicker-year {
+    color: black !important;
+    background-color: white !important;
+    padding: 0.25rem 0 0.25rem 0;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+
+    &:hover{
+      background-color: #dfc89e !important;
+    }
+  }
+
+  .p-monthpicker .p-monthpicker-month {
+    color: black !important;
+    background-color: white !important;
+    padding: 0.25rem 0 0.25rem 0;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+
+    &:hover{
+      background-color: #dfc89e !important;
+    }
+  }
+
+  .p-datepicker-calendar thead{
+    padding-bottom: 0.5rem;
+  }
+
+  .p-datepicker-calendar tbody tr td{
+    padding: 0.2rem 0 0.2rem 0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+    &:hover{
+      background-color: #dfc89e !important;
+    }
+  }
+
+  .p-datepicker-calendar th {
+    color: black !important;
+  }
+
+  .p-datepicker-buttonbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    align-items: center;
+    color: black !important;
+    background-color: white !important;
+  }
+
+  .p-button-secondary {
+    background-color: #dfc89e !important;
+    border-radius: 0.5rem !important;
+    border: none !important;
+    padding: 0.4rem 0.8rem !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: ${colors.accent.hover} !important;
+    }
   }
 `;
 
