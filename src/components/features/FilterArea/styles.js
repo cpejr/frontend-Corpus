@@ -6,11 +6,9 @@ import Select from "react-select";
 
 export const StyledSelect = styled(Select)`
   width: 100%;
-  margin: auto;
   border-color: 1px solid #d4a373;
   justify-content: space-between;
   align-items: center;
-  gap: 50px;
   color: #d4a373;
 
   background-color: ${colors.background.primary};
@@ -63,7 +61,6 @@ export const Section = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  gap: 50px;
 `;
 
 
@@ -96,10 +93,6 @@ export const TotalParticipantsSelectSection = styled.div`
 
 export const PickTimeSection = styled.div`
   width: 100%;
-
-  &:focus{
-    border: 2px solid #d4a373 !important;
-  }
 `;
 
 
