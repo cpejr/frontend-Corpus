@@ -283,14 +283,14 @@ export const ButtonFormFilter = styled.button`
   border-radius: 5px;
   width: 40%;
   height: 2.5rem;
-  background-color: ${colors.background.primary};
+  background-color: rgb(245, 169, 93);
   transition: all 0.6s;
   cursor: pointer;
-  color: #d4a373;
+  color:#ffffff;
   font-size: 1.1rem;
 
   &:hover{
-    background-color:rgb(245, 169, 93);
+    background-color: #d4a373;
     color: #ffffff;
   }
 `
