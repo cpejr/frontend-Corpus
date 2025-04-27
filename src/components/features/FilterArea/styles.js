@@ -12,9 +12,11 @@ export const StyledSelect = styled(Select)`
   align-items: center;
   gap: 50px;
   color: #d4a373;
+
   background-color: ${colors.background.primary};
   .css-1jqq78o-placeholder {
     color: #d4a373;
+    font-size: 1.1rem;
   }
   .css-13cymwt-control {
     background-color: ${colors.background.primary};
@@ -22,83 +24,93 @@ export const StyledSelect = styled(Select)`
     color: #d4a373;
   }
 `;
+
+
 export const StyledInput = styled.input`
-  width: 250px;
-  border-color: #d4a373;
+  border: 2px solid #d4a373;
+  border-radius: 5px;
+  height: 2.3rem;
+  width: calc(100% - 21px) !important;
   background-color: ${colors.background.primary};
-  height: 30px;
-  justify-content: space-between;
-  align-items: center;
-  gap: 50px;
   color: #d4a373;
+  padding-left: 16px;
+  font-size: 1.1rem;
+
   &::placeholder {
     color: #d4a373 !important;
   }
 `;
+
+
 export const FlagSelector = styled(ReactFlagsSelect)`
   color: #d4a373;
-  width: 50%;
+  width: 100%;
   align-items: center;
+  font-size: 1.2rem !important;
 
   .ReactFlagsSelect-module_selectBtn__19wW7 {
     border: 2px solid #d4a373;
     color: #d4a373;
   }
 `;
+
+
 export const Section = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
   gap: 50px;
 `;
+
+
 export const StyledForm = styled.form`
-  width: 100%;
-  justify-content: space-between;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  width: 100%;
   color: #d4a373;
-  gap: 50px;
+  gap: 16px;
+  margin-bottom: 24px;
+
   @media (max-width: ${breakpoints.smallMobile}) {
     margin-top: 0px;
     width: 250px
   }
 `;
+
+
 export const FlagSelectorSection = styled.div`
   width: 100%;
-  justify-content: space-between;
-  align-items: center;
 `;
+
+
 export const TotalParticipantsSelectSection = styled.div`
-  color: #d4a373;
-  border-color: ${colors.background.primary};
-  width: 50%;
-  align-items: center;
-  gap: 50px;
+  width: 100%;
 `;
+
+
 export const PickTimeSection = styled.div`
   width: 100%;
-  justify-content: space-between;
-  color: #d4a373;
-  border-color: #d4a373;
-  align-items: center;
-  gap: 50px;
 `;
+
+
 export const PickDateSection = styled.div`
   width: 100%;
-  justify-content: space-between;
-  align-items: center;
 `;
+
+
 export const SelectLanguageSection = styled.div`
   width: 100%;
-  justify-content: space-between;
-  align-items: center;
 `;
+
+
 export const Calendar = styled(PrimeCalendar)`
-  width: ${(props) => (props.width ? props.width : "95%")};
+  width: ${(props) => (props.width ? props.width : "100%")};
   align-self: center;
   display: flex;
   justify-content: center;
   border-radius: 25px;
-
   @media (max-width: ${breakpoints.smallMobile}) {
     margin-top: 0px;
     width: 250px
@@ -106,13 +118,13 @@ export const Calendar = styled(PrimeCalendar)`
 
   .p-inputtext {
     width: 100%;
-    height: 3rem;
+    height: 2.7rem;
     background-color: ${colors.background.primary};
     color: #d4a373;
-    border: solid 1px #d4a373;
-    padding-left: 10px;
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    border: 2px solid #d4a373;
+    border-radius: 5px;
+    padding-left: 16px;
+    font-size: 1.1rem;
 
     &:focus {
       outline: none;
@@ -131,3 +143,20 @@ export const Calendar = styled(PrimeCalendar)`
     border: 2px solid #d4a373;
   }
 `;
+
+export const ButtonFormFilter = styled.button`
+  border: 2px solid #d4a373;
+  border-radius: 5px;
+  width: 40%;
+  height: 2.5rem;
+  background-color: ${colors.background.primary};
+  transition: all 0.6s;
+  cursor: pointer;
+  color: #d4a373;
+  font-size: 1.1rem;
+
+  &:hover{
+    background-color:rgb(245, 169, 93);
+    color: #ffffff;
+  }
+`

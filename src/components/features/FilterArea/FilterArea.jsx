@@ -14,6 +14,7 @@ import {
   Calendar,
   StyledSelect,
   StyledInput,
+  ButtonFormFilter
 } from "./styles";
 import { TranslateText } from "./translations";
 
@@ -126,7 +127,6 @@ export default function FilterArea({ onSubmit }) {
           )}
         />
       </SelectLanguageSection>
-
       <PickTimeSection>
         <Controller
           name="duration"
@@ -167,7 +167,7 @@ export default function FilterArea({ onSubmit }) {
           )}
         />
       </PickDateSection>
-      <button type="submit">Aplicar Filtros</button>
+      <ButtonFormFilter type="submit">Aplicar Filtros</ButtonFormFilter>
     </StyledForm>
   );
 }

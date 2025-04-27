@@ -106,7 +106,6 @@ export default function Videos() {
           />
         </ContainerSearchBar>{" "}
         <DivSelect>
-
           <FilterArea onSubmit={handleFilterSubmit} />
         </DivSelect>
       </ContainerSearchFilter>
