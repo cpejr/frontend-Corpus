@@ -12,15 +12,17 @@ import { useGetArchives } from "../../hooks/query/archives";
 import { useDownloadTranscript } from "../../hooks/query/videos";
 import { ClipLoader } from "react-spinners";
 import useAuthStore from "../../stores/auth";
+import { useGlobalLanguage } from "../../stores/globalLanguage";
+import {TranslateText} from "./translations"
+
 
 export default function VideoPage() {
   const location = useLocation();
   const data = location.state;
   const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
 
-  if (!data) {
-    return <p>Dados não encontrados.</p>;
-  }
+  const { globalLanguage } = useGlobalLanguage();
+  const translation = TranslateText(globalLanguage);
 
   const { data: archiveData, isLoading } = useGetArchives({
     id: data.archives._id,
@@ -30,6 +32,19 @@ export default function VideoPage() {
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
   });
+
+  const handleDownload = () => {
+    if (!pdfUrl) return;
+
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = `${data.title}_transcript.pdf`;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <Container>
@@ -50,13 +65,8 @@ export default function VideoPage() {
                 allowFullScreen
               />
               {pdfUrl && isAdmin && (
-                <DownloadButton
-                  href={pdfUrl}
-                  download={`${data.title}_transcript.pdf`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  📄 Baixar Transcrição
+                <DownloadButton  onClick={handleDownload}>
+              {translation.buttonpdf}
                 </DownloadButton>
               )}
             </>
