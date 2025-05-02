@@ -21,7 +21,7 @@ export default function CalendarFunction({
   const locale = localeMap[globalLanguage] || "en-US";
 
   const handleChange = (dateChange) => {
-    setValue("birthday", dateChange.toLocaleDateString(locale), {
+    setValue("birthday", dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
 
@@ -50,9 +50,7 @@ export default function CalendarFunction({
             }}
             color={color}
             value={date}
-            dateFormat="dd/mm/yy"
-            view="date"
-            showButtonBar
+            dateFormat={dateFormat}     
             locale={locale}
           />
         )}

@@ -165,7 +165,7 @@ export default function FilterArea({ onSubmit }) {
               readOnlyInput
               hideOnRangeSelection
               showButtonBar
-              dateFormat="dd/mm/yy"
+              dateFormat="yy"
               locale={locale}
             />
           )}
