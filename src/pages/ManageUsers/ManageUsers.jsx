@@ -132,6 +132,7 @@ export default function ManageUser() {
           defaultValue={() => verifyUserType(user?.type)}
           onChange={(value) => handleTypeChange(user?._id, value)}
           options={selectOptions}
+          appendTo="self"
         />
       ),
       delete: (

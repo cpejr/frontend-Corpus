@@ -137,10 +137,10 @@ export default function RegisterPage() {
         <Title>{translation.titleRegister}</Title>
         <FormSubmit
           onSubmit={registerSubmit}
-          schema={validationSchemaRegister()}
           loading={registerLoading}
           inputs={inputsRegister}
           buttonText={translation.buttonRegister}
+          schema={validationSchemaRegister()}
         ></FormSubmit>
       </DivContainer>
       <ModalForgotPassword

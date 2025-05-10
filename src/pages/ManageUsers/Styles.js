@@ -111,7 +111,52 @@ export const TypeSelect = styled(Select)`
     display: none;
   }
   .ant-select-dropdown {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    background-color: white !important;
+  }
+
+  .ant-select-item-option-content {
+    color: black !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .rc-virtual-list-holder-inner {
+    color: black !important;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ant-select-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black !important;
+    width: 100%;
+  }
+
+  .ant-select-item-option-selected {
+    color: black !important;
+  }
+
+  .ant-select-item-option {
+    color: black !important;
+    width: 100%;
+  }
+
+  .ant-select-dropdown-menu-item {
+    color: black !important;
+    width: 100%;
+  }
+
+  .ant-select-dropdown-menu-item-selected {
+    color: black !important;
   }
 
   @media (max-width: ${breakpoints.mobile}) {
