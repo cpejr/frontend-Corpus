@@ -16,8 +16,10 @@ import { TranslateText } from "./translations";
 import Card from "../../components/features/Card/Card";
 import { useNavigate } from "react-router-dom";
 
+
 import Pagination from "../../components/features/Pagination/Pagination";
 import FilterArea from "../../components/features/FilterArea/FilterArea";
+
 
 export default function Videos() {
   const [searchValue, setSearchValue] = useState("");
@@ -59,6 +61,7 @@ export default function Videos() {
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText({ globalLanguage });
 
+
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(
@@ -68,6 +71,7 @@ export default function Videos() {
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 0));
   };
+
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages - 1));
@@ -109,7 +113,7 @@ export default function Videos() {
       {paginatedVideos.map((video) => (
         <DivLine key={video._id}>
           <Card
-          archives={video.archives}
+            archives={video.archives}
             context={video.context}
             responsibles={video.responsibles}
             code={video.code}
@@ -136,6 +140,7 @@ export default function Videos() {
           setCurrentPage={setCurrentPage}
         />
       </ButtonDiv>
+
     </Container>
   );
 }

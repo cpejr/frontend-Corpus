@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form as FormContainer,
   ErrorMessage,
@@ -17,6 +18,7 @@ import FormSelect from "../../common/FormSelect/FormSelect";
 import UploadButton from "../../common/UploadButton/UploadButton";
 import TimePicker from "../../common/FormTimePicker/TimePicker";
 import CalendarFunction from "../../common/Calendar/Calendar";
+
 export default function FormSubmit({
   inputs,
   onSubmit,
@@ -94,6 +96,8 @@ export default function FormSubmit({
             <InputKeep key={input.key}>
               <CalendarFunction
                 inputKey={input.key}
+                dateFormat={input.dateFormat}
+                view={input.view}
                 label={input.label}
                 placeholder={input.placeholder}
                 icon={input.icon}

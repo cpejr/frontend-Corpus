@@ -14,11 +14,16 @@ import {
   Calendar,
   StyledSelect,
   StyledInput,
+  ButtonFormFilter
 } from "./styles";
 import { TranslateText } from "./translations";
+import { localeMap } from "../../common/Calendar/locales";
 
 export default function FilterArea({ onSubmit }) {
   const { handleSubmit, reset, register, control } = useForm();
+
+  const { globalLanguage } = useGlobalLanguage();
+  const locale = localeMap[globalLanguage] || "en-US";
 
   const [selectTotalParticipants, setSelectTotalParticipants] = useState(null);
   const [country, setCountry] = useState(null);
@@ -27,7 +32,6 @@ export default function FilterArea({ onSubmit }) {
   const [dates, setDates] = useState(null);
 
   function submitHandler(data) {
-
     const toFilter = {
       ...data,
       totalParticipants: selectTotalParticipants,
@@ -50,7 +54,6 @@ export default function FilterArea({ onSubmit }) {
     { value: { min: 10, max: null }, label: "10+" },
   ];
 
-  const { globalLanguage } = useGlobalLanguage();
   const translateText = TranslateText({ globalLanguage });
   return (
     <StyledForm onSubmit={handleSubmit(submitHandler)}>
@@ -126,7 +129,6 @@ export default function FilterArea({ onSubmit }) {
           )}
         />
       </SelectLanguageSection>
-
       <PickTimeSection>
         <Controller
           name="duration"
@@ -158,16 +160,18 @@ export default function FilterArea({ onSubmit }) {
                 setDates(dates.value);
                 field.onChange(dates.value);
               }}
+              appendTo="self"
               placeholder={translateText.calendarPlaceholder}
               readOnlyInput
               hideOnRangeSelection
               showButtonBar
-              dateFormat="dd/mm/yy"
+              dateFormat="yy"
+              locale={locale}
             />
           )}
         />
       </PickDateSection>
-      <button type="submit">Aplicar Filtros</button>
+      <ButtonFormFilter type="submit">Aplicar Filtros</ButtonFormFilter>
     </StyledForm>
   );
 }

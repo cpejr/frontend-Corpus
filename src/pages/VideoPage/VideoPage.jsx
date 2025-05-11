@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import {
+
   Line,
   VideoContainer,
   Group,
@@ -7,6 +8,7 @@ import {
   Container,
   Video,
   DownloadButton,
+
 } from "./Styles";
 import { useGetArchives } from "../../hooks/query/archives";
 import { useDownloadTranscript } from "../../hooks/query/videos";
@@ -14,6 +16,7 @@ import { ClipLoader } from "react-spinners";
 import useAuthStore from "../../stores/auth";
 import { useGlobalLanguage } from "../../stores/globalLanguage";
 import {TranslateText} from "./translations"
+
 
 
 export default function VideoPage() {
@@ -24,10 +27,12 @@ export default function VideoPage() {
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
 
+
   const { data: archiveData, isLoading } = useGetArchives({
     id: data.archives._id,
     name: data.title,
   });
+
 
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
@@ -46,10 +51,12 @@ export default function VideoPage() {
     document.body.removeChild(link);
   };
 
+
   return (
     <Container>
       <WhiteContainer>
         <Group>
+
           <Line>{data.title}</Line>
         </Group>
 
@@ -71,6 +78,7 @@ export default function VideoPage() {
               )}
             </>
           )}
+
         </VideoContainer>
       </WhiteContainer>
     </Container>

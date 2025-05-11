@@ -27,28 +27,39 @@ export default function AboutUs() {
 
   return (
     <Container>
+    
       <BackgroundTitle>
         <Title>{translation.title1}</Title>
       </BackgroundTitle>
       <Line>
         <TextColumn>
+          <img
+            style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
+            src={image}
+            alt="image"
+          />
+        </TextColumn>
+        <TextPintaColumn>
           <p>{translation.paragraph1}</p>
-        </TextColumn>
-        <TextColumn>
-          <img src={image} alt="image" />
-        </TextColumn>
+        </TextPintaColumn>
       </Line>
-      <ImageLine>
-        <TextColumn>
-          <img src={image} alt="image" />
-        </TextColumn>
-        <TextColumn>
+      <ImageLine style={{ marginBottom: "2rem", height: "40rem" }}>
+        <TextPintaColumn>
           <p>{translation.paragraph2}</p>
+        </TextPintaColumn>
+        <TextColumn>
+          <img
+            style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
+            src={image}
+            alt="image"
+          />
         </TextColumn>
       </ImageLine>
       <Banner>
         <p>{translation.paragraph3}</p>
       </Banner>
+
+
       {isMobileScreen ? (
         <SubTitle>{translation.subtitle1}</SubTitle>
       ) : (
@@ -58,9 +69,13 @@ export default function AboutUs() {
         <p>{translation.paragraph4}</p>
       </TextLine>
       <Line>
-        <PintaColumn>
-          <img src={image} alt="image" />
-        </PintaColumn>
+      <TextColumn>
+          <img
+            style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
+            src={image}
+            alt="image"
+          />
+        </TextColumn>
         <TextPintaColumn>
           <p>{translation.paragraph5}</p>
         </TextPintaColumn>
@@ -77,9 +92,45 @@ export default function AboutUs() {
           />
         </TextColumn>
       </ImageLine>
-      <Banner>
-        <p>{translation.paragraph7}</p>
-      </Banner>
+
+
+      {isMobileScreen ? (
+        <SubTitle>{translation.subtitle2}</SubTitle>
+      ) : (
+        <SubTitle> &ensp; &ensp;{translation.subtitle2}</SubTitle>
+      )}
+      <Line>
+        <TextColumn>
+          <img
+            style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
+            src={image}
+            alt="image"
+          />
+        </TextColumn>
+        <TextPintaColumn>
+          <p>{translation.paragraph7}</p>
+        </TextPintaColumn>
+      </Line>
+
+      {isMobileScreen ? (
+        <SubTitle>{translation.subtitle3}</SubTitle>
+      ) : (
+        <SubTitle> &ensp; &ensp;{translation.subtitle3}</SubTitle>
+      )}
+      <ImageLine style={{ marginBottom: "2rem", height: "40rem" }}>
+        <TextPintaColumn>
+          <p>{translation.paragraph8}</p>
+        </TextPintaColumn>
+        <TextColumn>
+          <img
+            style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
+            src={image}
+            alt="image"
+          />
+        </TextColumn>
+      </ImageLine>
+
+
     </Container>
   );
 }
