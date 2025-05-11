@@ -109,3 +109,10 @@ export async function getArchives(_id) {
 
   return data
 }
+export const downloadTranscript = async (title) => {
+  const encodedTitle = encodeURIComponent(`${title}.pdf`);
+  const response = await api.get(`/download/transcript/${encodedTitle}`, {
+    responseType: "blob",
+  });
+  return response.data;
+};

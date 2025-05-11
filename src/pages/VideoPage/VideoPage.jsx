@@ -1,28 +1,56 @@
 import { useLocation } from "react-router-dom";
 import {
 
-    Line,
-    VideoContainer,
-    Group,
-    WhiteContainer,
-    Container,
-    Video, // Mantendo Styled Components para estilização
+  Line,
+  VideoContainer,
+  Group,
+  WhiteContainer,
+  Container,
+  Video,
+  DownloadButton,
+
 } from "./Styles";
 import { useGetArchives } from "../../hooks/query/archives";
+import { useDownloadTranscript } from "../../hooks/query/videos";
 import { ClipLoader } from "react-spinners";
+import useAuthStore from "../../stores/auth";
+import { useGlobalLanguage } from "../../stores/globalLanguage";
+import {TranslateText} from "./translations"
+
 
 
 export default function VideoPage() {
   const location = useLocation();
   const data = location.state;
+  const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translation = TranslateText(globalLanguage);
 
 
   const { data: archiveData, isLoading } = useGetArchives({
-    id: data.archives,
+    id: data.archives._id,
     name: data.title,
-    onError: () => {},
   });
-  console.log(archiveData)
+
+
+  const { data: pdfUrl } = useDownloadTranscript({
+    title: data.title,
+  });
+
+  const handleDownload = () => {
+    if (!pdfUrl) return;
+
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = `${data.title}_transcript.pdf`;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
 
   return (
     <Container>
@@ -31,16 +59,24 @@ export default function VideoPage() {
 
           <Line>{data.title}</Line>
         </Group>
+
         <VideoContainer>
           {isLoading && <ClipLoader color="#FFA500" size={50} />}
           {!isLoading && (
-            <Video
-              src={`data:video/mp4;base64,${archiveData?.videoFile}`} // Vídeo Base64
-              title={data.title}
-              controls
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+            <>
+              <Video
+                src={`data:video/mp4;base64,${archiveData?.videoFile}`}
+                title={data.title}
+                controls
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+              {pdfUrl && isAdmin && (
+                <DownloadButton  onClick={handleDownload}>
+              {translation.buttonpdf}
+                </DownloadButton>
+              )}
+            </>
           )}
 
         </VideoContainer>
@@ -48,3 +84,4 @@ export default function VideoPage() {
     </Container>
   );
 }
+

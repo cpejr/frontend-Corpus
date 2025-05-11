@@ -20,7 +20,7 @@ export default function CalendarFunction({
   const { globalLanguage } = useGlobalLanguage();
   const locale = localeMap[globalLanguage] || "en-US";
 
-  const handleChange = (dateChange) => {
+  const handleChange = (dateChange) => { 
     setValue("birthday", dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });

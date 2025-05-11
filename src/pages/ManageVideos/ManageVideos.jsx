@@ -166,8 +166,9 @@ export default function ManageVideosPage() {
   });
 
   const handleSubmit = async (data) => {
+
     createVideo(data);
-    console.log(handleSubmit);
+    
   };
   useEffect(() => {
     if (videos) {
