@@ -104,10 +104,10 @@ export async function refresh() {
 }
 
 // archive
-export async function getArchives(_id) {
-  const {data} = await api.get(`/archive/${_id}`)
+export async function getArchives(id) {
+  const { data } = await api.get(`/archive/${id}`);
 
-  return data
+  return data;
 }
 export const downloadTranscript = async (title) => {
   const encodedTitle = encodeURIComponent(`${title}.pdf`);

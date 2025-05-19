@@ -1,6 +1,11 @@
 import { Card, Button } from "antd";
 import styled from "styled-components";
 import { breakpoints, colors, fonts } from "../../../styles/stylesVariables";
+import { ClipLoader } from "react-spinners";
+
+export const Loader = styled(ClipLoader)`
+  color: #ffa500;
+`;
 
 export const StyledCard = styled(Card)`
   display: flex;
@@ -35,7 +40,7 @@ export const StyledCard = styled(Card)`
 
 export const Image = styled.div`
   display: flex;
-  width: 250px;  
+  width: 250px;
   height: auto;
   align-items: center;
   justify-content: center;
