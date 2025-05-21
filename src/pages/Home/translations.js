@@ -16,15 +16,14 @@ export function TranslateText({ globalLanguage }) {
     subtitleLogo = "em Interações Multimodais";
     title1 = "Sobre nós";
     paragraph1 =
-      "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt. Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam.";
+      "O Centro de Pesquisa Internacional Intercultural Communication in Multimodal Interactions (ICMI) é uma rede interinstitucional e internacional de pesquisadores. Desde 2010, nosso trabalho tem sido pioneiro na investigação de fenômenos conversacionais, interacionais, translinguísticos, multimodais e linguístico-cognitivos. Atualmente, nossos pesquisadores têm se dedicado ao desenvolvimento de metodologias inovadoras para a transcrição e análise multimodal de interações mediadas por vídeo, em contextos virtuais.";
     textButton1 = "saiba mais!";
-    title2 = "Vídeos";
+    title2 = "Dados e Preservação";
     paragraph2 =
-      "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt. Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam.";
+      "Os dados presentes neste projeto, registrados sob o (CAAE: 55218521.1.1001.5149), são um recurso em expansão desde 2010, documentando interações em contextos interculturais variados. Esta é uma plataforma que vem sendo construída para a preservação e disponibilização desses dados, com o objetivo de criar um banco robusto que suporte análises multimodais detalhadas.";
     textButton2 = "saiba mais!";
     title3 = "Políticas de privacidade";
-    paragraph3 =
-      "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt. Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam.";
+    paragraph3 = "Em construção";
     textButton3 = "saiba mais!";
   }
   if (globalLanguage === "EN") {
@@ -74,7 +73,7 @@ export function TranslateText({ globalLanguage }) {
     paragraph3 =
       "Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam. Id fugit iusto est possimus asperiores qui repellat nesciunt. Lorem ipsum dolor sit amet. Ut dolorum consequatur ut fugiat ducimus et quia saepe et recusandae incidunt qui impedit sunt et molestiae veniam et obcaecati ipsam.";
     textButton3 = "mehr erfahren!";
-}
+  }
 
   return {
     titleLogo,
