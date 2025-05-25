@@ -170,6 +170,9 @@ export default function ManageVideosPage() {
 
   // Código para traduzir os títulos
   async function translateTitles() {
+
+    console.log("Vídeos recebidos da API:", videos);
+
     const translatedTitles = await Promise.all(
       videos.map(async (video) => {
         return {
@@ -223,6 +226,7 @@ export default function ManageVideosPage() {
 
   useEffect(() => {
     if (videos) {
+       console.log("Vídeos recebidos:", videos);
       translateTitles();
     }
   }, [videos, globalLanguage]);
