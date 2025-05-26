@@ -23,9 +23,14 @@ export default function VideoPage() {
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
 
+  const safeTitle = data.title
+    ? data.title.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ_.-]/g, "")
+    : "transcricao";
+
   const { data: archiveData, isLoading } = useGetArchives({
     id: data.archives._id,
     name: data.title,
+    safeTitle,
   });
 
   const { data: pdfUrl } = useDownloadTranscript({
@@ -56,13 +61,19 @@ export default function VideoPage() {
           {isLoading && <ClipLoader color="#FFA500" size={50} />}
           {!isLoading && (
             <>
-              <Video
-                src={`data:video/mp4;base64,${archiveData?.videoFile}`}
-                title={data.title}
-                controls
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              <Video controls title={data.title}>
+                <source
+                  src={`data:video/mp4;base64,${archiveData?.videoFile}`}
+                  type="video/mp4"
+                />
+                <track
+                  label="Português"
+                  kind="subtitles"
+                  srcLang="pt"
+                  src={`/transcripts/${encodeURIComponent(safeTitle)}.vtt`}
+                  default
+                />
+              </Video>
               {pdfUrl && isAdmin && (
                 <DownloadButton onClick={handleDownload}>
                   {translation.buttonpdf}
