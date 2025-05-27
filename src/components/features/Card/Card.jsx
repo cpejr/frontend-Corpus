@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   StyledCard,
   OrangeButton,
@@ -21,6 +22,8 @@ export default function Card({
   archives,
   thumbnail,
 }) {
+  const [thumb, setThumb] = useState(null);
+
   const { data: archiveData, isLoading } = useGetArchives({
     id: archives._id,
     name: title,
@@ -28,17 +31,26 @@ export default function Card({
     onError: () => {},
   });
 
+  useEffect(() => {
+    const cacheKey = `thumb_${archives._id}`;
+    const cachedThumb = localStorage.getItem(cacheKey);
+
+    if (cachedThumb) {
+      setThumb(cachedThumb);
+    } else if (archiveData?.thumbFile) {
+      localStorage.setItem(cacheKey, archiveData.thumbFile);
+      setThumb(archiveData.thumbFile);
+    }
+  }, [archiveData, archives._id]);
+
   return (
     <StyledCard>
       <Image>
         {isLoading ? (
-          <Loader /> // Spinner enquanto carrega
-        ) : (
-          <img
-            src={`data:image/webp;base64,${archiveData?.thumbFile}`}
-            alt={title}
-          />
-        )}
+          <Loader />
+        ) : thumb ? (
+          <img src={`data:image/webp;base64,${thumb}`} alt={title} />
+        ) : null}
       </Image>
       <Group>
         <Line>{title}</Line>
@@ -64,5 +76,5 @@ Card.propTypes = {
   event: PropTypes.func.isRequired,
   thumbnail: PropTypes.string.isRequired,
   ShortDescription: PropTypes.string.isRequired,
-  archives: PropTypes.string,
+  archives: PropTypes.object.isRequired,
 };
