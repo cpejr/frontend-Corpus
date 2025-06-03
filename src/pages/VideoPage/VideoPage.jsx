@@ -32,6 +32,7 @@ export default function VideoPage() {
     name: data.title,
     safeTitle,
   });
+  const vttURL = archiveData?.vttURL || data?.vttURL;
 
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
@@ -70,7 +71,7 @@ export default function VideoPage() {
                   label="Português"
                   kind="subtitles"
                   srcLang="pt"
-                  src={`/transcripts/${encodeURIComponent(safeTitle)}.vtt`}
+                  src={vttURL}
                   default
                 />
               </Video>
