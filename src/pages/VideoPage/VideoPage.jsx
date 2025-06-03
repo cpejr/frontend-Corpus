@@ -30,9 +30,9 @@ export default function VideoPage() {
   const { data: archiveData, isLoading } = useGetArchives({
     id: data.archives._id,
     name: data.title,
-    safeTitle,
+    vttFile: data.vttFile,
   });
-  const vttURL = archiveData?.vttURL || data?.vttURL;
+  const vttURL = `/transcripts/${encodeURIComponent(safeTitle)}.vtt` || "";
 
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
@@ -50,6 +50,7 @@ export default function VideoPage() {
     link.click();
     document.body.removeChild(link);
   };
+  console.log("URL DO VIDEO", vttURL);
 
   return (
     <Container>
