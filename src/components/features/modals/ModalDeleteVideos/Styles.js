@@ -18,11 +18,11 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: #dfc89e;
+  color: ${colors.accent.primary};
   text-align: center;
 `;
 
 export const Text = styled.h3`
-  color: #dfc89e;
+  color: ${colors.accent.primary};
   text-align: center;
 `;

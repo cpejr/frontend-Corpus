@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import { colors } from "../../../styles/stylesVariables";
 
 export const PageButton = styled.button`
   padding: 5px 10px;
   margin: 0 5px;
   font-size: 1rem;
   border-radius: 100px;
-  border: 1px solid "#F4EFF9";
+  border: 1px solid ${colors.modals.background};
   border-radius: 4px;
-  background-color: ${({ isActive }) => (isActive ? "black" : "transparent")};
-  color: white;
+  background-color: ${({ isActive }) => (isActive ? colors.black : "transparent")};
+  color: ${colors.font.secondary};
   cursor: ${({ isActive }) => (isActive ? "default" : "pointer")};
 `;
 
@@ -18,5 +19,5 @@ export const ArrowButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: white;
+  color: ${colors.font.secondary};
 `;

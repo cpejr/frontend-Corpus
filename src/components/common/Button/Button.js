@@ -22,8 +22,8 @@ const Button = styled.button`
   gap: ${(props) => props.gap};
   width: ${(props) => props.width};
   /*cor e estilo do botão*/
-  color: #f6fff8;
-  background-color: #dfc89e;
+  color: ${colors.font.secondary};
+  background-color: ${colors.accent.primary};
   border-width: ${(props) => props.borderWidth ?? "0.15rem"};
   border-color: ${(props) => props.borderColor ?? "transparent"};
   border-style: solid;

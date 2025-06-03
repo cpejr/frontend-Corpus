@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../../styles/stylesVariables";
 
 export const Container = styled.div`
   display: flex;
@@ -42,11 +43,11 @@ export const StyledInput = styled.input`
   select:-webkit-autofill:focus {
     border: 1px solid green;
     -webkit-text-fill-color: green;
-    -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+    -webkit-box-shadow: 0 0 0px 1000px ${colors.blue.background} inset;
     transition: background-color 5000s ease-in-out 0s;
   }
   &:hover {
-    border-color: #f19709;
+    border-color: ${colors.accent.primary};
   }
   &:placeholdercolor {
     color: black;

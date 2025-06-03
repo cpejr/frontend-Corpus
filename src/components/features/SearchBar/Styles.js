@@ -16,7 +16,7 @@ export const Input = styled(AutoComplete)`
     background-color: ${colors.background.primary};
 
     border-radius: 25px;
-    border: solid #d4a373 1px;
+    border: solid ${colors.accent.primary} 1px;
     padding-left: 10px;
     font-size: 1.2rem;
     margin-bottom: 2rem;
@@ -27,10 +27,10 @@ export const Input = styled(AutoComplete)`
     color: ${colors.font.primary};
 
     &::placeholder {
-      color: #d4a373;
+      color: ${colors.accent.primary};
     }
     &:hover {
-      border-color: #f19709;
+      border-color: ${colors.accent.primary};
     }
   }
 `;

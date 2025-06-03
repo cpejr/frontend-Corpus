@@ -43,7 +43,7 @@ export const Header = styled(Menubar)`
   width: 100%;
 
   .p-menuitem {
-    color: #f5eadf;
+    color: ${colors.background.primary};
     padding: 10px;
     background-color: ${colors.background.header};
   }
@@ -51,7 +51,7 @@ export const Header = styled(Menubar)`
   .p-menuitem-text {
     text-decoration: none;
     font-size: 125%;
-    color: #f5eadf;
+    color: ${colors.background.primary};
 
     &:hover {
       text-decoration: underline;
@@ -75,7 +75,6 @@ export const Select = styled.div`
   :hover {
     cursor: pointer;
     text-decoration: underline;
-
     text-decoration-thickness: 0.2rem;
   }
   @media (max-width: ${breakpoints.tablet}) {
@@ -84,7 +83,7 @@ export const Select = styled.div`
     font-weight: 600;
     :hover {
       text-decoration: underline;
-      text-decoration-color: white;
+      text-decoration-color: ${colors.background.white};
       text-decoration-thickness: 0.2rem;
     }
   }

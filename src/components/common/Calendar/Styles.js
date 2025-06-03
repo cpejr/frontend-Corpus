@@ -36,7 +36,7 @@ export const StyledCalendar = styled(Calendar)`
   align-items: center;
   height: 50px;
   border: ${(props) =>
-    props?.error ? "0.1rem red solid" : `0.1rem ${colors.black} solid`};
+    props?.error ? `0.1rem ${colors.error.secondary} solid` : `0.1rem ${colors.black} solid`};
 
   &:hover {
     border-color: ${colors.accent.hover};
@@ -44,15 +44,15 @@ export const StyledCalendar = styled(Calendar)`
 
   ::placeholder {
     font-size: 20px;
-    color: black;
+    color: ${colors.font.primary};
     @media (max-width: ${breakpoints.mobile}) {
       font-size: 16px;
     }
   }
 
   .p-inputtext {
-    background-color: white;
-    color: black !important;
+    background-color: ${colors.background.white};
+    color: ${colors.font.primary} !important;
     align-self: center;
     border: solid 1px ${colors.font.primary};
     width: 100%;
@@ -76,21 +76,18 @@ export const StyledCalendar = styled(Calendar)`
     }
   }
 
-
   .p-datepicker {
-    background-color: white !important;
+    background-color: ${colors.background.white} !important;
     border: 0.15rem solid ${colors.font.primary} !important;
   }
-
 
   .p-datepicker-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: black !important;
+    color: ${colors.font.primary} !important;
     padding: 0.5rem 0.5rem;
   }
-
 
   .p-datepicker-title {
     display: flex;
@@ -99,28 +96,25 @@ export const StyledCalendar = styled(Calendar)`
     gap: 0.5rem;
   }
 
-
   .p-datepicker-month,
   .p-datepicker-year {
-    color: black !important;
-    background-color: white !important;
+    color: ${colors.font.primary} !important;
+    background-color: ${colors.background.white} !important;
     font-size: 1.3rem;
   }
-
 
   .p-datepicker-decade {
-    color: black !important;
+    color: ${colors.font.primary} !important;
     font-size: 1.3rem;
   }
-
 
   .p-datepicker-next,
   .p-datepicker-prev {
-    color: black !important;
+    color: ${colors.font.primary} !important;
     border-radius: 0.5rem !important;
     border: none !important;
     padding: 0.2rem 0.4rem !important;
-    background-color: #dfc89e !important;
+    background-color: ${colors.accent.primary} !important;
     cursor: pointer;
     transition: all 0.3s ease;
 
@@ -129,28 +123,27 @@ export const StyledCalendar = styled(Calendar)`
     }
   }
 
-
   .p-yearpicker .p-yearpicker-year {
-    color: black !important;
-    background-color: white !important;
+    color: ${colors.font.primary} !important;
+    background-color: ${colors.background.white} !important;
     padding: 0.25rem 0 0.25rem 0;
     transition: all 0.5s ease;
     border-radius: 10px;
 
     &:hover{
-      background-color: #dfc89e !important;
+      background-color: ${colors.accent.primary} !important;
     }
   }
 
   .p-monthpicker .p-monthpicker-month {
-    color: black !important;
-    background-color: white !important;
+    color: ${colors.font.primary} !important;
+    background-color: ${colors.background.white} !important;
     padding: 0.25rem 0 0.25rem 0;
     transition: all 0.5s ease;
     border-radius: 10px;
 
     &:hover{
-      background-color: #dfc89e !important;
+      background-color: ${colors.accent.primary} !important;
     }
   }
 
@@ -165,12 +158,12 @@ export const StyledCalendar = styled(Calendar)`
     transition: all 0.5s ease;
 
     &:hover{
-      background-color: #dfc89e !important;
+      background-color: ${colors.accent.primary} !important;
     }
   }
 
   .p-datepicker-calendar th {
-    color: black !important;
+    color: ${colors.font.primary} !important;
   }
 
   .p-datepicker-buttonbar {
@@ -178,12 +171,12 @@ export const StyledCalendar = styled(Calendar)`
     justify-content: space-between;
     padding: 1rem 1rem;
     align-items: center;
-    color: black !important;
-    background-color: white !important;
+    color: ${colors.font.primary} !important;
+    background-color: ${colors.background.white} !important;
   }
 
   .p-button-secondary {
-    background-color: #dfc89e !important;
+    background-color: ${colors.accent.primary} !important;
     border-radius: 0.5rem !important;
     border: none !important;
     padding: 0.4rem 0.8rem !important;

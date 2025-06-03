@@ -28,7 +28,7 @@ export const SocialContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 50px;
-  color: #f5eadf;
+  color: ${colors.background.primary};
   gap: 10px;
 
   p {
@@ -45,7 +45,7 @@ export const SocialIcon = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #f5eadf;
+  color: ${colors.background.primary};
   justify-content: center;
   gap: 40px;
   @media (max-width: ${breakpoints.mobile}) {
@@ -63,12 +63,14 @@ export const Instagram = styled(FaInstagram)`
     font-size: 30px;
   }
 `;
+
 export const Facebook = styled(FaFacebookSquare)`
   font-size: 50px;
   @media (max-width: ${breakpoints.mobile}) {
     font-size: 30px;
   }
 `;
+
 export const Whatsapp = styled(FaWhatsapp)`
   font-size: 50px;
   @media (max-width: ${breakpoints.mobile}) {

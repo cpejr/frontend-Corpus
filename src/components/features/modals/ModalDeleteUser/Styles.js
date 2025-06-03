@@ -4,7 +4,7 @@ import { Modal } from "antd";
 
 export const ModalStyles = styled(Modal)`
   .ant-modal-content {
-    background-color: #ccd5ae;
+    background-color: ${colors.blue.accent};
     align-items: center;
     justify-content: center;
     color: ${colors.font.primary};
@@ -28,10 +28,10 @@ export const Container = styled.div`
 export const Button = styled.button`
   width: 192px;
   height: 57px;
-  background-color: #ccd5ae;
-  border: 1px solid #debc96;
+  background-color: ${colors.blue.accent};
+  border: 1px solid ${colors.accent.primary};
   border-radius: 5px;
-  color: #debc96;
+  color: ${colors.accent.primary};
   text-transform: uppercase;
   font-family: ${fonts.Exo2};
   font-size: 40px;
@@ -48,13 +48,13 @@ export const Button = styled.button`
 `;
 
 export const Title = styled.h1`
-  color: #debc96;
+  color: ${colors.accent.primary};
   text-align: center;
   font-family: ${fonts.Exo2};
 `;
 
 export const Text = styled.h3`
-  color: #debc96;
+  color: ${colors.accent.primary};
   text-align: center;
   font-family: ${fonts.Exo2};
 `;

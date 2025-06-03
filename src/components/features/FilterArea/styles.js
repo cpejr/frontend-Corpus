@@ -6,53 +6,53 @@ import Select from "react-select";
 
 export const StyledSelect = styled(Select)`
   width: 100%;
-  border-color: 1px solid #d4a373;
+  border-color: 1px solid ${colors.accent.primary};
   justify-content: space-between;
   align-items: center;
-  color: #d4a373;
+  color: ${colors.accent.primary};
 
   background-color: ${colors.background.primary};
   .css-1jqq78o-placeholder {
-    color: #d4a373;
+    color: ${colors.accent.primary};
     font-size: 1.1rem;
   }
   .css-13cymwt-control {
     background-color: ${colors.background.primary};
-    border: 2px solid #d4a373;
-    color: #d4a373;
+    border: 2px solid ${colors.accent.primary};
+    color: ${colors.accent.primary};
   }
 `;
 
 
 export const StyledInput = styled.input`
-  border: 2px solid #d4a373;
+  border: 2px solid ${colors.accent.primary};
   border-radius: 5px;
   height: 2.3rem;
   width: calc(100% - 21px) !important;
   background-color: ${colors.background.primary};
-  color: #d4a373;
+  color: ${colors.accent.primary};
   padding-left: 16px;
   font-size: 1.1rem;
 
   &:focus{
-    border: 2px solid #d4a373 !important;
+    border: 2px solid ${colors.accent.primary} !important;
   }
 
   &::placeholder {
-    color: #d4a373 !important;
+    color: ${colors.accent.primary} !important;
   }
 `;
 
 
 export const FlagSelector = styled(ReactFlagsSelect)`
-  color: #d4a373;
+  color: ${colors.accent.primary};
   width: 100%;
   align-items: center;
   font-size: 1.2rem !important;
 
   .ReactFlagsSelect-module_selectBtn__19wW7 {
-    border: 2px solid #d4a373;
-    color: #d4a373;
+    border: 2px solid ${colors.accent.primary};
+    color: ${colors.accent.primary};
   }
 `;
 
@@ -70,7 +70,7 @@ export const StyledForm = styled.form`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  color: #d4a373;
+  color: ${colors.accent.primary};
   gap: 16px;
   margin-bottom: 24px;
 
@@ -119,8 +119,8 @@ export const Calendar = styled(PrimeCalendar)`
 
   .p-inputtext {
     background-color: ${colors.background.primary};
-    color: #d4a373;
-    border: 2px solid #d4a373;
+    color: ${colors.accent.primary};
+    border: 2px solid ${colors.accent.primary};
     border-radius: 5px;
     width: 100%;
     height: 2.7rem;
@@ -132,11 +132,11 @@ export const Calendar = styled(PrimeCalendar)`
     }
 
     &::placeholder {
-      color: #d4a373;
+      color: ${colors.accent.primary};
     }
 
     &:hover {
-      border-color: #d4a373;
+      border-color: ${colors.accent.primary};
     }
 
     @media (max-width: ${breakpoints.mobile}) {
@@ -153,8 +153,8 @@ export const Calendar = styled(PrimeCalendar)`
 
 
   .p-datepicker {
-    background-color: white !important;
-    border: 2px solid #d4a373;
+    background-color: ${colors.background.white} !important;
+    border: 2px solid ${colors.accent.primary};
   }
 
 
@@ -162,7 +162,7 @@ export const Calendar = styled(PrimeCalendar)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #d4a373 !important;
+    color: ${colors.accent.primary} !important;
     padding: 0.5rem 0.5rem;
   }
 
@@ -177,25 +177,25 @@ export const Calendar = styled(PrimeCalendar)`
 
   .p-datepicker-month,
   .p-datepicker-year {
-    color: black !important;
-    background-color: white !important;
+    color: ${colors.font.primary} !important;
+    background-color: ${colors.background.white} !important;
     font-size: 1.3rem;
   }
 
 
   .p-datepicker-decade {
-    color: black !important;
+    color: ${colors.font.primary} !important;
     font-size: 1.3rem;
   }
 
 
   .p-datepicker-next,
   .p-datepicker-prev {
-    color: black !important;
+    color: ${colors.font.primary} !important;
     border-radius: 0.5rem !important;
     border: none !important;
     padding: 0.2rem 0.4rem !important;
-    background-color: #dfc89e !important;
+    background-color: ${colors.accent.primary} !important;
     cursor: pointer;
     transition: all 0.3s ease;
 
@@ -206,26 +206,26 @@ export const Calendar = styled(PrimeCalendar)`
 
 
   .p-yearpicker .p-yearpicker-year {
-    color: black !important;
-    background-color: white !important;
+    color: ${colors.font.primary} !important;
+    background-color: ${colors.background.white} !important;
     padding: 0.25rem 0 0.25rem 0;
     transition: all 0.5s ease;
     border-radius: 10px;
 
     &:hover{
-      background-color: #dfc89e !important;
+      background-color: ${colors.accent.primary} !important;
     }
   }
 
   .p-monthpicker .p-monthpicker-month {
-    color: black !important;
-    background-color: white !important;
+    color: ${colors.font.primary} !important;
+    background-color: ${colors.background.white} !important;
     padding: 0.25rem 0 0.25rem 0;
     transition: all 0.5s ease;
     border-radius: 10px;
 
     &:hover{
-      background-color: #dfc89e !important;
+      background-color: ${colors.accent.primary} !important;
     }
   }
 
@@ -240,12 +240,12 @@ export const Calendar = styled(PrimeCalendar)`
     transition: all 0.5s ease;
 
     &:hover{
-      background-color: #dfc89e !important;
+      background-color: ${colors.accent.primary} !important;
     }
   }
 
   .p-datepicker-calendar th {
-    color: black !important;
+    color: ${colors.font.primary} !important;
   }
 
   .p-datepicker-buttonbar {
@@ -253,12 +253,12 @@ export const Calendar = styled(PrimeCalendar)`
     justify-content: space-between;
     padding: 1rem 1rem;
     align-items: center;
-    color: black !important;
-    background-color: white !important;
+    color: ${colors.font.primary} !important;
+    background-color: ${colors.background.white} !important;
   }
 
   .p-button-secondary {
-    background-color: #dfc89e !important;
+    background-color: ${colors.accent.primary} !important;
     border-radius: 0.5rem !important;
     border: none !important;
     padding: 0.4rem 0.8rem !important;
@@ -272,18 +272,18 @@ export const Calendar = styled(PrimeCalendar)`
 `;
 
 export const ButtonFormFilter = styled.button`
-  border: 2px solid #d4a373;
+  border: 2px solid ${colors.accent.primary};
   border-radius: 5px;
   width: 40%;
   height: 2.5rem;
-  background-color: rgb(245, 169, 93);
+  background-color: ${colors.accent.primary};
   transition: all 0.6s;
   cursor: pointer;
-  color:#ffffff;
+  color: ${colors.font.secondary};
   font-size: 1.1rem;
 
   &:hover{
-    background-color: #d4a373;
-    color: #ffffff;
+    background-color: ${colors.accent.hover};
+    color: ${colors.font.secondary};
   }
 `

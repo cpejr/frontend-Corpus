@@ -26,11 +26,11 @@ export const Message = styled.h1`
 
 export const ModalStyle = styled(Modal)`
   .ant-modal-content {
-    background-color: #fefae0;
+    background-color: ${colors.background.primary};
     padding: 1rem;
     align-items: center;
     justify-content: center;
-    color: red;
+    color: ${colors.error.secondary};
     padding: 6;
     margin: 0;
     border-radius: none;
@@ -56,19 +56,20 @@ export const Form = styled.form`
     max-width: 144rem;
   }
 `;
+
 export const Calendar = styled(PrimeCalendar)`
   display: flex;
   justify-content: center;
   width: 260px;
-  color: #000;
-  background-color: "white";
+  color: ${colors.font.primary};
+  background-color: ${colors.background.white};
   .p-inputtext {
     border: solid 1px ${colors.font.secondary};
     cursor: pointer;
     color: ${colors.font.secondary};
 
     &:hover {
-      border-color: #f19709;
+      border-color: ${colors.accent.primary};
       color: ${colors.font.secondary};
     }
   }

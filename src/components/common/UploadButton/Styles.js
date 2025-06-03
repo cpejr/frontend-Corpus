@@ -6,8 +6,8 @@ export const AddButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ccd5ae;
-  background-color: white;
+  color: ${colors.blue.accent};
+  background-color: ${colors.background.white};
   border-radius: 10px;
   background-color: ${colors.background.secondary};
   color: ${colors.font.primary};
@@ -18,7 +18,7 @@ export const AddButton = styled(Button)`
 
   &:hover {
     background-color: ${colors.black};
-    color: #f6fff8 !important;
+    color: ${colors.font.secondary} !important;
   }
 
   &:focus {

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../../styles/stylesVariables";
 
 export const Container = styled.div`
   display: flex;
@@ -29,10 +30,10 @@ export const StyledSelect = styled.select`
   border: 0;
   width: ${(props) => props?.width};
   border-bottom: ${(props) =>
-    props?.error ? "1px solid #ff0000" : "1px solid #570b87"} !important;
+    props?.error ? `1px solid ${colors.error.secondary}` : `1px solid ${colors.blue.dark}`} !important;
   border-radius: 0.4rem;
-  color: black;
-  background-color: white;
+  color: ${colors.font.primary};
+  background-color: ${colors.background.white};
   font-size: 20px;
   font-family: "Roboto Condensed";
   padding-right: 25px;
@@ -45,13 +46,13 @@ export const StyledSelect = styled.select`
     outline: none;
   }
   &::placeholder {
-    color: black;
+    color: ${colors.font.primary};
   }
   @media (max-width: 700px) {
     font-size: 16px;
   }
 
   &:hover {
-    border-color: #f19709;
+    border-color: ${colors.accent.primary};
   }
 `;

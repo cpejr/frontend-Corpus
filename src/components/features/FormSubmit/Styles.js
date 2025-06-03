@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoints } from "../../../styles/stylesVariables";
+import { breakpoints, colors } from "../../../styles/stylesVariables";
 
 export const Form = styled.form`
   align-items: center;
@@ -25,7 +25,7 @@ export const Form = styled.form`
 export const ErrorMessage = styled.p`
   font-size: 0.9rem;
   margin: 0px;
-  color: #ff0000;
+  color: ${colors.error.secondary};
   font-weight: 400;
   text-align: center;
   margin-top: 10px;
@@ -35,7 +35,7 @@ export const InputKeep = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  color: black;
+  color: ${colors.font.primary};
 `;
 export const Selects = styled.div`
   display: flex;

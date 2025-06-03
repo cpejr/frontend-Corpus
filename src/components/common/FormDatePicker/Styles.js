@@ -26,9 +26,9 @@ export const StyledDatePicker = styled(DatePicker)`
   padding: 0.5rem;
   width: 100%;
   border-bottom: ${(props) =>
-    props?.error ? "1px solid #ff0000" : "1px solid #570b87"} !important;
-  color: black;
-  background-color: white;
+    props?.error ? `1px solid ${colors.error.secondary}` : `1px solid ${colors.blue.dark}`} !important;
+  color: ${(props) => (props?.error ? colors.error.secondary : colors.blue.dark)};
+  background-color: ${colors.blue.dark};
   border-radius: 4px;
   font-size: 1em;
   z-index: 10;

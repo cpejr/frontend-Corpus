@@ -4,7 +4,7 @@ import { breakpoints, colors, fonts } from "../../../styles/stylesVariables";
 import { ClipLoader } from "react-spinners";
 
 export const Loader = styled(ClipLoader)`
-  color: #ffa500;
+  color: ${colors.accent.primary};
 `;
 
 export const StyledCard = styled(Card)`
@@ -15,7 +15,7 @@ export const StyledCard = styled(Card)`
   align-items: center;
   border-radius: 24px;
   gap: 3.33rem;
-  background-color: #e9edc9;
+  background-color: ${colors.background.secondary};
   margin-bottom: 4rem;
   &:hover {
   }
@@ -108,7 +108,7 @@ export const ButtonDiv = styled.div`
 export const OrangeButton = styled(Button)`
   width: 10rem;
   height: 2.5rem;
-  background-color: #d4a373;
+  background-color: ${colors.accent.primary};
   border: none;
   margin-top: 1rem;
   border-radius: 10px;
