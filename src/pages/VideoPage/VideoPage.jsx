@@ -23,16 +23,11 @@ export default function VideoPage() {
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
 
-  const safeTitle = data.title
-    ? data.title.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ_.-]/g, "")
-    : "transcricao";
-
   const { data: archiveData, isLoading } = useGetArchives({
     id: data.archives._id,
     name: data.title,
-    vttFile: data.vttFile,
   });
-  const vttURL = `/transcripts/${encodeURIComponent(safeTitle)}.vtt` || "";
+  const vttURL = archiveData?.vttURL || "";
 
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
