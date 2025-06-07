@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import { useGlobalLanguage } from "../../../stores/globalLanguage";
-import { getLanguages, getCountries, getVideosByParameters } from "../../../services/endpoints";
+import {
+  getLanguages,
+  getCountries,
+  getVideosByParameters,
+} from "../../../services/endpoints";
 
 import {
   StyledForm,
@@ -14,7 +18,7 @@ import {
   Calendar,
   StyledSelect,
   StyledInput,
-  ButtonFormFilter
+  ButtonFormFilter,
 } from "./styles";
 import { TranslateText } from "./translations";
 import { localeMap } from "../../common/Calendar/locales";
@@ -33,8 +37,6 @@ export default function FilterArea({ onSubmit }) {
   const [languages, setLanguages] = useState([]);
   const [countries, setCountries] = useState([]);
 
-
-  const { globalLanguage } = useGlobalLanguage();
   const translateText = TranslateText({ globalLanguage });
 
   const options = [
@@ -60,7 +62,6 @@ export default function FilterArea({ onSubmit }) {
   }, []);
 
   async function submitHandler(data) {
-
     const toFilter = {
       ...data,
       totalParticipants: selectTotalParticipants,
@@ -84,7 +85,6 @@ export default function FilterArea({ onSubmit }) {
       console.error("Erro ao buscar vídeos filtrados:", error);
     }
   }
-
 
   return (
     <StyledForm onSubmit={handleSubmit(submitHandler)}>
@@ -203,7 +203,6 @@ export default function FilterArea({ onSubmit }) {
       </PickDateSection>
 
       <ButtonFormFilter type="submit">Aplicar Filtros</ButtonFormFilter>
-
     </StyledForm>
   );
 }
