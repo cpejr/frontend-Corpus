@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Controller } from "react-hook-form";
 import { Container, StyledCalendar } from "./Styles";
+import { useGlobalLanguage } from "../../../stores/globalLanguage";
+import { localeMap } from "./locales";
 
 export default function CalendarFunction({
   inputKey,
@@ -15,14 +17,17 @@ export default function CalendarFunction({
   dateFormat,
 }) {
   const [date, setDate] = useState(defaultValue || "");
+  const { globalLanguage } = useGlobalLanguage();
+  const locale = localeMap[globalLanguage] || "en-US";
 
-  const handleChange = (dateChange) => {
+  const handleChange = (dateChange) => { 
     setValue("birthday", dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
 
     setDate(dateChange);
   };
+  
   useEffect(() => {
     if (isSubmitSuccessful) setDate(null);
   }, [isSubmitSuccessful]);
@@ -35,6 +40,7 @@ export default function CalendarFunction({
         render={({ field }) => (
           <StyledCalendar
             {...field}
+            appendTo="self"
             error={error}
             selected={date}
             placeholder={placeholder}
@@ -44,7 +50,8 @@ export default function CalendarFunction({
             }}
             color={color}
             value={date}
-            dateFormat={dateFormat}
+            dateFormat={dateFormat}     
+            locale={locale}
           />
         )}
       />

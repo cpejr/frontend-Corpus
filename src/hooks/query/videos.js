@@ -6,6 +6,7 @@ import {
   createVideos,
   deleteVideos,
   updateVideos,
+  downloadTranscript,
 } from "../../services/endpoints";
 
 export function useGetVideos({
@@ -75,5 +76,22 @@ export function useGetVideosByParameters({
       }),
     onSuccess,
     onError,
+  });
+}
+export function useDownloadTranscript({
+  title,
+  onSuccess = () => {},
+  onError = (err) => console.error(err),
+} = {}) {
+  return useQuery({
+    queryKey: ["transcript", title],
+    queryFn: () => downloadTranscript(title),
+    enabled: !!title, 
+    onSuccess,
+    onError,
+    staleTime: Infinity,
+    select: (data) => {
+      return URL.createObjectURL(new Blob([data]));
+    },
   });
 }

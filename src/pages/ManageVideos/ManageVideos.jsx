@@ -224,6 +224,7 @@ export default function ManageVideosPage() {
     },
   });
 
+
   useEffect(() => {
     if (videos) {
        console.log("Vídeos recebidos:", videos);

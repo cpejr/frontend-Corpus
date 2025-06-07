@@ -7,6 +7,32 @@ export const Container = styled.div`
   padding: 3rem 0;
 `;
 
+export const TranscriptionBox = styled.div`
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+`;
+
+export const TranscriptionHeader = styled.h4`
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+`;
+
+export const TranscriptionText = styled.p`
+  white-space: pre-wrap;
+  line-height: 1.5;
+  color: #555;
+  font-size: 14px;
+  margin: 0;
+`;
+
 export const DivTitle = styled.div`
   width: 450px;
   border-bottom: 4px solid ${colors.background.secondary};
@@ -62,7 +88,7 @@ export const Section = styled.section`
   }
 
   @media (max-width: ${breakpoints.mobile}) {
-    width: 80%;
+    width: 100%;
   }
 `;
 

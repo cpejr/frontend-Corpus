@@ -56,9 +56,15 @@ export const Section = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 20px 50px;
   padding: 2rem 0;
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    margin: 0 auto;
+  }
   @media (max-width: ${breakpoints.mobile}) {
     display: flex;
     flex-direction: column;
@@ -78,6 +84,12 @@ export const Button1 = styled(Button)`
   font-size: 2rem;
   cursor: pointer;
 
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
   @media (max-width: ${breakpoints.mobile}) {
     width: 10rem;
     height: 3rem;
@@ -108,16 +120,21 @@ export const Column = styled.div`
       font-size: 1.5rem;
     }
   }
-
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: 80%;
+  }
   @media (max-width: ${breakpoints.mobile}) {
     max-width: 80%;
   }
 `;
 
 export const Image = styled.img`
-  max-width: 50%;
+  max-width: 30%;
   margin: 50px;
   border: solid #ccd5ae 10px;
+  @media (max-width: ${breakpoints.tablet}) {
+    display: none;
+  }
   @media (max-width: ${breakpoints.mobile}) {
     display: none;
   }
@@ -126,6 +143,13 @@ export const Image = styled.img`
 export const ImageMobile = styled.img`
   display: none;
   border: solid #ccd5ae 10px;
+  @media (max-width: ${breakpoints.tablet}) {
+    display: block;
+    margin: 20px;
+    max-width: 60%;
+
+    color: #ccd5ae;
+  }
   @media (max-width: ${breakpoints.mobile}) {
     display: block;
     margin: 20px;

@@ -1,6 +1,46 @@
 import styled from "styled-components";
 import { breakpoints, colors, fonts } from "../../styles/stylesVariables";
 
+
+export const DownloadButton = styled.button`
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #FFA500;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #E69500;
+  }
+`;
+
+export const TranscriptionContainer = styled.div`
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  
+  h3 {
+    margin-bottom: 1rem;
+    color: #333;
+  }
+`;
+
+
+
+export const TimeBadge = styled.span`
+  display: inline-block;
+  margin-right: 0.5rem;
+  color: #666;
+  font-size: 0.8rem;
+  min-width: 40px;
+`;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
