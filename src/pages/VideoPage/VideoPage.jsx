@@ -27,6 +27,7 @@ export default function VideoPage() {
     id: data.archives._id,
     name: data.title,
   });
+  const vttURL = archiveData?.vttURL || "";
 
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
@@ -44,6 +45,7 @@ export default function VideoPage() {
     link.click();
     document.body.removeChild(link);
   };
+  console.log("URL DO VIDEO", vttURL);
 
   return (
     <Container>
@@ -56,13 +58,19 @@ export default function VideoPage() {
           {isLoading && <ClipLoader color="#FFA500" size={50} />}
           {!isLoading && (
             <>
-              <Video
-                src={`data:video/mp4;base64,${archiveData?.videoFile}`}
-                title={data.title}
-                controls
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              <Video controls title={data.title}>
+                <source
+                  src={`data:video/mp4;base64,${archiveData?.videoFile}`}
+                  type="video/mp4"
+                />
+                <track
+                  label="Português"
+                  kind="subtitles"
+                  srcLang="pt"
+                  src={vttURL}
+                  default
+                />
+              </Video>
               {pdfUrl && isAdmin && (
                 <DownloadButton onClick={handleDownload}>
                   {translation.buttonpdf}

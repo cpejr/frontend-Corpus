@@ -2,16 +2,16 @@ export function TranslateText(globalLanguage) {
   let buttonpdf;
 
   if (globalLanguage === "PT") {
-    buttonpdf = "Download de Legenda";
+    buttonpdf = "Download de Transcrição Automática";
   }
   if (globalLanguage === "EN") {
-    buttonpdf = "Download Subtitles";
+    buttonpdf = "Download Automatic Transcription";
   }
   if (globalLanguage === "ES") {
-    buttonpdf = "Descargar Subtítulos";
+    buttonpdf = "Descargar Transcripción automática";
   }
   if (globalLanguage === "GE") {
-    buttonpdf = "Transkription herunterladen";
+    buttonpdf = "Transkription Automatische Transkription";
   }
   return {
     buttonpdf,
