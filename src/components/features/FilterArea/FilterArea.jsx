@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import { useGlobalLanguage } from "../../../stores/globalLanguage";
+import { getLanguages, getCountries, getVideosByParameters } from "../../../services/endpoints";
 
 import {
-  FlagSelector,
   StyledForm,
   FlagSelectorSection,
   PickDateSection,
@@ -26,35 +26,66 @@ export default function FilterArea({ onSubmit }) {
   const locale = localeMap[globalLanguage] || "en-US";
 
   const [selectTotalParticipants, setSelectTotalParticipants] = useState(null);
-  const [country, setCountry] = useState(null);
-  const [language, setLanguage] = useState(null);
+  const [country, setCountry] = useState([]);
+  const [language, setLanguage] = useState([]);
   const [duration, setDuration] = useState("");
   const [dates, setDates] = useState(null);
+  const [languages, setLanguages] = useState([]);
+  const [countries, setCountries] = useState([]);
 
-  function submitHandler(data) {
-    const toFilter = {
-      ...data,
-      totalParticipants: selectTotalParticipants,
-      country,
-      language,
-      duration,
-      dates,
-    };
-    reset();
-    setCountry(null);
-    setLanguage(null);
-    setDuration("");
-    setSelectTotalParticipants(null)
-    onSubmit(toFilter);
-  }
-  //Array de opções para o select de Total de Participantes
+
+  const { globalLanguage } = useGlobalLanguage();
+  const translateText = TranslateText({ globalLanguage });
+
   const options = [
     { value: { min: 1, max: 5 }, label: "1 a 5" },
     { value: { min: 6, max: 10 }, label: "6 a 10" },
     { value: { min: 10, max: null }, label: "10+" },
   ];
 
-  const translateText = TranslateText({ globalLanguage });
+  useEffect(() => {
+    async function fetchOptions() {
+      try {
+        const countries = await getCountries();
+        const languages = await getLanguages();
+
+        setCountries(countries);
+        setLanguages(languages);
+      } catch (error) {
+        console.error("Erro ao buscar países ou idiomas:", error);
+      }
+    }
+
+    fetchOptions();
+  }, []);
+
+  async function submitHandler(data) {
+
+    const toFilter = {
+      ...data,
+      totalParticipants: selectTotalParticipants,
+      country: country.map((c) => c.value),
+      language: language.map((lang) => lang.value),
+      duration,
+      dates,
+    };
+
+    console.log("Filtros enviados para o backend:", toFilter);
+
+    try {
+      const videos = await getVideosByParameters(toFilter);
+      onSubmit(videos);
+      reset();
+      setCountry([]);
+      setLanguage([]);
+      setDuration("");
+      setSelectTotalParticipants(null);
+    } catch (error) {
+      console.error("Erro ao buscar vídeos filtrados:", error);
+    }
+  }
+
+
   return (
     <StyledForm onSubmit={handleSubmit(submitHandler)}>
       <TotalParticipantsSelectSection>
@@ -69,7 +100,7 @@ export default function FilterArea({ onSubmit }) {
               onChange={(e) => {
                 setSelectTotalParticipants(e.value);
                 field.onChange(e);
-              }}              
+              }}
               isSearchable={false}
               placeholder={translateText.totalParticipantsPlaceholder}
               options={options}
@@ -77,54 +108,52 @@ export default function FilterArea({ onSubmit }) {
           )}
         />
       </TotalParticipantsSelectSection>
+
       <FlagSelectorSection>
         <Controller
           name="country"
           control={control}
-          defaultValue=""
+          defaultValue={[]}
           render={({ field }) => (
-            <FlagSelector
+            <StyledSelect
               {...field}
-              selected={country}
-              onSelect={(e) => {
-                setCountry(e);
-                field.onChange(e);
+              isMulti
+              value={country}
+              onChange={(selected) => {
+                setCountry(selected);
+                field.onChange(selected);
               }}
-              countries={["US", "GB", "FR", "DE", "IT"]}
-              customLabels={{
-                US: "EN-US",
-                GB: "EN-GB",
-                FR: "FR",
-                DE: "DE",
-                IT: "IT",
-              }}
+              isSearchable={true}
               placeholder={translateText.countryPlaceholder}
+              options={countries.map((country) => ({
+                value: country._id,
+                label: country.name,
+              }))}
             />
           )}
         />
       </FlagSelectorSection>
+
       <SelectLanguageSection>
         <Controller
           name="language"
           control={control}
-          defaultValue=""
+          defaultValue={[]}
           render={({ field }) => (
-            <FlagSelector
+            <StyledSelect
               {...field}
-              selected={language}
-              onSelect={(e) => {
-                setLanguage(e);
-                field.onChange(e);
+              isMulti
+              value={language}
+              onChange={(selected) => {
+                setLanguage(selected);
+                field.onChange(selected);
               }}
-              countries={["US", "GB", "FR", "DE", "IT"]}
-              customLabels={{
-                US: "EN-US",
-                GB: "EN-GB",
-                FR: "FR",
-                DE: "DE",
-                IT: "IT",
-              }}
+              isSearchable={true}
               placeholder={translateText.languagePlaceholder}
+              options={languages.map((lang) => ({
+                value: lang.name,
+                label: lang.name,
+              }))}
             />
           )}
         />
@@ -141,13 +170,14 @@ export default function FilterArea({ onSubmit }) {
               {...register("duration")}
               onChange={(e) => {
                 setDuration(e.target.value);
-                field.onChange(e.value);
+                field.onChange(e.target.value);
               }}
               value={duration}
-            ></StyledInput>
+            />
           )}
         />
       </PickTimeSection>
+
       <PickDateSection>
         <Controller
           name="dates"
@@ -171,7 +201,9 @@ export default function FilterArea({ onSubmit }) {
           )}
         />
       </PickDateSection>
+
       <ButtonFormFilter type="submit">Aplicar Filtros</ButtonFormFilter>
+
     </StyledForm>
   );
 }
