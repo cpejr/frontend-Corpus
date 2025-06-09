@@ -71,8 +71,6 @@ export default function FilterArea({ onSubmit }) {
       dates,
     };
 
-    console.log("Filtros enviados para o backend:", toFilter);
-
     try {
       const videos = await getVideosByParameters(toFilter);
       onSubmit(videos);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useGetLanguages } from "../../hooks/query/language";  
-import { useGetCountries } from "../../hooks/query/country";  
+import { useGetLanguages } from "../../hooks/query/language";
+import { useGetCountries } from "../../hooks/query/country";
 import { FormSubmit, SearchBar } from "../../components";
 import {
   Container,
@@ -36,28 +36,24 @@ export default function ManageVideosPage() {
 
   const [inputs, setInputs] = useState([]);
   const [allVideos, setAllVideos] = useState([]);
-  const [languages, setLanguages] = useState([]);  
-  const [countries, setCountries] = useState([]); 
+  const [languages, setLanguages] = useState([]);
+  const [countries, setCountries] = useState([]);
 
-  
-  const { data: languagesData } = useGetLanguages();  
-  const { data: countryData } = useGetCountries();   
+  const { data: languagesData } = useGetLanguages();
+  const { data: countryData } = useGetCountries();
 
-  
   useEffect(() => {
     if (languagesData) {
-      setLanguages(languagesData);  
+      setLanguages(languagesData);
     }
   }, [languagesData]);
 
-  
   useEffect(() => {
     if (countryData) {
-      setCountries(countryData);  
+      setCountries(countryData);
     }
   }, [countryData]);
 
-  
   useEffect(() => {
     setInputs([
       {
@@ -101,24 +97,24 @@ export default function ManageVideosPage() {
         })),
       },
       {
-        type: "select",  
-        key: "country",  
-        placeholder: translation.placeholder8,  
-        label: "country",  
+        type: "select",
+        key: "country",
+        placeholder: translation.placeholder8,
+        label: "country",
         options: countries.map((country) => ({
-          value: country._id,  
-          name: country.name,  
-        })),  
+          value: country._id,
+          name: country.name,
+        })),
       },
       {
-        type: "select",  
-        key: "language",  
-        placeholder: translation.placeholder9,  
-        label: "language",  
+        type: "select",
+        key: "language",
+        placeholder: translation.placeholder9,
+        label: "language",
         options: languages.map((lang) => ({
-          value: lang._id,  
-          name: lang.name,  
-        })),  
+          value: lang._id,
+          name: lang.name,
+        })),
       },
       {
         type: "date",
@@ -141,26 +137,26 @@ export default function ManageVideosPage() {
         errors: [translation.error1, translation.error2],
       },
     ]);
-  }, [languages, countries, globalLanguage]);  
+  }, [languages, countries, globalLanguage]);
 
-  
   const handleSubmit = async (data) => {
     try {
-     
-      const countryDoc = countries.find(country => country.name.toLowerCase() === data.country);
-      const languageDoc = languages.find(lang => lang.name.toLowerCase() === data.language);
+      const countryDoc = countries.find(
+        (country) => country.name.toLowerCase() === data.country
+      );
+      const languageDoc = languages.find(
+        (lang) => lang.name.toLowerCase() === data.language
+      );
 
-      
       if (!countryDoc || !languageDoc) {
         toast.error("País ou idioma não encontrado.");
         return;
       }
 
-      
       createVideo({
-        ...data,  
-        country: countryDoc._id,  
-        language: languageDoc._id,  
+        ...data,
+        country: countryDoc._id,
+        language: languageDoc._id,
       });
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
@@ -170,9 +166,6 @@ export default function ManageVideosPage() {
 
   // Código para traduzir os títulos
   async function translateTitles() {
-
-    console.log("Vídeos recebidos da API:", videos);
-
     const translatedTitles = await Promise.all(
       videos.map(async (video) => {
         return {
@@ -219,15 +212,12 @@ export default function ManageVideosPage() {
       });
     },
     onError: (err) => {
-      console.log(err);
       toast.error(TranslateToastError(globalLanguage, err.response.status));
     },
   });
 
-
   useEffect(() => {
     if (videos) {
-       console.log("Vídeos recebidos:", videos);
       translateTitles();
     }
   }, [videos, globalLanguage]);

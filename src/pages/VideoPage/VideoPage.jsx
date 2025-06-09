@@ -22,9 +22,9 @@ export default function VideoPage() {
 
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
-
+  const archiveId = data?.archives;
   const { data: archiveData, isLoading } = useGetArchives({
-    id: data.archives._id,
+    id: archiveId,
     name: data.title,
   });
   const vttURL = archiveData?.vttURL || "";
@@ -45,7 +45,6 @@ export default function VideoPage() {
     link.click();
     document.body.removeChild(link);
   };
-  console.log("URL DO VIDEO", vttURL);
 
   return (
     <Container>
