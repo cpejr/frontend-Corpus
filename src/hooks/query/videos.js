@@ -10,17 +10,17 @@ import {
 } from "../../services/endpoints";
 
 export function useGetVideos({
-  filters,
   onSuccess = () => {},
   onError = (err) => console.error(err),
 } = {}) {
   return useQuery({
-    queryKey: ["videos", filters],
-    queryFn: () => getVideos(filters),
+    queryKey: ["videos"],  
+    queryFn: () => getVideos(),  
     onSuccess,
     onError,
   });
 }
+
 
 export function useCreateVideos({
   onSuccess = () => {},
