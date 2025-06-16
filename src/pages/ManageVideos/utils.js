@@ -42,6 +42,5 @@ export const validationSchema = () => {
       .min(1, { message: translation.error12 }),
 
     birthday: z.date({ required_error: translation.error13 }),
-
   });
 };

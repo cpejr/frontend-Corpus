@@ -11,7 +11,7 @@ export default function UploadButton({
   setValue,
   placeholder,
   allowedMimeTypes,
-  messageError1, 
+  messageError1,
   messageError2,
 }) {
   const [file, setFile] = useState(null);
@@ -20,26 +20,26 @@ export default function UploadButton({
     const reader = new FileReader();
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(file);
+    console.log(file);
   };
 
   const handleChange = (info) => {
-    
     const { originFileObj } = info?.fileList[0] || {};
 
     if (originFileObj) {
       try {
         setFile(originFileObj);
         getBase64(originFileObj, (url) => {
+          console.log(url);
           setValue(label, url);
         });
       } catch (error) {
-        toast.error(messageError1)
+        toast.error(messageError1);
       }
-    } else{
+    } else {
       setFile(null);
-      toast.error(messageError2)
+      toast.error(messageError2);
     }
-  
   };
 
   const props = {
@@ -54,7 +54,13 @@ export default function UploadButton({
 
   return (
     <div>
-      <Upload name={inputKey} onChange={handleChange} beforeUpload={() => false} maxCount={1} {...props}>
+      <Upload
+        name={inputKey}
+        onChange={handleChange}
+        beforeUpload={() => false}
+        maxCount={1}
+        {...props}
+      >
         <AddButton icon={<UploadOutlined />}>{placeholder}</AddButton>
       </Upload>
     </div>

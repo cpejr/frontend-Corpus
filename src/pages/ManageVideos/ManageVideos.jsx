@@ -141,12 +141,11 @@ export default function ManageVideosPage() {
 
   const handleSubmit = async (data) => {
     try {
+      console.log(data);
       const countryDoc = countries.find(
-        (country) => country.name.toLowerCase() === data.country
+        (country) => country.name === data.country
       );
-      const languageDoc = languages.find(
-        (lang) => lang.name.toLowerCase() === data.language
-      );
+      const languageDoc = languages.find((lang) => lang.name === data.language);
 
       if (!countryDoc || !languageDoc) {
         toast.error("País ou idioma não encontrado.");

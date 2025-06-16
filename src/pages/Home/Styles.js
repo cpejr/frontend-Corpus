@@ -41,15 +41,19 @@ export const TitleLogo = styled.h1`
   max-width: 100%;
   font-size: 4vw;
   font-weight: normal;
-  color: rgba(242, 251, 243, 255);
-  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.7);
+  color: black;
+  font-family: Impact, Haettenschweiler, "Arial Narrow";
+  //color: rgba(242, 251, 243, 255);
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
 `;
 
 export const SubTitleLogo = styled.h3`
   font-size: 2vw;
   margin: 0px;
   font-weight: 100;
-  color: rgba(242, 251, 243, 255);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold";
+  //color: rgba(242, 251, 243, 255);
+  color: black;
 `;
 
 export const Section = styled.div`
@@ -83,7 +87,6 @@ export const Button1 = styled(Button)`
   text-transform: capitalize;
   font-size: 2rem;
   cursor: pointer;
-
 
   @media (max-width: ${breakpoints.tablet}) {
     width: 10rem;
