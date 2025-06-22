@@ -44,7 +44,7 @@ export function TranslateText({ globalLanguage }) {
     placeholder6 = "Responsáveis da coleta";
     placeholder7 = "Número de participantes";
     placeholder8 = "País de origem";
-    placeholder9 = "Língua";
+    placeholder9 = "Idioma";
     placeholder10 = "Duração da integração";
     placeholder11 = "Data da coleta";
     button1 = "Enviar";
@@ -152,7 +152,7 @@ export function TranslateText({ globalLanguage }) {
     error11 = "Gesprochene Sprache ist erforderlich";
     error12 = "Dauer ist erforderlich";
     error13 = "Datum ist erforderlich";
-}
+  }
 
   return {
     title1,
