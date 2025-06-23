@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { breakpoints, colors, fonts } from "../../styles/stylesVariables";
 
-
 export const DownloadButton = styled.button`
   margin-top: 20px;
   padding: 10px 15px;
-  background-color: #FFA500;
+  background-color: #ffa500;
   color: white;
   border: none;
   border-radius: 5px;
@@ -14,7 +13,7 @@ export const DownloadButton = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #E69500;
+    background-color: #e69500;
   }
 `;
 
@@ -25,14 +24,12 @@ export const TranscriptionContainer = styled.div`
   border-radius: 8px;
   max-height: 300px;
   overflow-y: auto;
-  
+
   h3 {
     margin-bottom: 1rem;
     color: #333;
   }
 `;
-
-
 
 export const TimeBadge = styled.span`
   display: inline-block;
@@ -123,4 +120,9 @@ export const Group = styled.div`
   display: flex;
   margin-left: 5%;
   margin-right: 5%;
+`;
+
+export const ButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

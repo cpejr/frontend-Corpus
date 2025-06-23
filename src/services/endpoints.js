@@ -4,26 +4,24 @@ import useAuthStore from "../stores/auth";
 //Language endpoints
 export const getLanguages = async () => {
   try {
-    const { data } = await api.get("/language/");  
-    return data;  
+    const { data } = await api.get("/language/");
+    return data;
   } catch (error) {
-    console.error("Erro ao buscar idiomas:", error);  
-    throw error;  
+    console.error("Erro ao buscar idiomas:", error);
+    throw error;
   }
 };
 
 //Country endpoints
 export const getCountries = async () => {
   try {
-    const { data } = await api.get("/country");  
-    return data;  
+    const { data } = await api.get("/country");
+    return data;
   } catch (error) {
-    console.error("Erro ao buscar países:", error);  
-    throw error; 
+    console.error("Erro ao buscar países:", error);
+    throw error;
   }
 };
-
-
 
 //CategoryType endpoints
 export const getCategoryPrice = async (filters = {}) => {
@@ -53,6 +51,7 @@ export const createVideos = async (newVideo) => {
 };
 
 export async function updateVideos({ _id, body }) {
+  console.log(_id, body);
   const { data } = await api.put(`/video/${_id}`, body);
 
   return data;
