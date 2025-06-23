@@ -139,3 +139,9 @@ export const downloadTranscript = async (title) => {
   });
   return response.data;
 };
+//manualTranscription
+export async function getManualTranscription(id) {
+  const { data } = await api.get(`/manualTranscription/${id}`);
+
+  return data;
+}

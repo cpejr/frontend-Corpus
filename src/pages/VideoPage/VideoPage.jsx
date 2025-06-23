@@ -19,12 +19,18 @@ import { useGlobalLanguage } from "../../stores/globalLanguage";
 import { TranslateText } from "./translations";
 import { FormSubmit } from "../../components";
 import { useUpdateVideos } from "../../hooks/query/videos";
+import { useGetManualTranscriptions } from "../../hooks/query/manualTranscription";
 
 export default function VideoPage() {
   const location = useLocation();
   const data = location.state;
   console.log(data);
   const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
+
+  const { data: manualTranscription } = useGetArchives({
+    id: data?.manualTranscription?._id,
+    onError: () => {},
+  });
 
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
