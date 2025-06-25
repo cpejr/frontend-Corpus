@@ -7,6 +7,7 @@ export function useGetManualTranscriptions({
   id,
 } = {}) {
   return useQuery({
+    queryKey: ["transcription"],
     queryFn: () => getManualTranscription(id),
     onSuccess,
     onError,
