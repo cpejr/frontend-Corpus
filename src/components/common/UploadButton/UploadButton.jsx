@@ -4,6 +4,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import { AddButton } from "./Styles";
 import { toast } from "react-toastify";
+import { useUploadChunkBase64 } from "../../../hooks/query/videos.js";
 
 export default function UploadButton({
   inputKey,
@@ -15,26 +16,53 @@ export default function UploadButton({
   messageError2,
 }) {
   const [file, setFile] = useState(null);
+  const CHUNK_SIZE = 1 * 1024 * 1024; //aqui ta 1mb mas para ajustar eh soh ajustar o primeiro numero
 
-  const getBase64 = (file, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result));
-    reader.readAsDataURL(file);
-    console.log(file);
-  };
+  const uploadChunkMutation = useUploadChunkBase64();
 
-  const handleChange = (info) => {
+  async function readFileInBase64Chunks(file, onChunk) {
+    const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+    console.log(`Tamanho total do arquivo: ${file.size} bytes`);
+    console.log(`Total de chunks: ${totalChunks}`);
+
+    for (let i = 0; i < totalChunks; i++) {
+      const start = i * CHUNK_SIZE;
+      const end = Math.min(start + CHUNK_SIZE, file.size);
+      const chunk = file.slice(start, end);
+
+      const base64Chunk = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (e) => reject(e);
+        reader.readAsDataURL(chunk);
+      });
+
+      await onChunk(base64Chunk, i, totalChunks);
+    }
+  }
+
+  const handleChange = async (info) => {
     const { originFileObj } = info?.fileList[0] || {};
 
     if (originFileObj) {
       try {
         setFile(originFileObj);
-        getBase64(originFileObj, (url) => {
-          console.log(url);
-          setValue(label, url);
+        const filename = originFileObj.name;
+
+        await readFileInBase64Chunks(originFileObj, async (base64Chunk, index, total) => {
+          await uploadChunkMutation.mutateAsync({
+            chunk: base64Chunk,
+            index,
+            filename,
+            totalChunks: total,
+          });
         });
+
+
+        setValue(label, filename);
       } catch (error) {
         toast.error(messageError1);
+        console.error("Erro ao processar arquivo:", error);
       }
     } else {
       setFile(null);

@@ -7,6 +7,7 @@ import {
   deleteVideos,
   updateVideos,
   downloadTranscript,
+  uploadChunkBase64,
 } from "../../services/endpoints";
 
 export function useGetVideos({
@@ -93,5 +94,16 @@ export function useDownloadTranscript({
     select: (data) => {
       return URL.createObjectURL(new Blob([data]));
     },
+  });
+}
+
+export function useUploadChunkBase64({
+  onSuccess = () => {},
+  onError = (err) => console.error(err),
+} = {}) {
+  return useMutation({
+    mutationFn: uploadChunkBase64,
+    onSuccess,
+    onError,
   });
 }

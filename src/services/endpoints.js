@@ -140,3 +140,11 @@ export const downloadTranscript = async (title) => {
   });
   return response.data;
 };
+
+//chunks 
+export const uploadChunkBase64 = async (formData) => {
+  const { data } = await api.post("/video/chunk", formData);
+  return data;
+};
+
+
