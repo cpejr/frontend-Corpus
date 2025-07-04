@@ -48,8 +48,15 @@ export const deleteVideos = async (_id) => {
 };
 
 export const createVideos = async (newVideo) => {
-  const { data } = await api.post(`/video`, newVideo);
-  return data;
+  console.log("[createVideos] Dados enviados para criação:", newVideo);
+  try {
+    const { data } = await api.post(`/video`, newVideo);
+    console.log("[createVideos] Sucesso:", data);
+    return data;
+  } catch (error) {
+    console.error("[createVideos] Erro ao criar vídeo:", error.response?.data || error.message);
+    throw error;
+  }
 };
 
 export async function updateVideos({ _id, body }) {

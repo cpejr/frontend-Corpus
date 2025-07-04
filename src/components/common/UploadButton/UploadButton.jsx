@@ -16,7 +16,7 @@ export default function UploadButton({
   messageError2,
 }) {
   const [file, setFile] = useState(null);
-  const CHUNK_SIZE = 1 * 1024 * 1024; //aqui ta 1mb mas para ajustar eh soh ajustar o primeiro numero
+  const CHUNK_SIZE = 100 * 1024 * 1024; //aqui ta 1mb mas para ajustar eh soh ajustar o primeiro numero
 
   const uploadChunkMutation = useUploadChunkBase64();
 

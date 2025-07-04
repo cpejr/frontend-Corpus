@@ -208,6 +208,7 @@ export default function ManageVideosPage() {
       toast.success(translation.successToast);
       queryClient.invalidateQueries({
         queryKey: ["videos"],
+        
       });
     },
     onError: (err) => {
