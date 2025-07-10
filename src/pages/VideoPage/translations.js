@@ -10,7 +10,7 @@ export function TranslateText(globalLanguage) {
     buttonpdf = "download de Transcrição Automática";
     upload = "Upload";
     send = "Enviar";
-    download = "Baixar Arquivo Polido";
+    download = "Transcrição";
     transcriptionUpload = "Transcrição manual enviada com sucesso!";
     transcriptionWaiting = "Um instante para o arquivo carregar";
   }

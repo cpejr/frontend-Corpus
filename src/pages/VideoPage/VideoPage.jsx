@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import {
   Line,
   VideoContainer,
@@ -8,6 +9,7 @@ import {
   Video,
   DownloadButton,
   ButtonDiv,
+  DownloadIcon,
 } from "./Styles";
 import { useState } from "react";
 import { validationSchema } from "./utils";
@@ -23,12 +25,19 @@ import { useGetManualTranscriptions } from "../../hooks/query/manualTranscriptio
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import Button from "../../components/common/Button/Button";
+
 export default function VideoPage() {
   const queryClient = useQueryClient();
   const location = useLocation();
   const data = location.state;
   const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
+  const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
+  const [displayUploadButton, setDisplayUploadButton] = useState(true);
 
+  useEffect(() => {
+    setDisplayDownloadButton(data?.ManualTranscriptionArchive);
+    setDisplayUploadButton(!data?.ManualTranscriptionArchive);
+  }, [data?.ManualTranscriptionArchive]);
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
 
@@ -95,7 +104,7 @@ export default function VideoPage() {
       key: "ManualTranscriptionArchive",
       placeholder: translation.upload,
       label: "ManualTranscriptionArchive",
-      errors: ["ola", "ola"],
+      errors: ["ERROR", "BAD FUNCTIONING"],
     },
   ]);
   const handleSubmit = (archive) => {
@@ -134,7 +143,7 @@ export default function VideoPage() {
           )}
         </VideoContainer>
         <ButtonDiv>
-          {isAdmin && (
+          {isAdmin && displayUploadButton && (
             <FormSubmit
               schema={validationSchema()}
               inputs={inputs}
@@ -143,13 +152,14 @@ export default function VideoPage() {
               buttonText={translation.send}
             />
           )}
-          {data?.ManualTranscriptionArchive && (
+          {displayDownloadButton && (
             <Button
               width="240px"
               onClick={() =>
                 downloadBase64Auto(manualTranscription, data?.title)
               }
             >
+              <DownloadIcon />
               {translation.download}
             </Button>
           )}
