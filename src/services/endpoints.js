@@ -51,7 +51,6 @@ export const createVideos = async (newVideo) => {
 };
 
 export async function updateVideos({ _id, body }) {
-  console.log(_id, body);
   const { data } = await api.put(`/video/${_id}`, body);
 
   return data;
@@ -141,7 +140,6 @@ export const downloadTranscript = async (title) => {
 };
 //manualTranscription
 export async function getManualTranscription(id) {
-  console.log(id);
   const { data } = await api.get(`/manualTranscription/${id}`);
 
   return data;

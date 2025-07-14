@@ -20,7 +20,6 @@ export default function UploadButton({
     const reader = new FileReader();
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(file);
-    console.log(file);
   };
 
   const handleChange = (info) => {
@@ -30,7 +29,6 @@ export default function UploadButton({
       try {
         setFile(originFileObj);
         getBase64(originFileObj, (url) => {
-          console.log(url);
           setValue(label, url);
         });
       } catch (error) {

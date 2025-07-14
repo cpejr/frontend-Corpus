@@ -32,11 +32,9 @@ export default function VideoPage() {
   const data = location.state;
   const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
   const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
-  const [displayUploadButton, setDisplayUploadButton] = useState(true);
 
   useEffect(() => {
     setDisplayDownloadButton(data?.ManualTranscriptionArchive);
-    setDisplayUploadButton(!data?.ManualTranscriptionArchive);
   }, [data?.ManualTranscriptionArchive]);
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
@@ -143,7 +141,7 @@ export default function VideoPage() {
           )}
         </VideoContainer>
         <ButtonDiv>
-          {isAdmin && displayUploadButton && (
+          {isAdmin && (
             <FormSubmit
               schema={validationSchema()}
               inputs={inputs}
