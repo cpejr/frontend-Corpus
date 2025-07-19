@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 export default function UploadButton({
   inputKey,
-  label,
   setValue,
   placeholder,
   allowedMimeTypes,
@@ -16,28 +15,19 @@ export default function UploadButton({
 }) {
   const [file, setFile] = useState(null);
 
-  const getBase64 = (file, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result));
-    reader.readAsDataURL(file);
-    console.log(file);
-  };
-
   const handleChange = (info) => {
     const { originFileObj } = info?.fileList[0] || {};
 
     if (originFileObj) {
       try {
         setFile(originFileObj);
-        getBase64(originFileObj, (url) => {
-          console.log(url);
-          setValue(label, url);
-        });
+        setValue(inputKey, originFileObj);
       } catch (error) {
         toast.error(messageError1);
       }
     } else {
       setFile(null);
+      setValue(inputKey, null);
       toast.error(messageError2);
     }
   };
@@ -45,7 +35,7 @@ export default function UploadButton({
   const props = {
     onRemove: () => {
       setFile(null);
-      setValue(label, null);
+      setValue(inputKey, null);
     },
     fileList: file ? [file] : [],
     multiple: false,

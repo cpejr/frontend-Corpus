@@ -123,7 +123,7 @@ export default function VideoPage() {
             <>
               <Video controls title={data.title}>
                 <source
-                  src={`data:video/mp4;base64,${archiveData?.videoFile}`}
+                  src={`data:video/mp4;base64,${archiveData}`}
                   type="video/mp4"
                 />
                 <track
@@ -134,6 +134,28 @@ export default function VideoPage() {
                   default
                 />
               </Video>
+              <ButtonDiv>
+                {isAdmin && displayUploadButton && (
+                  <FormSubmit
+                    schema={validationSchema()}
+                    inputs={inputs}
+                    onSubmit={handleSubmit}
+                    loading={false}
+                    buttonText={translation.send}
+                  />
+                )}
+                {displayDownloadButton && (
+                  <Button
+                    width="240px"
+                    onClick={() =>
+                      downloadBase64Auto(manualTranscription, data?.title)
+                    }
+                  >
+                    <DownloadIcon />
+                    {translation.download}
+                  </Button>
+                )}
+              </ButtonDiv>
               {pdfUrl && isAdmin && (
                 <DownloadButton onClick={handleDownload}>
                   {translation.buttonpdf}
@@ -142,28 +164,6 @@ export default function VideoPage() {
             </>
           )}
         </VideoContainer>
-        <ButtonDiv>
-          {isAdmin && displayUploadButton && (
-            <FormSubmit
-              schema={validationSchema()}
-              inputs={inputs}
-              onSubmit={handleSubmit}
-              loading={false}
-              buttonText={translation.send}
-            />
-          )}
-          {displayDownloadButton && (
-            <Button
-              width="240px"
-              onClick={() =>
-                downloadBase64Auto(manualTranscription, data?.title)
-              }
-            >
-              <DownloadIcon />
-              {translation.download}
-            </Button>
-          )}
-        </ButtonDiv>
       </WhiteContainer>
     </Container>
   );

@@ -7,7 +7,7 @@ export function TranslateText(globalLanguage) {
     transcriptionWaiting;
 
   if (globalLanguage === "PT") {
-    buttonpdf = "download de Transcrição Automática";
+    buttonpdf = "Download de Transcrição Automática";
     upload = "Upload";
     send = "Enviar";
     download = "Transcrição";
@@ -15,7 +15,7 @@ export function TranslateText(globalLanguage) {
     transcriptionWaiting = "Um instante para o arquivo carregar";
   }
   if (globalLanguage === "EN") {
-    buttonpdf = "download Automatic Transcription";
+    buttonpdf = "Download Automatic Transcription";
     upload = "Upload";
     send = "Send";
     download = "download Polished File";
