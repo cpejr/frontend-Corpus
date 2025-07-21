@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 import {
   StyledCard,
   OrangeButton,
@@ -20,36 +20,36 @@ export default function Card({
   ShortDescription,
   code,
   archives,
-  thumbnail,
 }) {
-  const [thumb, setThumb] = useState(null);
+  //const [thumb, setThumb] = useState(null);
 
   const { data: archiveData, isLoading } = useGetArchives({
     id: archives._id,
     name: title,
-    thumbFile: thumbnail,
+
     onError: () => {},
   });
+  console.log("useGetArchives", archiveData);
 
-  useEffect(() => {
-    const cacheKey = `thumb_${archives._id}`;
-    const cachedThumb = localStorage.getItem(cacheKey);
+  // useEffect(() => {
+  //   const cacheKey = `thumb_${archives._id}`;
+  //   const cachedThumb = localStorage.getItem(cacheKey);
 
-    if (cachedThumb) {
-      setThumb(cachedThumb);
-    } else if (archiveData?.thumbFile) {
-      localStorage.setItem(cacheKey, archiveData.thumbFile);
-      setThumb(archiveData.thumbFile);
-    }
-  }, [archiveData, archives._id]);
+  //   if (cachedThumb) {
+  //     setThumb(cachedThumb);
+  //   } else if (archiveData?.thumbFile) {
+  //     localStorage.setItem(cacheKey, archiveData.thumbFile);
+  //     setThumb(archiveData.thumbFile);
+  //   }
+  // }, [archiveData, archives._id]);
 
   return (
     <StyledCard>
       <Image>
         {isLoading ? (
           <Loader />
-        ) : thumb ? (
-          <img src={`data:image/webp;base64,${thumb}`} alt={title} />
+        ) : archiveData.thumbURL ? (
+          <img src={archiveData.thumbURL} alt={title} />
         ) : null}
       </Image>
       <Group>
@@ -74,7 +74,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   code: PropTypes.string.isRequired,
   event: PropTypes.func.isRequired,
-  thumbnail: PropTypes.string.isRequired,
+
   ShortDescription: PropTypes.string.isRequired,
   archives: PropTypes.object.isRequired,
 };

@@ -44,6 +44,7 @@ export default function VideoPage() {
   const archiveId = data?.archives;
   const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
 
+  //Provavelmente esse hook terá que ser modificado
   const { data: archiveData, isLoading } = useGetArchives({
     id: archiveId,
     name: data.title,
@@ -122,10 +123,7 @@ export default function VideoPage() {
           {!isLoading && (
             <>
               <Video controls title={data.title}>
-                <source
-                  src={`data:video/mp4;base64,${archiveData?.videoFile}`}
-                  type="video/mp4"
-                />
+                <source src={archiveData.videoURL} type="video/mp4" />
                 <track
                   label="Português"
                   kind="subtitles"
@@ -134,6 +132,28 @@ export default function VideoPage() {
                   default
                 />
               </Video>
+              <ButtonDiv>
+                {isAdmin && displayUploadButton && (
+                  <FormSubmit
+                    schema={validationSchema()}
+                    inputs={inputs}
+                    onSubmit={handleSubmit}
+                    loading={false}
+                    buttonText={translation.send}
+                  />
+                )}
+                {displayDownloadButton && (
+                  <Button
+                    width="240px"
+                    onClick={() =>
+                      downloadBase64Auto(manualTranscription, data?.title)
+                    }
+                  >
+                    <DownloadIcon />
+                    {translation.download}
+                  </Button>
+                )}
+              </ButtonDiv>
               {pdfUrl && isAdmin && (
                 <DownloadButton onClick={handleDownload}>
                   {translation.buttonpdf}
@@ -142,28 +162,6 @@ export default function VideoPage() {
             </>
           )}
         </VideoContainer>
-        <ButtonDiv>
-          {isAdmin && displayUploadButton && (
-            <FormSubmit
-              schema={validationSchema()}
-              inputs={inputs}
-              onSubmit={handleSubmit}
-              loading={false}
-              buttonText={translation.send}
-            />
-          )}
-          {displayDownloadButton && (
-            <Button
-              width="240px"
-              onClick={() =>
-                downloadBase64Auto(manualTranscription, data?.title)
-              }
-            >
-              <DownloadIcon />
-              {translation.download}
-            </Button>
-          )}
-        </ButtonDiv>
       </WhiteContainer>
     </Container>
   );
