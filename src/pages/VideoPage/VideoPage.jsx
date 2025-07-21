@@ -44,6 +44,7 @@ export default function VideoPage() {
   const archiveId = data?.archives;
   const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
 
+  //Provavelmente esse hook terá que ser modificado
   const { data: archiveData, isLoading } = useGetArchives({
     id: archiveId,
     name: data.title,
@@ -122,10 +123,7 @@ export default function VideoPage() {
           {!isLoading && (
             <>
               <Video controls title={data.title}>
-                <source
-                  src={`data:video/mp4;base64,${archiveData}`}
-                  type="video/mp4"
-                />
+                <source src={archiveData.videoURL} type="video/mp4" />
                 <track
                   label="Português"
                   kind="subtitles"
