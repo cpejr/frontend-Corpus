@@ -12,7 +12,7 @@ import {
   TextPintaColumn,
   BackgroundTitle,
 } from "./Styles";
-import { image } from "../../assets";
+import { ICMI } from "../../assets";
 import { breakpoints } from "../../styles/stylesVariables";
 
 import { useGlobalLanguage } from "../../stores/globalLanguage";
@@ -27,7 +27,6 @@ export default function AboutUs() {
 
   return (
     <Container>
-    
       <BackgroundTitle>
         <Title>{translation.title1}</Title>
       </BackgroundTitle>
@@ -35,8 +34,8 @@ export default function AboutUs() {
         <TextColumn>
           <img
             style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
-            src={image}
-            alt="image"
+            src={ICMI}
+            alt="ICMI"
           />
         </TextColumn>
         <TextPintaColumn>
@@ -50,15 +49,14 @@ export default function AboutUs() {
         <TextColumn>
           <img
             style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
-            src={image}
-            alt="image"
+            src={ICMI}
+            alt="ICMI"
           />
         </TextColumn>
       </ImageLine>
       <Banner>
         <p>{translation.paragraph3}</p>
       </Banner>
-
 
       {isMobileScreen ? (
         <SubTitle>{translation.subtitle1}</SubTitle>
@@ -69,11 +67,11 @@ export default function AboutUs() {
         <p>{translation.paragraph4}</p>
       </TextLine>
       <Line>
-      <TextColumn>
+        <TextColumn>
           <img
             style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
-            src={image}
-            alt="image"
+            src={ICMI}
+            alt="ICMI"
           />
         </TextColumn>
         <TextPintaColumn>
@@ -87,12 +85,11 @@ export default function AboutUs() {
         <TextColumn>
           <img
             style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
-            src={image}
-            alt="image"
+            src={ICMI}
+            alt="ICMI"
           />
         </TextColumn>
       </ImageLine>
-
 
       {isMobileScreen ? (
         <SubTitle>{translation.subtitle2}</SubTitle>
@@ -103,8 +100,8 @@ export default function AboutUs() {
         <TextColumn>
           <img
             style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
-            src={image}
-            alt="image"
+            src={ICMI}
+            alt="ICMI"
           />
         </TextColumn>
         <TextPintaColumn>
@@ -124,13 +121,11 @@ export default function AboutUs() {
         <TextColumn>
           <img
             style={{ border: "none", maxWidth: "250px", alignSelf: "center" }}
-            src={image}
-            alt="image"
+            src={ICMI}
+            alt="ICMI"
           />
         </TextColumn>
       </ImageLine>
-
-
     </Container>
   );
 }

@@ -147,7 +147,7 @@ export default function FormSubmit({
                   icon={input.icon}
                   color={input.color}
                   error={errors[input.key] ? true : false || requestError}
-                  allowedMimeTypes=".jpg, .png, .pdf, video/mp4,video/x-msvideo,video/quicktime,video/webm"
+                  allowedMimeTypes="*/*"
                   setValue={setValue}
                   {...register(input.key)}
                   multiple={false}
