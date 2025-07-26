@@ -181,7 +181,7 @@ export default function FormSubmit({
         }
         return null;
       })}
-      <Button type="submit" fontSize="1.2em" width="40% !important">
+      <Button type="submit" width="23%">
         {loading ? <LoadingOutlined /> : buttonText}
       </Button>
     </FormContainer>

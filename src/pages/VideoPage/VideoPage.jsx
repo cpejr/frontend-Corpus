@@ -10,6 +10,7 @@ import {
   DownloadButton,
   ButtonDiv,
   DownloadIcon,
+  ButtonDiv2,
 } from "./Styles";
 import { useState } from "react";
 import { validationSchema } from "./utils";
@@ -142,9 +143,11 @@ export default function VideoPage() {
                     buttonText={translation.send}
                   />
                 )}
-                {displayDownloadButton && (
-                  <Button
-                    width="240px"
+                {
+                  /*displayDownloadButton && */ <Button
+                    width="15%"
+                    height="30%"
+                    marginLeft="1 rem"
                     onClick={() =>
                       downloadBase64Auto(manualTranscription, data?.title)
                     }
@@ -152,13 +155,18 @@ export default function VideoPage() {
                     <DownloadIcon />
                     {translation.download}
                   </Button>
-                )}
+                }
               </ButtonDiv>
-              {pdfUrl && isAdmin && (
-                <DownloadButton onClick={handleDownload}>
-                  {translation.buttonpdf}
-                </DownloadButton>
-              )}
+
+              <ButtonDiv2>
+                {
+                  /*pdfUrl && isAdmin &&*/ <DownloadButton
+                    onClick={handleDownload}
+                  >
+                    {translation.buttonpdf}
+                  </DownloadButton>
+                }
+              </ButtonDiv2>
             </>
           )}
         </VideoContainer>
