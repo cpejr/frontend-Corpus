@@ -13,12 +13,7 @@ import {
   ImageLogo,
 } from "./Styles";
 
-import {
-  logo,
-  aboutUsHome,
-  videosHome,
-  privacyPoliciesHome,
-} from "../../assets/index";
+import { logo, UFMGHome, JLUHome, FALEHome } from "../../assets/index";
 
 import { Button1 } from "./Styles";
 import { useNavigate } from "react-router-dom";
@@ -44,27 +39,27 @@ export default function Home() {
           </ContainerText>
         </ContainerLogo>
       </Overlay>
-      
+
       <Section>
         <>
           <Column>
             <Title>{translation.title1}</Title>
             <p>{translation.paragraph1}</p>
-            <ImageMobile src={aboutUsHome} />
+            <ImageMobile src={UFMGHome} />
             <Button1 onClick={() => navigate("/")}>
               {translation.textButton1}
             </Button1>
           </Column>
         </>
-        <Image src={aboutUsHome} />
+        <Image src={UFMGHome} />
       </Section>
 
       <Section>
-        <Image src={videosHome} />
+        <Image src={JLUHome} />
         <Column>
           <Title>{translation.title2}</Title>
           <p>{translation.paragraph2}</p>
-          <ImageMobile src={videosHome} />
+          <ImageMobile src={JLUHome} />
           <Button1 onClick={() => navigate("/")}>
             {translation.textButton2}
           </Button1>
@@ -75,12 +70,12 @@ export default function Home() {
         <Column>
           <Title>{translation.title3}</Title>
           <p>{translation.paragraph3}</p>
-          <ImageMobile src={privacyPoliciesHome} />
+          <ImageMobile src={FALEHome} />
           <Button1 onClick={() => navigate("/")}>
             {translation.textButton3}
           </Button1>
         </Column>
-        <Image src={privacyPoliciesHome} />
+        <Image src={FALEHome} />
       </Section>
     </Container>
   );
