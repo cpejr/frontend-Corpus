@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, fonts } from "../../../styles/stylesVariables";
+import { colors, fonts, breakpoints } from "../../../styles/stylesVariables";
 
 const Button = styled.button`
   /*Posição */
@@ -10,13 +10,14 @@ const Button = styled.button`
   /*Medidas*/
   margin-top: ${(props) => props.marginTop};
   margin-left: ${(props) => props.marginLeft};
+  margin-right: ${(props) => props.marginRight};
   min-width: ${(props) => props.minWidth};
   max-width: ${(props) => props.maxWidth};
   min-height: ${(props) => props.minHeight};
   max-height: ${(props) => props.maxHeight};
   padding-top: ${(props) => props.paddingTop ?? "0.7rem"};
-  padding-left: ${(props) => props.paddingLeft ?? "3rem"};
-  padding-right: ${(props) => props.paddingRight ?? "3rem"};
+  padding-left: ${(props) => props.paddingLeft ?? "1rem"};
+  padding-right: ${(props) => props.paddingRight ?? "1rem"};
   padding-bottom: ${(props) => props.paddingBottom ?? "0.7rem"};
   height: ${(props) => props.height};
   gap: ${(props) => props.gap};
@@ -40,6 +41,23 @@ const Button = styled.button`
     background-color: ${(props) => props.hoverBackgroundColor ?? colors.black};
     border-color: ${(props) => props.hoverBorderColor};
     color: ${(props) => props.hoverColor ?? "white"};
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 30%;
+    //padding: 0.5rem 0.8rem;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 0.9rem;
+    width: 40%;
+    //padding: 0.5rem 0.8rem;
+  }
+
+  @media (max-width: ${breakpoints.smallMobile}) {
+    font-size: 0.8rem;
+    width: 40%;
+    //padding: 0.4rem 0.6rem;
   }
 `;
 

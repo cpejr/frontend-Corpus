@@ -3,18 +3,33 @@ import { breakpoints, colors, fonts } from "../../styles/stylesVariables";
 import { MdFileDownload } from "react-icons/md";
 
 export const DownloadButton = styled.button`
-  margin-top: 20px;
-  padding: 10px 15px;
+  margin-top: 1%;
+  margin-bottom: 5%;
+  margin-right: 10%;
+  padding: 0.6rem 1rem;
   background-color: #ffa500;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3em;
+  width: 80%;
+  max-width: 300px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1 rem;
   transition: background-color 0.3s;
 
   &:hover {
     background-color: #e69500;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+    //max-width: 100%;
+  }
+
+  @media (max-width: ${breakpoints.smallMobile}) {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
   }
 `;
 export const DownloadIcon = styled(MdFileDownload)`
@@ -64,18 +79,22 @@ export const WhiteContainer = styled.div`
   background-color: white;
   margin-bottom: 4rem;
   padding: 40px 0px 40px 0px;
+
   @media (max-width: ${breakpoints.smallTablet}) {
-    height: 60vw;
+    height: 85vw;
   }
-  @media (max-width: ${breakpoints.mobile}) {
+  @media (max-width: ${breakpoints.tablet}) {
     height: 70vw;
   }
+  @media (max-width: ${breakpoints.mobile}) {
+    height: 95vw;
+  }
   @media (max-width: ${breakpoints.smallMobile}) {
-    width: 90%;
-    height: 75vw;
+    width: 100%;
+    height: 100vw;
   }
   @media (max-width: ${breakpoints.mediumMobile}) {
-    height: 85vw;
+    height: 120vw;
   }
 
   > div {
@@ -101,7 +120,7 @@ export const VideoContainer = styled.div`
 
 export const Video = styled.video`
   width: 80%;
-  height: 90%;
+  height: 70%;
 `;
 
 export const Line = styled.div`
@@ -128,4 +147,17 @@ export const Group = styled.div`
 export const ButtonDiv = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 4 rem;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  align-self: center;
+`;
+
+export const ButtonDiv2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
 `;
