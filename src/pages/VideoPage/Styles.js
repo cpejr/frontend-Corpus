@@ -161,3 +161,29 @@ export const ButtonDiv2 = styled.div`
   align-items: center;
   width: 70%;
 `;
+
+export const DownloadLink = styled.a`
+  margin-top: 1%;
+  margin-bottom: 5%;
+  margin-right: 10%;
+  padding: 0.6rem 1rem;
+  background-color: #ffa500;
+  color: white;
+  border: none;
+  border-radius: 0.3em;
+  width: 80%;
+  max-width: 300px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+
+  &:hover {
+    background-color: #e69500;
+  }
+`;

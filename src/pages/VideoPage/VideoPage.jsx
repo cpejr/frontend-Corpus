@@ -11,6 +11,7 @@ import {
   ButtonDiv,
   DownloadIcon,
   ButtonDiv2,
+  DownloadLink,
 } from "./Styles";
 import { validationSchema } from "./utils";
 import { useGetArchives } from "../../hooks/query/archives";
@@ -24,22 +25,17 @@ import { useUpdateVideos } from "../../hooks/query/videos";
 import { useGetManualTranscriptions } from "../../hooks/query/manualTranscription";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
-import Button from "../../components/common/Button/Button";
 
 export default function VideoPage() {
   const queryClient = useQueryClient();
   const location = useLocation();
   const data = location.state;
 
-
-
   const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
-
-  const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
-
-
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
+
+  const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
 
   const archiveId = data?.archives;
   const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
@@ -48,22 +44,17 @@ export default function VideoPage() {
     id: archiveId,
     name: data.title,
   });
+
   const vttURL = archiveData?.vttURL || "";
 
   const { data: manualTranscription } = useGetManualTranscriptions({
-  id: manualTranscriptionID,
-  onError: () => {},
-});
+    id: manualTranscriptionID,
+    onError: () => {},
+  });
 
-useEffect(() => {
-  setDisplayDownloadButton(!!manualTranscription);
-}, [manualTranscription]);
-
-
-useEffect(() => {
-  console.log("data:", manualTranscription);
-}, [manualTranscription]);
-
+  useEffect(() => {
+    setDisplayDownloadButton(!!manualTranscription);
+  }, [manualTranscription]);
 
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
@@ -77,7 +68,7 @@ useEffect(() => {
     },
   });
 
-   const handleDownload = () => {
+  const handleDownload = () => {
     if (!pdfUrl) return;
 
     const link = document.createElement("a");
@@ -104,11 +95,6 @@ useEffect(() => {
     console.log("Arquivo recebido no submit:", archive.ManualTranscriptionArchive);
     updateVideos({ _id: data._id, body: archive });
   };
-
-
-console.log("manualTranscription (URL):", manualTranscription);
-console.log("displayDownloadButton:", displayDownloadButton);
-
 
   return (
     <Container>
@@ -142,28 +128,25 @@ console.log("displayDownloadButton:", displayDownloadButton);
                     buttonText={translation.send}
                   />
                 )}
+
                 {displayDownloadButton && manualTranscription && (
-                  <a
+                  <DownloadLink
                     href={manualTranscription}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ textDecoration: "none" }}
                   >
-                    <Button width="15%" height="30%" marginLeft="1rem">
-                      <DownloadIcon />
-                      {translation.download}
-                    </Button>
-                  </a>
+                    <DownloadIcon />
+                    {translation.download}
+                  </DownloadLink>
                 )}
               </ButtonDiv>
+
               <ButtonDiv2>
-                {
-                  pdfUrl && isAdmin && <DownloadButton
-                    onClick={handleDownload}
-                  >
+                {pdfUrl && isAdmin && (
+                  <DownloadButton onClick={handleDownload}>
                     {translation.buttonpdf}
                   </DownloadButton>
-                }
+                )}
               </ButtonDiv2>
             </>
           )}
