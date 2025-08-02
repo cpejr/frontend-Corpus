@@ -141,7 +141,6 @@ export default function ManageVideosPage() {
 
   const handleSubmit = async (data) => {
     try {
-      console.log(data);
       const countryDoc = countries.find(
         (country) => country.name === data.country
       );
@@ -190,7 +189,7 @@ export default function ManageVideosPage() {
   }
 
   const navigate = useNavigate();
-
+  const [editVideo, setEditVideo] = useState();
   const [searchValue, setSearchValue] = useState("");
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -207,8 +206,9 @@ export default function ManageVideosPage() {
     setShowDeleteModal(true);
   };
 
-  function handleEdit(id) {
-    setVideoId(id);
+  function handleEdit(video) {
+    setVideoId(video._id);
+    setEditVideo(video);
     setShowEditModal(true);
   }
 
@@ -278,7 +278,7 @@ export default function ManageVideosPage() {
               </VideoTitle>
               <ListLine />
               <Buttons>
-                <StyledEditOutlined onClick={() => handleEdit(video?._id)} />
+                <StyledEditOutlined onClick={() => handleEdit(video)} />
                 <StyledDeleteOutlined
                   onClick={() => handleDelete(video?._id)}
                 />
@@ -294,9 +294,10 @@ export default function ManageVideosPage() {
           id={videoId}
         />
         <ModalEditVideos
-          openModal={showEditModal}
-          closeModal={() => setShowEditModal(false)}
+          modal={showEditModal}
+          close={() => setShowEditModal(false)}
           id={videoId}
+          video={editVideo}
         />
       </Modals>
     </Container>
