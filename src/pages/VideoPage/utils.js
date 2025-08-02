@@ -1,8 +1,12 @@
 import { z } from "zod";
 
-// Form Validation
 export const validationSchema = () => {
   return z.object({
-    ManualTranscriptionArchive: z.string({ required_error: "insira um video" }),
+
+    ManualTranscriptionArchive: z
+      .any()
+      .refine((file) => file instanceof File, "Insira um arquivo válido")
+      .optional(), // ou .nonempty() se quiser obrigatório
+
   });
 };

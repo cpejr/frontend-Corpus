@@ -151,11 +151,23 @@ export default function ManageVideosPage() {
         return;
       }
 
-      createVideo({
-        ...data,
-        country: countryDoc._id,
-        language: languageDoc._id,
-      });
+      const formData = new FormData();
+      formData.append("title", data.title);
+      formData.append("ShortDescription", data.ShortDescription);
+      formData.append("code", data.code);
+      formData.append("context", data.context);
+      formData.append("responsibles", data.responsibles);
+      formData.append("totalParticipants", data.totalParticipants);
+      formData.append("country", countryDoc._id);
+      formData.append("language", languageDoc._id);
+      formData.append("birthday", data.birthday);
+      formData.append("duration", data.duration);
+
+      if (data.videoFile) {
+        formData.append("videoFile", data.videoFile);
+      }
+
+      createVideo(formData);
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
       toast.error("Erro ao enviar dados");

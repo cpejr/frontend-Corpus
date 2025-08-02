@@ -10,10 +10,14 @@ export const Form = styled.form`
   gap: 2rem !important;
   box-shadow: none;
   z-index: 0;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 80%;
+  }
   @media (max-width: 700px) {
     align-items: center;
     flex-direction: column;
-    width: 90%;
+    width: 50%;
     gap: 0%;
   }
 

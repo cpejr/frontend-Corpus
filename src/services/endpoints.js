@@ -51,10 +51,32 @@ export const createVideos = async (newVideo) => {
 };
 
 export async function updateVideos({ _id, body }) {
-  const { data } = await api.put(`/video/${_id}`, body);
 
-  return data;
+  const formData = new FormData();
+
+
+  // Log para ver o que está no body antes de adicionar no FormData
+  console.log("Dados recebidos no front para envio:", body);
+
+  for (const key in body) {
+    console.log(`Adicionando ao FormData: chave=${key}, valor=`, body[key]);
+    formData.append(key, body[key]);
+  }
+
+  try {
+    const { data } = await api.put(`/video/${_id}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    console.log("Resposta do servidor:", data);
+    return data;
+  } catch (error) {
+    console.error("Erro na requisição updateVideos:", error);
+    throw error;
+  }
 }
+
+
 
 //user
 export async function getUsers() {
@@ -138,9 +160,9 @@ export const downloadTranscript = async (title) => {
   });
   return response.data;
 };
-//manualTranscription
+// manualTranscription
 export async function getManualTranscription(id) {
-  const { data } = await api.get(`/manualTranscription/${id}`);
+  const response = await api.get(`/manualTranscription/${id}`);
+  return response.data.url; 
 
-  return data;
 }

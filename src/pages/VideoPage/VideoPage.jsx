@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Line,
   VideoContainer,
@@ -10,8 +10,8 @@ import {
   DownloadButton,
   ButtonDiv,
   DownloadIcon,
+  ButtonDiv2,
 } from "./Styles";
-import { useState } from "react";
 import { validationSchema } from "./utils";
 import { useGetArchives } from "../../hooks/query/archives";
 import { useDownloadTranscript } from "../../hooks/query/videos";
@@ -30,12 +30,14 @@ export default function VideoPage() {
   const queryClient = useQueryClient();
   const location = useLocation();
   const data = location.state;
+
+
+
   const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
+
   const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
 
-  useEffect(() => {
-    setDisplayDownloadButton(data?.ManualTranscriptionArchive);
-  }, [data?.ManualTranscriptionArchive]);
+
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
 
@@ -49,25 +51,33 @@ export default function VideoPage() {
   const vttURL = archiveData?.vttURL || "";
 
   const { data: manualTranscription } = useGetManualTranscriptions({
-    id: manualTranscriptionID,
-    onError: () => {},
-  });
+  id: manualTranscriptionID,
+  onError: () => {},
+});
+
+useEffect(() => {
+  setDisplayDownloadButton(!!manualTranscription);
+}, [manualTranscription]);
+
+
+useEffect(() => {
+  console.log("data:", manualTranscription);
+}, [manualTranscription]);
+
+
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
   });
+
   const { mutate: updateVideos } = useUpdateVideos({
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["videos"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["transcription"],
-      });
+      queryClient.invalidateQueries({ queryKey: ["videos"] });
+      queryClient.invalidateQueries({ queryKey: ["transcription"] });
       toast.success(translation.transcriptionUpload);
     },
   });
 
-  const handleDownload = () => {
+   const handleDownload = () => {
     if (!pdfUrl) return;
 
     const link = document.createElement("a");
@@ -79,23 +89,7 @@ export default function VideoPage() {
     link.click();
     document.body.removeChild(link);
   };
-  function downloadBase64Auto(base64Data, videoTitle) {
-    const matches = base64Data.match(/^data:([^;]+);base64,/);
-    if (!matches) {
-      toast.success(translation.transcriptionWaiting);
-      return;
-    }
 
-    const mimeType = matches[1];
-    const extension = mimeType.split("/")[1];
-    const filename = `${videoTitle}.${extension}`;
-    const link = document.createElement("a");
-    link.href = base64Data;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
   const [inputs] = useState([
     {
       type: "file",
@@ -105,9 +99,17 @@ export default function VideoPage() {
       errors: ["ERROR", "BAD FUNCTIONING"],
     },
   ]);
+
   const handleSubmit = (archive) => {
+    console.log("Arquivo recebido no submit:", archive.ManualTranscriptionArchive);
     updateVideos({ _id: data._id, body: archive });
   };
+
+
+console.log("manualTranscription (URL):", manualTranscription);
+console.log("displayDownloadButton:", displayDownloadButton);
+
+
   return (
     <Container>
       <WhiteContainer>
@@ -120,10 +122,7 @@ export default function VideoPage() {
           {!isLoading && (
             <>
               <Video controls title={data.title}>
-                <source
-                  src={`data:video/mp4;base64,${archiveData?.videoFile}`}
-                  type="video/mp4"
-                />
+                <source src={archiveData.videoURL} type="video/mp4" />
                 <track
                   label="Português"
                   kind="subtitles"
@@ -132,36 +131,43 @@ export default function VideoPage() {
                   default
                 />
               </Video>
-              {pdfUrl && isAdmin && (
-                <DownloadButton onClick={handleDownload}>
-                  {translation.buttonpdf}
-                </DownloadButton>
-              )}
+
+              <ButtonDiv>
+                {isAdmin && (
+                  <FormSubmit
+                    schema={validationSchema()}
+                    inputs={inputs}
+                    onSubmit={handleSubmit}
+                    loading={false}
+                    buttonText={translation.send}
+                  />
+                )}
+                {displayDownloadButton && manualTranscription && (
+                  <a
+                    href={manualTranscription}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Button width="15%" height="30%" marginLeft="1rem">
+                      <DownloadIcon />
+                      {translation.download}
+                    </Button>
+                  </a>
+                )}
+              </ButtonDiv>
+              <ButtonDiv2>
+                {
+                  pdfUrl && isAdmin && <DownloadButton
+                    onClick={handleDownload}
+                  >
+                    {translation.buttonpdf}
+                  </DownloadButton>
+                }
+              </ButtonDiv2>
             </>
           )}
         </VideoContainer>
-        <ButtonDiv>
-          {isAdmin && (
-            <FormSubmit
-              schema={validationSchema()}
-              inputs={inputs}
-              onSubmit={handleSubmit}
-              loading={false}
-              buttonText={translation.send}
-            />
-          )}
-          {displayDownloadButton && (
-            <Button
-              width="240px"
-              onClick={() =>
-                downloadBase64Auto(manualTranscription, data?.title)
-              }
-            >
-              <DownloadIcon />
-              {translation.download}
-            </Button>
-          )}
-        </ButtonDiv>
       </WhiteContainer>
     </Container>
   );
