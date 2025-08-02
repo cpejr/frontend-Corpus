@@ -37,7 +37,6 @@ export default function VideoPage() {
 
   const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
 
-  
 
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);

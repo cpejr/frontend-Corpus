@@ -51,7 +51,9 @@ export const createVideos = async (newVideo) => {
 };
 
 export async function updateVideos({ _id, body }) {
+
   const formData = new FormData();
+
 
   // Log para ver o que está no body antes de adicionar no FormData
   console.log("Dados recebidos no front para envio:", body);
@@ -162,4 +164,5 @@ export const downloadTranscript = async (title) => {
 export async function getManualTranscription(id) {
   const response = await api.get(`/manualTranscription/${id}`);
   return response.data.url; 
+
 }

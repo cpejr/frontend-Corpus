@@ -6,51 +6,140 @@ import {
   Container,
   Message,
   ModalStyle,
-  Form,
+  FormDiv,
 
   //Calendar,
 } from "./Styles";
-import { useState } from "react";
+import { useGetCountries } from "../../../../hooks/query/country";
+import { useGetLanguages } from "../../../../hooks/query/language";
+import { useState, useEffect } from "react";
+import { useGlobalLanguage } from "../../../../stores/globalLanguage";
+import { TranslateText } from "./translations";
+import { useUpdateVideos } from "../../../../hooks/query/videos";
 //import formatDate from "../../../../utils/formatDate";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
-export default function ModalEditVideos({
-  videos,
-  modal,
-  close,
-  _id,
-  updateVideos,
-}) {
+export default function ModalEditVideos({ video, modal, close, id }) {
+  const queryClient = useQueryClient();
   //const [date, setDate] = useState();
-  const [inputs] = useState([
-    {
-      type: "select",
-      key: "code",
-      placeholder: "Selecione sua formação",
-      label: "code",
-      options: Array.from({ length: 100 }, (_, i) => ({
-        value: i + 1,
-        name: (i + 1).toString(),
-      })),
+  const { globalLanguage } = useGlobalLanguage();
+  const translation = TranslateText(globalLanguage);
+  const { data: languagesData } = useGetLanguages();
+  const { data: countryData } = useGetCountries();
+  const [inputs, setInputs] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [countries, setCountries] = useState([]);
+  console.log(video);
+  useEffect(() => {
+    if (languagesData) {
+      setLanguages(languagesData);
+    }
+  }, [languagesData]);
+  useEffect(() => {
+    if (countryData) {
+      setCountries(countryData);
+    }
+  }, [countryData]);
+
+  useEffect(() => {
+    setInputs([
+      {
+        type: "text",
+        key: "title",
+        placeholder: translation.placeholder1,
+        label: "title",
+        value: video?.title,
+      },
+      {
+        type: "text",
+        key: "ShortDescription",
+        placeholder: translation.placeholder2,
+        label: "ShortDescription",
+        value: video?.ShortDescription,
+      },
+      {
+        type: "text",
+        key: "context",
+        placeholder: translation.placeholder3,
+        label: "context",
+        value: video?.context,
+      },
+      {
+        type: "text",
+        key: "responsibles",
+        placeholder: translation.placeholder4,
+        label: "responsibles",
+        value: video?.responsibles,
+      },
+      {
+        type: "select",
+        key: "totalParticipants",
+        placeholder: translation.placeholder5,
+        label: "totalParticipants",
+        value: video?.totalParticipants,
+        options: Array.from({ length: 100 }, (_, i) => ({
+          value: i + 1,
+          name: (i + 1).toString(),
+        })),
+      },
+      {
+        type: "select",
+        key: "country",
+        placeholder: translation.placeholder6,
+        label: "country",
+        value: video?.country[0]?.name,
+        options: countries.map((country) => ({
+          value: country._id,
+          name: country.name,
+        })),
+      },
+      {
+        type: "select",
+        key: "language",
+        placeholder: translation.placeholder7,
+        label: "language",
+        value: video?.language[0]?.name,
+        options: languages.map((lang) => ({
+          value: lang._id,
+          name: lang.name,
+        })),
+      },
+      {
+        type: "date",
+        key: "birthday",
+        placeholder: translation.placeholder9,
+        dateFormat: "yy",
+        defaultValue: new Date(video?.birthday),
+        label: "birthday",
+      },
+      {
+        type: "time",
+        key: "duration",
+        placeholder: translation.placeholder8,
+        label: "duration",
+        value: video?.duration,
+      },
+    ]);
+  }, [languages, countries, globalLanguage, video]);
+  console.log(video?.language[0]?._id);
+  const { mutate: updateVideos } = useUpdateVideos({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["videos"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["transcription"],
+      });
+      toast.success(translation.successToast);
     },
-    {
-      type: "file",
-      key: "videoFile",
-      placeholder: "Escolha um arquivo de mídia",
-      label: "videoFile",
-    },
-    {
-      type: "time",
-      key: "duration",
-      placeholder: "Tempo de duração",
-      label: "Duração",
-    },
-  ]);
+  });
+
   const handleSubmit = (data) => {
-    const updatedData = {
-      ...data,
-      ...videos,
-    };
-    updateVideos(_id, updatedData);
+    data.country = countries.find((country) => country.name === data.country);
+    data.language = languages.find((lang) => lang.name === data.language);
+
+    updateVideos({ _id: id, body: data });
     close();
   };
 
@@ -65,39 +154,22 @@ export default function ModalEditVideos({
       >
         <Message>Editar Informações</Message>
 
-        <Form>
+        <FormDiv>
           <FormSubmit
             inputs={inputs}
             onSubmit={handleSubmit}
             loading={false}
             buttonText="Enviar"
           />
-        </Form>
-        {/* <Button
-          type="submit"
-          onClick={handleSubmit}
-          backgroundcolor="transparent"
-          color={colors.font.primary}
-          border="1px solid"
-          borderRadius="0.5rem"
-          marginTop="1.5rem"
-          fontSize="1.8rem"
-          fontWeight="500"
-          lineHeight="2.2rem"
-          hoverBackgroundColor={colors.modals.modalButton}
-          hoverColor={colors.font.secondary}
-          borderColor={colors.modals.modalButton}
-        >
-          Editar
-        </Button> */}
+        </FormDiv>
       </ModalStyle>
     </Container>
   );
 }
 
 ModalEditVideos.propTypes = {
-  _id: PropTypes.string.isRequired,
-  videos: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  video: PropTypes.object.isRequired,
   close: PropTypes.func.isRequired,
   open: PropTypes.func.isRequired,
   modal: PropTypes.bool.isRequired,
