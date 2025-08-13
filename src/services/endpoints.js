@@ -51,11 +51,19 @@ export const createVideos = async (newVideo) => {
 };
 
 export async function updateVideos({ _id, body }) {
-  console.log(_id, body);
-  const { data } = await api.put(`/video/${_id}`, body);
+  const formData = new FormData();
+
+  for (const key in body) {
+    formData.append(key, body[key]);
+  }
+
+  const { data } = await api.put(`/video/${_id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
   return data;
 }
+
 
 //user
 export async function getUsers() {
@@ -139,10 +147,9 @@ export const downloadTranscript = async (title) => {
   });
   return response.data;
 };
-//manualTranscription
+// manualTranscription
 export async function getManualTranscription(id) {
-  console.log(id);
-  const { data } = await api.get(`/manualTranscription/${id}`);
+  const response = await api.get(`/manualTranscription/${id}`);
+  return response.data.url; 
 
-  return data;
 }

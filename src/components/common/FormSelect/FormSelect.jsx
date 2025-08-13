@@ -19,7 +19,7 @@ export default function FormSelect({
   ...props
 }) {
   const [selectedValue, setSelectedValue] = useState(defaultValue || "");
-
+  console.log(defaultValue);
   useEffect(() => {
     if (isSubmitSuccessful) setSelectedValue("");
   }, [isSubmitSuccessful]);

@@ -37,7 +37,7 @@ export default function FormSubmit({
     control,
     setValue,
   } = useForm({
-    resolver: zodResolver(schema),
+    resolver: schema ? zodResolver(schema) : undefined,
   });
 
   function submitHandler(data) {
@@ -171,6 +171,7 @@ export default function FormSubmit({
                 error={errors[input.key] ? true : false || requestError}
                 setValue={setValue}
                 control={control}
+                defaultValue={input?.value}
                 {...register(input.key)}
               />
               {errors[input.key]?.message && (
@@ -181,7 +182,7 @@ export default function FormSubmit({
         }
         return null;
       })}
-      <Button type="submit" fontSize="1.2em" width="40% !important">
+      <Button type="submit" width="23%">
         {loading ? <LoadingOutlined /> : buttonText}
       </Button>
     </FormContainer>

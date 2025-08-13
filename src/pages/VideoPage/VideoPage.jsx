@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Line,
   VideoContainer,
@@ -10,8 +10,9 @@ import {
   DownloadButton,
   ButtonDiv,
   DownloadIcon,
+  ButtonDiv2,
+  DownloadLink,
 } from "./Styles";
-import { useState } from "react";
 import { validationSchema } from "./utils";
 import { useGetArchives } from "../../hooks/query/archives";
 import { useDownloadTranscript } from "../../hooks/query/videos";
@@ -24,48 +25,45 @@ import { useUpdateVideos } from "../../hooks/query/videos";
 import { useGetManualTranscriptions } from "../../hooks/query/manualTranscription";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
-import Button from "../../components/common/Button/Button";
 
 export default function VideoPage() {
   const queryClient = useQueryClient();
   const location = useLocation();
   const data = location.state;
-  const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
-  const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
-  const [displayUploadButton, setDisplayUploadButton] = useState(true);
 
-  useEffect(() => {
-    setDisplayDownloadButton(data?.ManualTranscriptionArchive);
-    setDisplayUploadButton(!data?.ManualTranscriptionArchive);
-  }, [data?.ManualTranscriptionArchive]);
+  const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
+
+  const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
 
   const archiveId = data?.archives;
   const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
 
-  //Provavelmente esse hook terá que ser modificado
   const { data: archiveData, isLoading } = useGetArchives({
     id: archiveId,
     name: data.title,
   });
+
   const vttURL = archiveData?.vttURL || "";
 
   const { data: manualTranscription } = useGetManualTranscriptions({
     id: manualTranscriptionID,
     onError: () => {},
   });
+
+  useEffect(() => {
+    setDisplayDownloadButton(!!manualTranscription);
+  }, [manualTranscription]);
+
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
   });
+
   const { mutate: updateVideos } = useUpdateVideos({
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["videos"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["transcription"],
-      });
+      queryClient.invalidateQueries({ queryKey: ["videos"] });
+      queryClient.invalidateQueries({ queryKey: ["transcription"] });
       toast.success(translation.transcriptionUpload);
     },
   });
@@ -82,23 +80,7 @@ export default function VideoPage() {
     link.click();
     document.body.removeChild(link);
   };
-  function downloadBase64Auto(base64Data, videoTitle) {
-    const matches = base64Data.match(/^data:([^;]+);base64,/);
-    if (!matches) {
-      toast.success(translation.transcriptionWaiting);
-      return;
-    }
 
-    const mimeType = matches[1];
-    const extension = mimeType.split("/")[1];
-    const filename = `${videoTitle}.${extension}`;
-    const link = document.createElement("a");
-    link.href = base64Data;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
   const [inputs] = useState([
     {
       type: "file",
@@ -108,9 +90,12 @@ export default function VideoPage() {
       errors: ["ERROR", "BAD FUNCTIONING"],
     },
   ]);
+
   const handleSubmit = (archive) => {
+    console.log("Arquivo recebido no submit:", archive.ManualTranscriptionArchive);
     updateVideos({ _id: data._id, body: archive });
   };
+
   return (
     <Container>
       <WhiteContainer>
@@ -132,8 +117,9 @@ export default function VideoPage() {
                   default
                 />
               </Video>
+
               <ButtonDiv>
-                {isAdmin && displayUploadButton && (
+                {isAdmin && (
                   <FormSubmit
                     schema={validationSchema()}
                     inputs={inputs}
@@ -142,23 +128,26 @@ export default function VideoPage() {
                     buttonText={translation.send}
                   />
                 )}
-                {displayDownloadButton && (
-                  <Button
-                    width="240px"
-                    onClick={() =>
-                      downloadBase64Auto(manualTranscription, data?.title)
-                    }
+
+                {displayDownloadButton && manualTranscription && (
+                  <DownloadLink
+                    href={manualTranscription}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <DownloadIcon />
                     {translation.download}
-                  </Button>
+                  </DownloadLink>
                 )}
               </ButtonDiv>
-              {pdfUrl && isAdmin && (
-                <DownloadButton onClick={handleDownload}>
-                  {translation.buttonpdf}
-                </DownloadButton>
-              )}
+
+              <ButtonDiv2>
+                {pdfUrl && isAdmin && (
+                  <DownloadButton onClick={handleDownload}>
+                    {translation.buttonpdf}
+                  </DownloadButton>
+                )}
+              </ButtonDiv2>
             </>
           )}
         </VideoContainer>
