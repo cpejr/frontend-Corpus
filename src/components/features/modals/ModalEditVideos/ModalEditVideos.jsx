@@ -136,12 +136,32 @@ export default function ModalEditVideos({ video, modal, close, id }) {
   });
 
   const handleSubmit = (data) => {
-    data.country = countries.find((country) => country.name === data.country);
-    data.language = languages.find((lang) => lang.name === data.language);
+  const selectedCountry = countries.find(
+    (country) => country.name === data.country
+  );
+  const selectedLanguage = languages.find(
+    (lang) => lang.name === data.language
+  );
 
-    updateVideos({ _id: id, body: data });
-    close();
+  const body = {
+    ...data,
+    country: selectedCountry ? [selectedCountry._id] : [],
+    language: selectedLanguage ? [selectedLanguage._id] : [],
   };
+
+  if (data.birthday && data.birthday !== "undefined" && data.birthday !== "null") {
+    body.birthday = new Date(data.birthday);
+  } else {
+    delete body.birthday;
+  }
+
+  updateVideos({ _id: id, body });
+  close();
+};
+
+
+
+
 
   return (
     <Container>
