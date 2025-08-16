@@ -24,27 +24,31 @@ import { TranslateText } from "./translations";
 import { localeMap } from "../../common/Calendar/locales";
 
 export default function FilterArea({ onSubmit }) {
-  const { handleSubmit, reset, register, control } = useForm();
+  const { handleSubmit, reset, control } = useForm();
 
   const { globalLanguage } = useGlobalLanguage();
   const locale = localeMap[globalLanguage] || "en-US";
 
-  const [selectTotalParticipants, setSelectTotalParticipants] = useState(null);
-  const [country, setCountry] = useState([]);
-  const [language, setLanguage] = useState([]);
-  const [duration, setDuration] = useState("");
-  const [dates, setDates] = useState(null);
+  //const [selectTotalParticipants, setSelectTotalParticipants] = useState(null);
+  //const [country, setCountry] = useState([]);
+  //const [language, setLanguage] = useState([]);
+  //const [duration, setDuration] = useState("");
+  //const [dates, setDates] = useState(null);
   const [languages, setLanguages] = useState([]);
   const [countries, setCountries] = useState([]);
 
   const translateText = TranslateText({ globalLanguage });
 
-  const options = [
+  /*  const options = [
     { value: { min: 1, max: 5 }, label: "1 a 5" },
     { value: { min: 6, max: 10 }, label: "6 a 10" },
     { value: { min: 10, max: null }, label: "10+" },
+  ]; */
+  const options = [
+    { value: "1-5", label: "1 a 5" },
+    { value: "6-10", label: "6 a 10" },
+    { value: "10-mais", label: "10+" },
   ];
-
   useEffect(() => {
     async function fetchOptions() {
       try {
@@ -63,22 +67,23 @@ export default function FilterArea({ onSubmit }) {
 
   async function submitHandler(data) {
     const toFilter = {
-      ...data,
-      totalParticipants: selectTotalParticipants,
-      country: country.map((c) => c.value),
-      language: language.map((lang) => lang.value),
-      duration,
-      dates,
+      totalParticipants: data.totalParticipants.value,
+      country: data.country.map((c) => c.value),
+      language: data.language.map((l) => l.value),
+      duration: data.duration,
+      dates: data.dates,
     };
 
     try {
+      console.log("Filtros usados:", toFilter);
+
       const videos = await getVideosByParameters(toFilter);
-      onSubmit(videos);
+      onSubmit(toFilter);
       reset();
-      setCountry([]);
-      setLanguage([]);
-      setDuration("");
-      setSelectTotalParticipants(null);
+      //setCountry([]);
+      //setLanguage([]);
+      //setDuration("");
+      //setSelectTotalParticipants(null);
     } catch (error) {
       console.error("Erro ao buscar vídeos filtrados:", error);
     }
@@ -94,11 +99,11 @@ export default function FilterArea({ onSubmit }) {
           render={({ field }) => (
             <StyledSelect
               {...field}
-              defaultValue={selectTotalParticipants}
-              onChange={(e) => {
+              //defaultValue={selectTotalParticipants}
+              /* onChange={(e) => {
                 setSelectTotalParticipants(e.value);
                 field.onChange(e);
-              }}
+              }} */
               isSearchable={false}
               placeholder={translateText.totalParticipantsPlaceholder}
               options={options}
@@ -116,11 +121,11 @@ export default function FilterArea({ onSubmit }) {
             <StyledSelect
               {...field}
               isMulti
-              value={country}
-              onChange={(selected) => {
+              // value={country}
+              /*    onChange={(selected) => {
                 setCountry(selected);
                 field.onChange(selected);
-              }}
+              }} */
               isSearchable={true}
               placeholder={translateText.countryPlaceholder}
               options={countries.map((country) => ({
@@ -141,16 +146,16 @@ export default function FilterArea({ onSubmit }) {
             <StyledSelect
               {...field}
               isMulti
-              value={language}
-              onChange={(selected) => {
+              //value={language}
+              /*onChange={(selected) => {
                 setLanguage(selected);
                 field.onChange(selected);
-              }}
+              }}*/
               isSearchable={true}
               placeholder={translateText.languagePlaceholder}
-              options={languages.map((lang) => ({
-                value: lang.name,
-                label: lang.name,
+              options={languages.map((l) => ({
+                value: l._id,
+                label: l.name,
               }))}
             />
           )}
@@ -165,12 +170,13 @@ export default function FilterArea({ onSubmit }) {
             <StyledInput
               {...field}
               placeholder={translateText.durationPlaceholder}
-              {...register("duration")}
+              /* {...register("duration")}
               onChange={(e) => {
                 setDuration(e.target.value);
                 field.onChange(e.target.value);
               }}
-              value={duration}
+              value={duration} */
+              type="number"
             />
           )}
         />
@@ -184,10 +190,10 @@ export default function FilterArea({ onSubmit }) {
           render={({ field }) => (
             <Calendar
               {...field}
-              onChange={(dates) => {
+              /*onChange={(dates) => {
                 setDates(dates.value);
                 field.onChange(dates.value);
-              }}
+              }} */
               appendTo="self"
               placeholder={translateText.calendarPlaceholder}
               readOnlyInput

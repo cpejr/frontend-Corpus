@@ -36,7 +36,9 @@ export const getVideos = async () => {
   return data;
 };
 export const getVideosByParameters = async (filters = {}) => {
-  const { data } = await api.get(`/videofilter`, { params: filters });
+  const { data } = await api.get(`/videofilter`, {
+    params: filters,
+  });
 
   return data;
 };
@@ -63,7 +65,6 @@ export async function updateVideos({ _id, body }) {
 
   return data;
 }
-
 
 //user
 export async function getUsers() {
@@ -150,6 +151,5 @@ export const downloadTranscript = async (title) => {
 // manualTranscription
 export async function getManualTranscription(id) {
   const response = await api.get(`/manualTranscription/${id}`);
-  return response.data.url; 
-
+  return response.data.url;
 }
