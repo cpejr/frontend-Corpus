@@ -63,12 +63,7 @@ export function useGetVideosByParameters({
   onError = (err) => console.error(err),
 } = {}) {
   return useQuery({
-    queryKey: [
-      "videos",
-      {
-        filters,
-      },
-    ],
+    queryKey: ["videos", filters],
     queryFn: () => getVideosByParameters(filters),
     onSuccess,
     onError,

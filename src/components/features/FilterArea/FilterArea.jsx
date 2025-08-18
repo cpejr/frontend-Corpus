@@ -71,7 +71,7 @@ export default function FilterArea({ onSubmit }) {
       country: data.country.map((c) => c.value),
       language: data.language.map((l) => l.value),
       duration: data.duration,
-      dates: data.dates,
+      birthday: data.dates,
     };
 
     try {
@@ -186,7 +186,7 @@ export default function FilterArea({ onSubmit }) {
         <Controller
           name="dates"
           control={control}
-          defaultValue=""
+          defaultValue={null}
           render={({ field }) => (
             <Calendar
               {...field}
