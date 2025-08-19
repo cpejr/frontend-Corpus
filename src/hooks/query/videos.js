@@ -14,13 +14,12 @@ export function useGetVideos({
   onError = (err) => console.error(err),
 } = {}) {
   return useQuery({
-    queryKey: ["videos"],  
-    queryFn: () => getVideos(),  
+    queryKey: ["videos"],
+    queryFn: () => getVideos(),
     onSuccess,
     onError,
   });
 }
-
 
 export function useCreateVideos({
   onSuccess = () => {},
@@ -64,16 +63,8 @@ export function useGetVideosByParameters({
   onError = (err) => console.error(err),
 } = {}) {
   return useQuery({
-    queryKey: [
-      "videos",
-      {
-        filters,
-      },
-    ],
-    queryFn: () =>
-      getVideosByParameters({
-        filters,
-      }),
+    queryKey: ["videos", filters],
+    queryFn: () => getVideosByParameters(filters),
     onSuccess,
     onError,
   });
@@ -86,7 +77,7 @@ export function useDownloadTranscript({
   return useQuery({
     queryKey: ["transcript", title],
     queryFn: () => downloadTranscript(title),
-    enabled: !!title, 
+    enabled: !!title,
     onSuccess,
     onError,
     staleTime: Infinity,

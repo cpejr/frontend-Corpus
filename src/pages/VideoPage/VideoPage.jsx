@@ -92,7 +92,10 @@ export default function VideoPage() {
   ]);
 
   const handleSubmit = (archive) => {
-    console.log("Arquivo recebido no submit:", archive.ManualTranscriptionArchive);
+    console.log(
+      "Arquivo recebido no submit:",
+      archive.ManualTranscriptionArchive
+    );
     updateVideos({ _id: data._id, body: archive });
   };
 

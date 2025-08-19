@@ -82,6 +82,7 @@ export default function Videos() {
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
+
   useEffect(() => {
     setTotalPages(Math.ceil(SearchBarFilter.length / itemsPerPage));
   }, [SearchBarFilter.length]);
