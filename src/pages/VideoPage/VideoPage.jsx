@@ -59,6 +59,8 @@ export default function VideoPage() {
   const { data: pdfUrl } = useDownloadTranscript({
     title: data.title,
   });
+ 
+
 
   const { mutate: updateVideos } = useUpdateVideos({
     onSuccess: () => {
