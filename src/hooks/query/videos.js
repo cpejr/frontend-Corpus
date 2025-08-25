@@ -6,7 +6,8 @@ import {
   createVideos,
   deleteVideos,
   updateVideos,
-  getTranscriptionUrl
+  getTranscriptionUrl,
+  getVTTUrl
 } from "../../services/endpoints";
 
 export function useGetVideos({
@@ -82,4 +83,17 @@ export function useGetTranscriptionUrl({
     onSuccess,
     onError
   })
+}
+
+export function useGetVTTUrl ({ videoId,
+  onSuccess = () => {},
+  onError = (err) => console.error(err),
+} = {}) {
+  return useQuery({
+    queryKey: ["vttUrl", videoId],
+    queryFn: () => getVTTUrl(videoId),
+    enabled: !!videoId,
+    onSuccess,
+    onError,
+  });
 }
