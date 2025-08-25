@@ -20,14 +20,14 @@ export default function CalendarFunction({
   const { globalLanguage } = useGlobalLanguage();
   const locale = localeMap[globalLanguage] || "en-US";
 
-  const handleChange = (dateChange) => { 
+  const handleChange = (dateChange) => {
     setValue("birthday", dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
 
     setDate(dateChange);
   };
-  
+
   useEffect(() => {
     if (isSubmitSuccessful) setDate(null);
   }, [isSubmitSuccessful]);
@@ -50,7 +50,7 @@ export default function CalendarFunction({
             }}
             color={color}
             value={date}
-            dateFormat={dateFormat}     
+            dateFormat={dateFormat}
             locale={locale}
           />
         )}

@@ -37,7 +37,7 @@ export const ModalStyle = styled(Modal)`
   }
 `;
 
-export const Form = styled.form`
+export const FormDiv = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;

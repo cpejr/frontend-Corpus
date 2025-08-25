@@ -36,7 +36,9 @@ export const getVideos = async () => {
   return data;
 };
 export const getVideosByParameters = async (filters = {}) => {
-  const { data } = await api.get(`/videofilter`, { params: filters });
+  const { data } = await api.get(`/videofilter`, {
+    params: filters,
+  });
 
   return data;
 };
@@ -53,28 +55,16 @@ export const createVideos = async (newVideo) => {
 export async function updateVideos({ _id, body }) {
   const formData = new FormData();
 
-  // Log para ver o que está no body antes de adicionar no FormData
-  console.log("Dados recebidos no front para envio:", body);
-
   for (const key in body) {
-    console.log(`Adicionando ao FormData: chave=${key}, valor=`, body[key]);
     formData.append(key, body[key]);
   }
 
-  try {
-    const { data } = await api.put(`/video/${_id}`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+  const { data } = await api.put(`/video/${_id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
-    console.log("Resposta do servidor:", data);
-    return data;
-  } catch (error) {
-    console.error("Erro na requisição updateVideos:", error);
-    throw error;
-  }
+  return data;
 }
-
-
 
 //user
 export async function getUsers() {
@@ -151,15 +141,19 @@ export async function getArchives(id) {
 
   return data;
 }
-export const downloadTranscript = async (title) => {
-  const encodedTitle = encodeURIComponent(`${title}.pdf`);
-  const response = await api.get(`/download/transcript/${encodedTitle}`, {
-    responseType: "blob",
-  });
-  return response.data;
-};
+
+export const getVTTUrl = async (videoId) => {
+  const {data} = await api.get(`/video/vtt/${videoId}`);
+  return data.url;
+}
+
+
+export async function getTranscriptionUrl(id) {
+  const { data } = await api.get(`/transcription/url/${id}`);
+  return data;
+}
 // manualTranscription
 export async function getManualTranscription(id) {
   const response = await api.get(`/manualTranscription/${id}`);
-  return response.data.url; 
+  return response.data.url;
 }
