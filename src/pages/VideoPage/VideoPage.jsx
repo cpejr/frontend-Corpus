@@ -44,12 +44,16 @@ export default function VideoPage() {
     id: archiveId,
     name: data.title,
   });
-  const {data: vttUrlFromS3 } = useGetVTTUrl ({
-    videoId: data._id,
-  })
 
-  const vttURL = vttUrlFromS3 || "";
+  const vttURL = archiveData?.vttURL || "";
+  //Linhas temporariamente comentadas até configurar CORS
+  // const {data: vttUrlFromS3 } = useGetVTTUrl ({
+  //   videoId: data._id,
+  // })
 
+  // const vttURL = vttUrlFromS3 || "";
+  //
+   console.log("VTTURL", vttURL);
   const { data: manualTranscription } = useGetManualTranscriptions({
     id: manualTranscriptionID,
     onError: () => {},
