@@ -15,7 +15,7 @@ import {
 } from "./Styles";
 import { validationSchema } from "./utils";
 import { useGetArchives } from "../../hooks/query/archives";
-import { useDownloadTranscript } from "../../hooks/query/videos";
+import { useGetTranscriptionUrl, useGetVTTUrl } from "../../hooks/query/videos";
 import { ClipLoader } from "react-spinners";
 import useAuthStore from "../../stores/auth";
 import { useGlobalLanguage } from "../../stores/globalLanguage";
@@ -46,7 +46,14 @@ export default function VideoPage() {
   });
 
   const vttURL = archiveData?.vttURL || "";
+  //Linhas temporariamente comentadas até configurar CORS
+  // const {data: vttUrlFromS3 } = useGetVTTUrl ({
+  //   videoId: data._id,
+  // })
 
+  // const vttURL = vttUrlFromS3 || "";
+  //
+   console.log("VTTURL", vttURL);
   const { data: manualTranscription } = useGetManualTranscriptions({
     id: manualTranscriptionID,
     onError: () => {},
@@ -56,9 +63,12 @@ export default function VideoPage() {
     setDisplayDownloadButton(!!manualTranscription);
   }, [manualTranscription]);
 
-  const { data: pdfUrl } = useDownloadTranscript({
-    title: data.title,
+  const { data: transcriptionData} = useGetTranscriptionUrl ({
+    transcriptionId: data?.transcription,
   });
+  const pdfUrl = transcriptionData?.url;
+ 
+
 
   const { mutate: updateVideos } = useUpdateVideos({
     onSuccess: () => {

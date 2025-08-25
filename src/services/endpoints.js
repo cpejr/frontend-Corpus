@@ -141,13 +141,17 @@ export async function getArchives(id) {
 
   return data;
 }
-export const downloadTranscript = async (title) => {
-  const encodedTitle = encodeURIComponent(`${title}.pdf`);
-  const response = await api.get(`/download/transcript/${encodedTitle}`, {
-    responseType: "blob",
-  });
-  return response.data;
-};
+
+export const getVTTUrl = async (videoId) => {
+  const {data} = await api.get(`/video/vtt/${videoId}`);
+  return data.url;
+}
+
+
+export async function getTranscriptionUrl(id) {
+  const { data } = await api.get(`/transcription/url/${id}`);
+  return data;
+}
 // manualTranscription
 export async function getManualTranscription(id) {
   const response = await api.get(`/manualTranscription/${id}`);

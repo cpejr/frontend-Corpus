@@ -6,7 +6,8 @@ import {
   createVideos,
   deleteVideos,
   updateVideos,
-  downloadTranscript,
+  getTranscriptionUrl,
+  getVTTUrl
 } from "../../services/endpoints";
 
 export function useGetVideos({
@@ -69,20 +70,30 @@ export function useGetVideosByParameters({
     onError,
   });
 }
-export function useDownloadTranscript({
-  title,
+
+export function useGetTranscriptionUrl({ 
+  transcriptionId,
+  onSuccess = () => {},
+  onError = (err )=> console.error(err),
+} = {}) {
+  return useQuery({
+    queryKey: ["transcriptionUrl", transcriptionId],
+    queryFn: ()=> getTranscriptionUrl(transcriptionId),
+    enabled: !!transcriptionId,
+    onSuccess,
+    onError
+  })
+}
+
+export function useGetVTTUrl ({ videoId,
   onSuccess = () => {},
   onError = (err) => console.error(err),
 } = {}) {
   return useQuery({
-    queryKey: ["transcript", title],
-    queryFn: () => downloadTranscript(title),
-    enabled: !!title,
+    queryKey: ["vttUrl", videoId],
+    queryFn: () => getVTTUrl(videoId),
+    enabled: !!videoId,
     onSuccess,
     onError,
-    staleTime: Infinity,
-    select: (data) => {
-      return URL.createObjectURL(new Blob([data]));
-    },
   });
 }
