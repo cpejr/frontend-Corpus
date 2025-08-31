@@ -111,6 +111,7 @@ export default function ManageVideosPage() {
         key: "language",
         placeholder: translation.placeholder9,
         label: "language",
+        isMulti: true,
         options: languages.map((lang) => ({
           value: lang._id,
           name: lang.name,
@@ -144,9 +145,18 @@ export default function ManageVideosPage() {
       const countryDoc = countries.find(
         (country) => country.name === data.country
       );
-      const languageDoc = languages.find((lang) => lang.name === data.language);
+      
+      let languageIds;
+      if (Array.isArray(data.language)) {
+        languageIds = data.language.map(lang => lang.value);
+      } else if (typeof data.language === 'string') {
+        const foundLang = languages.find(lang => lang.name === data.language);
+        languageIds = foundLang ? [foundLang._id] : [];
+      } else {
+        languageIds = [data.language.value];
+      }
 
-      if (!countryDoc || !languageDoc) {
+      if (!countryDoc || !languageIds.length || languageIds.some(id => !id)) {
         toast.error("País ou idioma não encontrado.");
         return;
       }
@@ -159,7 +169,9 @@ export default function ManageVideosPage() {
       formData.append("responsibles", data.responsibles);
       formData.append("totalParticipants", data.totalParticipants);
       formData.append("country", countryDoc._id);
-      formData.append("language", languageDoc._id);
+      
+      languageIds.forEach(id => formData.append("language", id));
+      
       formData.append("birthday", data.birthday);
       formData.append("duration", data.duration);
 

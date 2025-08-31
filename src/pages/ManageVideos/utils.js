@@ -43,7 +43,7 @@ export const validationSchema = () => {
       .string({ required_error: translation.error10 })
       .min(1, { message: translation.error10 }),
     language: z
-      .string({ required_error: translation.error11 })
+      .array(z.object({ value: z.string(), label: z.string() }), { required_error: translation.error11 })
       .min(1, { message: translation.error11 }),
     duration: z
       .string({ required_error: translation.error12 })

@@ -27,6 +27,7 @@ export default function FormSubmit({
   loading,
   requestError,
   buttonText,
+  customRender, // novo prop
   ...props
 }) {
   const {
@@ -48,6 +49,13 @@ export default function FormSubmit({
   return (
     <FormContainer onSubmit={handleSubmit(submitHandler)}>
       {inputs.map((input) => {
+        // Se houver renderização customizada para este input, usa ela
+        if (customRender && typeof customRender === "function") {
+          const customElement = customRender({ input, register, errors, control, setValue });
+          if (customElement) return <InputKeep key={input.key}>{customElement}</InputKeep>;
+        }
+
+        // Inputs padrão
         if (input.type === "text" || input.type === "password") {
           return (
             <InputKeep key={input.key}>
@@ -84,6 +92,7 @@ export default function FormSubmit({
                 isSubmitSuccessful={isSubmitSuccessful}
                 placeholder={input?.placeholder}
                 setSelectType={props?.setSelectType}
+                isMulti={input?.isMulti}
               />
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
@@ -106,9 +115,7 @@ export default function FormSubmit({
                 setValue={setValue}
                 defaultValue={input?.defaultValue}
                 isSubmitSuccessful={isSubmitSuccessful}
-                onChange={(date) =>
-                  setValue(input.label, date, { shouldValidate: true })
-                }
+                onChange={(date) => setValue(input.label, date, { shouldValidate: true })}
                 color={color}
               />
               {errors[input.key]?.message && (
@@ -136,7 +143,7 @@ export default function FormSubmit({
               )}
             </InputKeep>
           );
-        } else if (input.type == "file") {
+        } else if (input.type === "file") {
           return (
             <InputKeep key={input.key}>
               <UploadSection>
@@ -151,8 +158,8 @@ export default function FormSubmit({
                   setValue={setValue}
                   {...register(input.key)}
                   multiple={false}
-                  messageError1={input.errors[0]}
-                  messageError2={input.errors[1]}
+                  messageError1={input.errors?.[0]}
+                  messageError2={input.errors?.[1]}
                 />
               </UploadSection>
               {errors[input.key]?.message && (
@@ -160,7 +167,7 @@ export default function FormSubmit({
               )}
             </InputKeep>
           );
-        } else if (input.type == "time") {
+        } else if (input.type === "time") {
           return (
             <InputKeep key={input.key}>
               <TimePicker
@@ -180,6 +187,7 @@ export default function FormSubmit({
             </InputKeep>
           );
         }
+
         return null;
       })}
       <Button type="submit" width="23%">
@@ -192,11 +200,11 @@ export default function FormSubmit({
 FormSubmit.propTypes = {
   inputs: PropTypes.array.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  schema: PropTypes.object.isRequired,
+  schema: PropTypes.object,
   color: PropTypes.string,
   loading: PropTypes.bool,
-  selectedOptionsInitial: PropTypes.object,
+  customRender: PropTypes.func, // novo
   requestError: PropTypes.bool,
-  setSelectType: PropTypes.string,
   buttonText: PropTypes.string,
+  setSelectType: PropTypes.string, // <-- ADICIONAR ISSO
 };

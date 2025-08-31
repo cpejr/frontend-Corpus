@@ -69,10 +69,14 @@ export default function VideoPage() {
   });
 
   const handleDownload = () => {
-    if (!pdfUrl) return;
+    if (!data.transcription) return;
 
+    // Try to download using the title-based endpoint
+    const encodedTitle = encodeURIComponent(`${data.title}.pdf`);
+    const downloadUrl = `/api/download/transcript/${encodedTitle}`;
+    
     const link = document.createElement("a");
-    link.href = pdfUrl;
+    link.href = downloadUrl;
     link.download = `${data.title}_transcript.pdf`;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
@@ -145,7 +149,7 @@ export default function VideoPage() {
               </ButtonDiv>
 
               <ButtonDiv2>
-                {pdfUrl && isAdmin && (
+                {data.transcription && (
                   <DownloadButton onClick={handleDownload}>
                     {translation.buttonpdf}
                   </DownloadButton>
