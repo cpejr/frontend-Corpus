@@ -133,7 +133,7 @@ export default function Head() {
           ))}
         </LanguageSelector>
       </Select>
-      {auth && <LogoutButton onClick={execLogout} />};
+      {auth && <LogoutButton onClick={execLogout} />}
       <HamburguerMenu />
     </Container>
   );
