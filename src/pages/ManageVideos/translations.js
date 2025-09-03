@@ -28,6 +28,8 @@ export function TranslateText({ globalLanguage }) {
   let error11;
   let error12;
   let error13;
+  let error14;
+  let error15;
 
   if (globalLanguage === "PT") {
     title1 = "ADICIONAR VÍDEOS";
@@ -59,6 +61,8 @@ export function TranslateText({ globalLanguage }) {
     error11 = "O idioma falado é obrigatório";
     error12 = "A duração é obrigatória";
     error13 = "A data é obrigatória";
+    error14 = "O arquivo não pode ser maior que 2GigaBytes de memória";
+    error15 = "Arquivo deve ser no formato MP4";
   }
   if (globalLanguage === "EN") {
     title1 = "ADD VIDEOS";
@@ -90,6 +94,8 @@ export function TranslateText({ globalLanguage }) {
     error11 = "Spoken language is required";
     error12 = "Duration is required";
     error13 = "Date is required";
+    error14 = "File cannot surpass 2GigaBytes of memory";
+    error15 = "File must be in MP4 format"
   }
   if (globalLanguage === "ES") {
     title1 = "AÑADIR VÍDEOS";
@@ -121,6 +127,8 @@ export function TranslateText({ globalLanguage }) {
     error11 = "El idioma hablado es obligatorio";
     error12 = "La duración es obligatoria";
     error13 = "La fecha es obligatoria";
+    error14 = "El archivo no puede superar los 2 GigaBytes de memoria";
+    error15 = "El archivo debe estar en formato MP4"
   }
   if (globalLanguage === "GE") {
     title1 = "VIDEOS HINZUFÜGEN";
@@ -152,6 +160,8 @@ export function TranslateText({ globalLanguage }) {
     error11 = "Gesprochene Sprache ist erforderlich";
     error12 = "Dauer ist erforderlich";
     error13 = "Datum ist erforderlich";
+    error14 = "Die Datei darf nicht mehr als 2 Gigabyte großen Speicher haben";
+    error15 = "Die Datei muss im MP4-Format vorliegen"
 }
 
   return {
@@ -184,6 +194,8 @@ export function TranslateText({ globalLanguage }) {
     error11,
     error12,
     error13,
+    error14,
+    error15,
   };
 }
 

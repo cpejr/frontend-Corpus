@@ -18,15 +18,11 @@ export const validationSchema = () => {
       .string({ required_error: translation.error4 })
       .min(1, { message: translation.error4 }),
     videoFile: z
-      .any()
+      .refine((file)=> ACCEPTED_VIDEO_TYPES.includes(file?.type), {message: translation.error15})
       .refine((file) => file, { message: translation.error5 })
       .refine((file) => file.size <= MAX_FILE_SIZE, {
-        message: `O arquivo não pode ser maior que 2GB.`,
+        message: translation.error14
       }),
-    // .refine((file) => ACCEPTED_VIDEO_TYPES.includes(file?.[0]?.type), {
-    //   message:
-    //     "Tipo de arquivo inválido. Apenas MP4, WebM e OGG são permitidos.",
-    // }),
     code: z
       .string({ required_error: translation.error6 })
       .min(1, { message: translation.error6 }),
