@@ -143,10 +143,9 @@ export async function getArchives(id) {
 }
 
 export const getVTTUrl = async (videoId) => {
-  const {data} = await api.get(`/video/vtt/${videoId}`);
+  const { data } = await api.get(`/video/vtt/${videoId}`);
   return data.url;
-}
-
+};
 
 export async function getTranscriptionUrl(id) {
   const { data } = await api.get(`/transcription/url/${id}`);
