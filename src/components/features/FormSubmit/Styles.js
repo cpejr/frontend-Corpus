@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { breakpoints } from "../../../styles/stylesVariables";
+import { RxQuestionMarkCircled } from "react-icons/rx";
+
 
 export const Form = styled.form`
   align-items: center;
@@ -37,7 +39,7 @@ export const ErrorMessage = styled.p`
 export const InputKeep = styled.div`
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction:row;
   width: 100%;
   color: black;
 `;
@@ -82,4 +84,29 @@ export const CheckText = styled.p`
   @media (max-width: ${breakpoints.smallMobile}) {
     font-size: 15px;
   }
+`;
+
+
+export const QuestionMarkIcon = styled(RxQuestionMarkCircled)`
+  width: 24px;
+  height: 24px;
+  color: #ccd5ae;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: #a3b18a;
+  }
+`;
+
+export const HelpToolContainer = styled.div`
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+`;
+export const InputWithTooltip = styled.div`
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  gap: 8px;
 `;

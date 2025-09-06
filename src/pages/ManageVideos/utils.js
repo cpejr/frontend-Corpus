@@ -18,8 +18,9 @@ export const validationSchema = () => {
       .string({ required_error: translation.error4 })
       .min(1, { message: translation.error4 }),
     videoFile: z
-      .refine((file)=> ACCEPTED_VIDEO_TYPES.includes(file?.type), {message: translation.error15})
+      .any()
       .refine((file) => file, { message: translation.error5 })
+      .refine((file) => ACCEPTED_VIDEO_TYPES.includes(file?.type), { message: translation.error15 })
       .refine((file) => file.size <= MAX_FILE_SIZE, {
         message: translation.error14
       }),
