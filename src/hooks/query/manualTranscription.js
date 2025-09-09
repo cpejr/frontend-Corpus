@@ -2,13 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import { getManualTranscription } from "../../services/endpoints";
 
 export function useGetManualTranscriptions({
-  onSuccess = () => {},
-  onError = (err) => console.error(err),
   id,
+  onSuccess = () => {},
+  onError = () => {},
 } = {}) {
   return useQuery({
-    queryKey: ["transcription"],
+    queryKey: ["transcription", id],
     queryFn: () => getManualTranscription(id),
+    enabled: !!id,
     onSuccess,
     onError,
   });

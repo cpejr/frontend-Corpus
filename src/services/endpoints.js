@@ -36,7 +36,9 @@ export const getVideos = async () => {
   return data;
 };
 export const getVideosByParameters = async (filters = {}) => {
-  const { data } = await api.get(`/videofilter`, { params: filters });
+  const { data } = await api.get(`/videofilter`, {
+    params: filters,
+  });
 
   return data;
 };
@@ -51,7 +53,15 @@ export const createVideos = async (newVideo) => {
 };
 
 export async function updateVideos({ _id, body }) {
-  const { data } = await api.put(`/video/${_id}`, body);
+  const formData = new FormData();
+
+  for (const key in body) {
+    formData.append(key, body[key]);
+  }
+
+  const { data } = await api.put(`/video/${_id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
   return data;
 }
@@ -131,16 +141,18 @@ export async function getArchives(id) {
 
   return data;
 }
-export const downloadTranscript = async (title) => {
-  const encodedTitle = encodeURIComponent(`${title}.pdf`);
-  const response = await api.get(`/download/transcript/${encodedTitle}`, {
-    responseType: "blob",
-  });
-  return response.data;
-};
-//manualTranscription
-export async function getManualTranscription(id) {
-  const { data } = await api.get(`/manualTranscription/${id}`);
 
+export const getVTTUrl = async (videoId) => {
+  const { data } = await api.get(`/video/vtt/${videoId}`);
+  return data.url;
+};
+
+export async function getTranscriptionUrl(id) {
+  const { data } = await api.get(`/transcription/url/${id}`);
   return data;
+}
+// manualTranscription
+export async function getManualTranscription(id) {
+  const response = await api.get(`/manualTranscription/${id}`);
+  return response.data.url;
 }

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { breakpoints, colors, fonts } from "../../styles/stylesVariables";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+
+
+
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -154,3 +158,4 @@ export const StyledDeleteOutlined = styled(DeleteOutlined)`
 export const Modals = styled.div`
   width: 100%;
 `;
+

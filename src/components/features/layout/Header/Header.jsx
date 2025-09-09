@@ -93,6 +93,8 @@ export default function Head() {
     logout();
   };
 
+  const auth = useAuthStore((state) => state.auth);
+
   return (
     <Container>
       {location.pathname !== "/" ? (
@@ -131,7 +133,7 @@ export default function Head() {
           ))}
         </LanguageSelector>
       </Select>
-      <LogoutButton onClick={execLogout} />
+      {auth && <LogoutButton onClick={execLogout} />}
       <HamburguerMenu />
     </Container>
   );

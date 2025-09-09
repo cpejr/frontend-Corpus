@@ -6,39 +6,39 @@ import {
   createVideos,
   deleteVideos,
   updateVideos,
-  downloadTranscript,
+  getTranscriptionUrl,
+  getVTTUrl
 } from "../../services/endpoints";
 
 export function useGetVideos({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
-    queryKey: ["videos"],  
-    queryFn: () => getVideos(),  
+    queryKey: ["videos"],
+    queryFn: () => getVideos(),
     onSuccess,
     onError,
   });
 }
 
-
 export function useCreateVideos({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useMutation({ mutationFn: createVideos, onSuccess, onError });
 }
 
 export function useDeleteVideos({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useMutation({ mutationFn: deleteVideos, onSuccess, onError });
 }
 
 export function useUpdateVideos({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useMutation({ mutationFn: updateVideos, onSuccess, onError });
 }
@@ -48,7 +48,7 @@ export function useGetVideosByCategoryId({
   transcription,
 
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["videos", { id, title, transcription }],
@@ -61,37 +61,39 @@ export function useGetVideosByParameters({
   filters,
 
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
-    queryKey: [
-      "videos",
-      {
-        filters,
-      },
-    ],
-    queryFn: () =>
-      getVideosByParameters({
-        filters,
-      }),
+    queryKey: ["videos", filters],
+    queryFn: () => getVideosByParameters(filters),
     onSuccess,
     onError,
   });
 }
-export function useDownloadTranscript({
-  title,
+
+export function useGetTranscriptionUrl({ 
+  transcriptionId,
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
-    queryKey: ["transcript", title],
-    queryFn: () => downloadTranscript(title),
-    enabled: !!title, 
+    queryKey: ["transcriptionUrl", transcriptionId],
+    queryFn: ()=> getTranscriptionUrl(transcriptionId),
+    enabled: !!transcriptionId,
+    onSuccess,
+    onError
+  })
+}
+
+export function useGetVTTUrl ({ videoId,
+  onSuccess = () => {},
+  onError = () => {},
+} = {}) {
+  return useQuery({
+    queryKey: ["vttUrl", videoId],
+    queryFn: () => getVTTUrl(videoId),
+    enabled: !!videoId,
     onSuccess,
     onError,
-    staleTime: Infinity,
-    select: (data) => {
-      return URL.createObjectURL(new Blob([data]));
-    },
   });
 }

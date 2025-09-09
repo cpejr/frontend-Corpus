@@ -11,7 +11,7 @@ import {
 
 export function useGetUsers({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["users"],
@@ -22,7 +22,7 @@ export function useGetUsers({
 }
 export function useDeleteUser({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useMutation({
     mutationFn: deleteUser,
@@ -32,7 +32,7 @@ export function useDeleteUser({
 }
 export function useUpdateUsers({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useMutation({
     mutationFn: updateUser,
@@ -43,7 +43,7 @@ export function useUpdateUsers({
 
 export function useCreateUsers({
   onSuccess = () => {},
-  onError = (err) => console.log(err),
+  onError = () => {},
 } = {}) {
   return useMutation({
     mutationFn: createUser,
@@ -54,7 +54,7 @@ export function useCreateUsers({
 
 export function useForgotPassword({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useMutation({
     mutationFn: forgotPassword,
@@ -65,7 +65,7 @@ export function useForgotPassword({
 
 export function useRedefinePassword({
   onSuccess = () => {},
-  onError = (err) => console.log(err),
+  onError = () => {},
 } = {}) {
   return useMutation({
     mutationFn: redefinePassword,

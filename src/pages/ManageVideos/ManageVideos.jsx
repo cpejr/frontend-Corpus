@@ -61,36 +61,48 @@ export default function ManageVideosPage() {
         key: "title",
         placeholder: translation.placeholder1,
         label: "title",
+        tooltipId: "title-tooltip",
+        tooltipContent: translation.titletip,
       },
       {
         type: "text",
         key: "ShortDescription",
         placeholder: translation.placeholder2,
         label: "ShortDescription",
+        tooltipId: "shortDescription-tooltip",
+        tooltipContent: translation.shortDescriptiontip,
       },
       {
         type: "text",
         key: "code",
         placeholder: translation.placeholder4,
         label: "code",
+        tooltipId: "code-tooltip",
+        tooltipContent: translation.codetip,
       },
       {
         type: "text",
         key: "context",
         placeholder: translation.placeholder5,
         label: "context",
+        tooltipId: "context-tooltip",
+        tooltipContent: translation.contexttip,
       },
       {
         type: "text",
         key: "responsibles",
         placeholder: translation.placeholder6,
         label: "responsibles",
+        tooltipId: "responsibles-tooltip",
+        tooltipContent: translation.responsiblestip,
       },
       {
         type: "select",
         key: "totalParticipants",
         placeholder: translation.placeholder7,
         label: "totalParticipants",
+        tooltipId: "totalParticipants-tooltip",
+        tooltipContent: translation.totalParticipantstip,
         options: Array.from({ length: 100 }, (_, i) => ({
           value: i + 1,
           name: (i + 1).toString(),
@@ -101,6 +113,8 @@ export default function ManageVideosPage() {
         key: "country",
         placeholder: translation.placeholder8,
         label: "country",
+        tooltipId: "country-tooltip",
+        tooltipContent: translation.countrytip,
         options: countries.map((country) => ({
           value: country._id,
           name: country.name,
@@ -111,6 +125,8 @@ export default function ManageVideosPage() {
         key: "language",
         placeholder: translation.placeholder9,
         label: "language",
+        tooltipId: "language-tooltip",
+        tooltipContent: translation.languagetip,
         options: languages.map((lang) => ({
           value: lang._id,
           name: lang.name,
@@ -122,18 +138,24 @@ export default function ManageVideosPage() {
         placeholder: translation.placeholder11,
         dateFormat: "yy",
         label: "birthday",
+        tooltipId: "birthday-tooltip",
+        tooltipContent: translation.birthdaytip
       },
       {
         type: "time",
         key: "duration",
         placeholder: translation.placeholder10,
         label: "duration",
+        tooltipId: "duration-tooltip",
+        tooltipContent: translation.durationtip
       },
       {
         type: "file",
         key: "videoFile",
         placeholder: translation.placeholder3,
         label: "videoFile",
+        tooltipId: "videoFile-tooltip",
+        tooltipContent: translation.videoFiletip,
         errors: [translation.error1, translation.error2],
       },
     ]);
@@ -151,13 +173,25 @@ export default function ManageVideosPage() {
         return;
       }
 
-      createVideo({
-        ...data,
-        country: countryDoc._id,
-        language: languageDoc._id,
-      });
+      const formData = new FormData();
+      formData.append("title", data.title);
+      formData.append("ShortDescription", data.ShortDescription);
+      formData.append("code", data.code);
+      formData.append("context", data.context);
+      formData.append("responsibles", data.responsibles);
+      formData.append("totalParticipants", data.totalParticipants);
+      formData.append("country", countryDoc._id);
+      formData.append("language", languageDoc._id);
+      formData.append("birthday", data.birthday);
+      formData.append("duration", data.duration);
+
+      if (data.videoFile) {
+        formData.append("videoFile", data.videoFile);
+      }
+
+      createVideo(formData);
     } catch (error) {
-      console.error("Erro ao enviar dados:", error);
+
       toast.error("Erro ao enviar dados");
     }
   };
@@ -226,6 +260,7 @@ export default function ManageVideosPage() {
       <DivTitle>
         <Title>{translation.title1}</Title>
       </DivTitle>
+      
 
       <Section>
         <FormSubmit
@@ -236,6 +271,7 @@ export default function ManageVideosPage() {
           buttonText={translation.button1}
         />
       </Section>
+ 
 
       <DivTitle margin="20px">
         <Title>{translation.title2}</Title>

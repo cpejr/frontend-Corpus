@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { breakpoints } from "../../../styles/stylesVariables";
+import { RxQuestionMarkCircled } from "react-icons/rx";
+
 
 export const Form = styled.form`
   align-items: center;
@@ -10,10 +12,14 @@ export const Form = styled.form`
   gap: 2rem !important;
   box-shadow: none;
   z-index: 0;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 80%;
+  }
   @media (max-width: 700px) {
     align-items: center;
     flex-direction: column;
-    width: 90%;
+    width: 50%;
     gap: 0%;
   }
 
@@ -33,7 +39,7 @@ export const ErrorMessage = styled.p`
 export const InputKeep = styled.div`
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction:row;
   width: 100%;
   color: black;
 `;
@@ -59,7 +65,7 @@ export const CheckSection = styled.div`
 
 export const UploadSection = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 `;
 
@@ -78,4 +84,29 @@ export const CheckText = styled.p`
   @media (max-width: ${breakpoints.smallMobile}) {
     font-size: 15px;
   }
+`;
+
+
+export const QuestionMarkIcon = styled(RxQuestionMarkCircled)`
+  width: 24px;
+  height: 24px;
+  color: #ccd5ae;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: #a3b18a;
+  }
+`;
+
+export const HelpToolContainer = styled.div`
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+`;
+export const InputWithTooltip = styled.div`
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  gap: 8px;
 `;

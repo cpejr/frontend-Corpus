@@ -7,6 +7,7 @@ import { TranslateText, TranslateToastError } from "./translations";
 import Button from "../../../common/Button/Button";
 import { Modal } from "antd";
 import { useDeleteVideos } from "../../../../hooks/query/videos";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ModalDeleteVideo({ openModal, closeModal, id }) {
   const { globalLanguage } = useGlobalLanguage();
@@ -23,8 +24,20 @@ export default function ModalDeleteVideo({ openModal, closeModal, id }) {
   });
 
   const onConfirm = () => {
-    deleteVideo(id);
+    deleteVideo(id, {
+      onSuccess: () => {
+        //toast.success("Vídeo deletado com sucesso");
+        closeModal();
+        queryClient.invalidateQueries({ queryKey: ["videos"] });
+      },
+      onError: (err) => {
+        toast.error(err);
+        closeModal();
+      },
+    });
   };
+
+  const queryClient = useQueryClient();
 
   return (
     <Modal

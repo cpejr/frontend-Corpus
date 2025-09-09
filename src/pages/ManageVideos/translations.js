@@ -28,6 +28,19 @@ export function TranslateText({ globalLanguage }) {
   let error11;
   let error12;
   let error13;
+  let error14;
+  let error15;
+  let titletip;
+  let shortDescriptiontip;
+  let codetip;
+  let contexttip;
+  let responsiblestip;
+  let totalParticipantstip;
+  let countrytip;
+  let languagetip;
+  let birthdaytip;
+  let durationtip;
+  let videoFiletip;
 
   if (globalLanguage === "PT") {
     title1 = "ADICIONAR VÍDEOS";
@@ -59,6 +72,19 @@ export function TranslateText({ globalLanguage }) {
     error11 = "O idioma falado é obrigatório";
     error12 = "A duração é obrigatória";
     error13 = "A data é obrigatória";
+    error14 = "O arquivo não pode ser maior que 2GigaBytes de memória";
+    error15 = "Arquivo deve ser no formato MP4";
+    titletip = "Digite o título do vídeo (máximo 100 caracteres)";
+    shortDescriptiontip = "Breve descrição do conteúdo do vídeo";
+    codetip = "Código único de identificação do vídeo";
+    contexttip = "Contexto ou categoria do vídeo: aula, palestra, entrevista, etc";
+    responsiblestip = "Pessoas responsáveis pela produção";
+    totalParticipantstip = "Número total de falantes no vídeo";
+    countrytip = "País de origem do vídeo";
+    languagetip = "Idiomas principais do vídeo, predominante vem primeiro";
+    birthdaytip = "Data de produção do vídeo";
+    durationtip = "Duração total do vídeo";
+    videoFiletip = "Arquivo de vídeo (formato aceito: MP4)";
   }
   if (globalLanguage === "EN") {
     title1 = "ADD VIDEOS";
@@ -90,6 +116,19 @@ export function TranslateText({ globalLanguage }) {
     error11 = "Spoken language is required";
     error12 = "Duration is required";
     error13 = "Date is required";
+    error14 = "File cannot surpass 2GigaBytes of memory";
+    error15 = "File must be in MP4 format";
+    titletip = "Enter the video title (maximum 100 characters)";
+    shortDescriptiontip = "Brief description of the video content";
+    codetip = "Unique video identification code";
+    contexttip = "Context or category of the video: class, lecture, interview, etc";
+    responsiblestip = "People responsible for production";
+    totalParticipantstip = "Total number of speakers in the video";
+    countrytip = "Country of origin of the video";
+    languagetip = "Main languages of the video, predominant comes first";
+    birthdaytip = "Video production date";
+    durationtip = "Total video duration";
+    videoFiletip = "Video file (accepted format: MP4)";
   }
   if (globalLanguage === "ES") {
     title1 = "AÑADIR VÍDEOS";
@@ -121,6 +160,19 @@ export function TranslateText({ globalLanguage }) {
     error11 = "El idioma hablado es obligatorio";
     error12 = "La duración es obligatoria";
     error13 = "La fecha es obligatoria";
+    error14 = "El archivo no puede superar los 2 GigaBytes de memoria";
+    error15 = "El archivo debe estar en formato MP4";
+    titletip = "Ingrese el título del video (máximo 100 caracteres)";
+    shortDescriptiontip = "Breve descripción del contenido del video";
+    codetip = "Código único de identificación del video";
+    contexttip = "Contexto o categoría del video: clase, conferencia, entrevista, etc";
+    responsiblestip = "Personas responsables de la producción";
+    totalParticipantstip = "Número total de hablantes en el video";
+    countrytip = "País de origen del video";
+    languagetip = "Idiomas principales del video, el predominante va primero";
+    birthdaytip = "Fecha de producción del video";
+    durationtip = "Duración total del video";
+    videoFiletip = "Archivo de video (formato aceptado: MP4)";
   }
   if (globalLanguage === "GE") {
     title1 = "VIDEOS HINZUFÜGEN";
@@ -152,7 +204,20 @@ export function TranslateText({ globalLanguage }) {
     error11 = "Gesprochene Sprache ist erforderlich";
     error12 = "Dauer ist erforderlich";
     error13 = "Datum ist erforderlich";
-}
+    error14 = "Die Datei darf nicht mehr als 2 Gigabyte großen Speicher haben";
+    error15 = "Die Datei muss im MP4-Format vorliegen";
+    titletip = "Geben Sie den Videotitel ein (maximal 100 Zeichen)";
+    shortDescriptiontip = "Kurze Beschreibung des Videoinhalts";
+    codetip = "Eindeutiger Video-Identifikationscode";
+    contexttip = "Kontext oder Kategorie des Videos: Unterricht, Vortrag, Interview, etc";
+    responsiblestip = "Für die Produktion verantwortliche Personen";
+    totalParticipantstip = "Gesamtzahl der Sprecher im Video";
+    countrytip = "Herkunftsland des Videos";
+    languagetip = "Hauptsprachen des Videos, vorherrschende kommt zuerst";
+    birthdaytip = "Datum der Videoproduktion";
+    durationtip = "Gesamte Videodauer";
+    videoFiletip = "Videodatei (akzeptiertes Format: MP4)";
+  }
 
   return {
     title1,
@@ -184,6 +249,19 @@ export function TranslateText({ globalLanguage }) {
     error11,
     error12,
     error13,
+    error14,
+    error15,
+    titletip,
+    shortDescriptiontip,
+    codetip,
+    contexttip,
+    responsiblestip,
+    totalParticipantstip,
+    countrytip,
+    languagetip,
+    birthdaytip,
+    durationtip,
+    videoFiletip,
   };
 }
 

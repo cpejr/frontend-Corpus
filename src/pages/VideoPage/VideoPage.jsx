@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Line,
   VideoContainer,
@@ -10,11 +10,12 @@ import {
   DownloadButton,
   ButtonDiv,
   DownloadIcon,
+  UploadButton,
+  DownloadLink,
 } from "./Styles";
-import { useState } from "react";
 import { validationSchema } from "./utils";
 import { useGetArchives } from "../../hooks/query/archives";
-import { useDownloadTranscript } from "../../hooks/query/videos";
+import { useGetTranscriptionUrl, useGetVTTUrl } from "../../hooks/query/videos";
 import { ClipLoader } from "react-spinners";
 import useAuthStore from "../../stores/auth";
 import { useGlobalLanguage } from "../../stores/globalLanguage";
@@ -24,44 +25,68 @@ import { useUpdateVideos } from "../../hooks/query/videos";
 import { useGetManualTranscriptions } from "../../hooks/query/manualTranscription";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
-import Button from "../../components/common/Button/Button";
+
 
 export default function VideoPage() {
   const queryClient = useQueryClient();
   const location = useLocation();
   const data = location.state;
-  const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
-  const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
 
-  useEffect(() => {
-    setDisplayDownloadButton(data?.ManualTranscriptionArchive);
-  }, [data?.ManualTranscriptionArchive]);
+  const isAdmin = useAuthStore((state) => state?.auth?.user?.type) === "admin";
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
 
+  const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
+
   const archiveId = data?.archives;
-  const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
+
+  //  const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
+  const [currentManualTranscriptionId, setManualTranscriptionId] = useState(
+    data?.ManualTranscriptionArchive?._id
+  );
 
   const { data: archiveData, isLoading } = useGetArchives({
-    id: archiveId,
+    id: archiveId._id,
     name: data.title,
   });
+
   const vttURL = archiveData?.vttURL || "";
+  //Linhas temporariamente comentadas até configurar CORS
+  // const {data: vttUrlFromS3 } = useGetVTTUrl ({
+  //   videoId: data._id,
+  // })
+
+  // const vttURL = vttUrlFromS3 || "";
+  //
+
 
   const { data: manualTranscription } = useGetManualTranscriptions({
-    id: manualTranscriptionID,
+    id: currentManualTranscriptionId,
     onError: () => {},
   });
-  const { data: pdfUrl } = useDownloadTranscript({
-    title: data.title,
+
+
+
+  useEffect(() => {
+    setDisplayDownloadButton(!!manualTranscription);
+  }, [manualTranscription]);
+
+  const { data: transcriptionData } = useGetTranscriptionUrl({
+    transcriptionId: data?.transcription,
   });
+  const pdfUrl = transcriptionData?.url;
+
   const { mutate: updateVideos } = useUpdateVideos({
-    onSuccess: () => {
+    onSuccess: (updatedVideo) => {
+      setManualTranscriptionId(updatedVideo.ManualTranscriptionArchive);
+
+      queryClient.invalidateQueries({ queryKey: ["videos"] });
+      
       queryClient.invalidateQueries({
-        queryKey: ["videos"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["transcription"],
+        queryKey: [
+          "manualTranscriptions",
+          updatedVideo.ManualTranscriptionArchive,
+        ],
       });
       toast.success(translation.transcriptionUpload);
     },
@@ -79,23 +104,7 @@ export default function VideoPage() {
     link.click();
     document.body.removeChild(link);
   };
-  function downloadBase64Auto(base64Data, videoTitle) {
-    const matches = base64Data.match(/^data:([^;]+);base64,/);
-    if (!matches) {
-      toast.success(translation.transcriptionWaiting);
-      return;
-    }
 
-    const mimeType = matches[1];
-    const extension = mimeType.split("/")[1];
-    const filename = `${videoTitle}.${extension}`;
-    const link = document.createElement("a");
-    link.href = base64Data;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
   const [inputs] = useState([
     {
       type: "file",
@@ -105,9 +114,18 @@ export default function VideoPage() {
       errors: ["ERROR", "BAD FUNCTIONING"],
     },
   ]);
+
   const handleSubmit = (archive) => {
-    updateVideos({ _id: data._id, body: archive });
+
+
+    updateVideos({
+      _id: data._id,
+      body: {
+        ManualTranscriptionArchive: archive.ManualTranscriptionArchive,
+      },
+    });
   };
+
   return (
     <Container>
       <WhiteContainer>
@@ -120,10 +138,7 @@ export default function VideoPage() {
           {!isLoading && (
             <>
               <Video controls title={data.title}>
-                <source
-                  src={`data:video/mp4;base64,${archiveData?.videoFile}`}
-                  type="video/mp4"
-                />
+                <source src={archiveData?.videoURL || ""} type="video/mp4" />
                 <track
                   label="Português"
                   kind="subtitles"
@@ -132,36 +147,42 @@ export default function VideoPage() {
                   default
                 />
               </Video>
-              {pdfUrl && isAdmin && (
-                <DownloadButton onClick={handleDownload}>
-                  {translation.buttonpdf}
-                </DownloadButton>
-              )}
+
+              <ButtonDiv>
+                {isAdmin && (
+                  <UploadButton>
+                  <FormSubmit
+                    schema={validationSchema()}
+                    inputs={inputs}
+                    onSubmit={handleSubmit}
+                    loading={false}
+                    buttonText={translation.send}
+                  /></UploadButton>
+                )}
+
+                {displayDownloadButton && manualTranscription && (
+                  <DownloadLink
+                    href={manualTranscription?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <DownloadIcon />
+                    {translation.download}
+                  </DownloadLink>
+                )}
+              
+
+              
+                {pdfUrl && isAdmin && (
+                  <DownloadButton onClick={handleDownload}>
+                    {translation.buttonpdf}
+                  </DownloadButton>
+                )}
+              
+              </ButtonDiv>
             </>
           )}
         </VideoContainer>
-        <ButtonDiv>
-          {isAdmin && (
-            <FormSubmit
-              schema={validationSchema()}
-              inputs={inputs}
-              onSubmit={handleSubmit}
-              loading={false}
-              buttonText={translation.send}
-            />
-          )}
-          {displayDownloadButton && (
-            <Button
-              width="240px"
-              onClick={() =>
-                downloadBase64Auto(manualTranscription, data?.title)
-              }
-            >
-              <DownloadIcon />
-              {translation.download}
-            </Button>
-          )}
-        </ButtonDiv>
       </WhiteContainer>
     </Container>
   );

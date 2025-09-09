@@ -8,7 +8,8 @@ export const validationSchema = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { globalLanguage } = useGlobalLanguage();
   const translation = TranslateText(globalLanguage);
-
+  const MAX_FILE_SIZE = 2000 * 1024 * 1024;
+  const ACCEPTED_VIDEO_TYPES = ["video/mp4"];
   return z.object({
     title: z
       .string({ required_error: translation.error3 })
@@ -17,8 +18,12 @@ export const validationSchema = () => {
       .string({ required_error: translation.error4 })
       .min(1, { message: translation.error4 }),
     videoFile: z
-      .string({ required_error: translation.error5 })
-      .min(1, { message: translation.error5 }),
+      .any()
+      .refine((file) => file, { message: translation.error5 })
+      .refine((file) => ACCEPTED_VIDEO_TYPES.includes(file?.type), { message: translation.error15 })
+      .refine((file) => file.size <= MAX_FILE_SIZE, {
+        message: translation.error14
+      }),
     code: z
       .string({ required_error: translation.error6 })
       .min(1, { message: translation.error6 }),
