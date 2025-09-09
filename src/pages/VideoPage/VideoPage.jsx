@@ -39,7 +39,11 @@ export default function VideoPage() {
   const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
 
   const archiveId = data?.archives;
-  const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
+
+  //  const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
+  const [currentManualTranscriptionId, setManualTranscriptionId] = useState(
+    data?.ManualTranscriptionArchive?._id
+  );
 
   const { data: archiveData, isLoading } = useGetArchives({
     id: archiveId._id,
@@ -55,10 +59,13 @@ export default function VideoPage() {
   // const vttURL = vttUrlFromS3 || "";
   //
   console.log("VTTURL", vttURL);
+
   const { data: manualTranscription } = useGetManualTranscriptions({
-    id: manualTranscriptionID,
+    id: currentManualTranscriptionId,
     onError: () => {},
   });
+
+  console.log("Valor da manualTranscription:", manualTranscription);
 
   useEffect(() => {
     setDisplayDownloadButton(!!manualTranscription);
@@ -70,9 +77,16 @@ export default function VideoPage() {
   const pdfUrl = transcriptionData?.url;
 
   const { mutate: updateVideos } = useUpdateVideos({
-    onSuccess: () => {
+    onSuccess: (updatedVideo) => {
+      setManualTranscriptionId(updatedVideo.ManualTranscriptionArchive);
+
       queryClient.invalidateQueries({ queryKey: ["videos"] });
-      queryClient.invalidateQueries({ queryKey: ["transcription"] });
+      queryClient.invalidateQueries({
+        queryKey: [
+          "manualTranscriptions",
+          updatedVideo.ManualTranscriptionArchive,
+        ],
+      });
       toast.success(translation.transcriptionUpload);
     },
   });
@@ -149,7 +163,7 @@ export default function VideoPage() {
 
                 {displayDownloadButton && manualTranscription && (
                   <DownloadLink
-                    href={manualTranscription}
+                    href={manualTranscription?.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
