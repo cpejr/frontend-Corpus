@@ -154,12 +154,10 @@ export const ButtonDiv = styled.div`
 `;
 
 export const UploadButton = styled.div`
-display: flex;
-
   justify-content: center;
   align-items: center !important;
   width: 100%;
-  margin-left: 50%;
+  
   {
   flex-direction: column;
   }

@@ -25,7 +25,7 @@ import { useUpdateVideos } from "../../hooks/query/videos";
 import { useGetManualTranscriptions } from "../../hooks/query/manualTranscription";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
-import ManualTranscriptionArchiveModel from "../../../../backend-Corpus/src/Models/ManualTranscriptionArchiveModel";
+
 
 export default function VideoPage() {
   const queryClient = useQueryClient();
@@ -72,15 +72,17 @@ export default function VideoPage() {
   }, [manualTranscription]);
 
   const { data: transcriptionData } = useGetTranscriptionUrl({
-    transcriptionId: data?.transcription?._id,
+    transcriptionId: data?.transcription,
   });
   const pdfUrl = transcriptionData?.url;
+  console.log("URL TRANSCRIÇÃO", transcriptionData);
 
   const { mutate: updateVideos } = useUpdateVideos({
     onSuccess: (updatedVideo) => {
       setManualTranscriptionId(updatedVideo.ManualTranscriptionArchive);
 
       queryClient.invalidateQueries({ queryKey: ["videos"] });
+      
       queryClient.invalidateQueries({
         queryKey: [
           "manualTranscriptions",
