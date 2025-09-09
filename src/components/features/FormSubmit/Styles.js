@@ -65,7 +65,7 @@ export const CheckSection = styled.div`
 
 export const UploadSection = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 `;
 

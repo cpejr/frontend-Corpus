@@ -10,7 +10,7 @@ import {
   DownloadButton,
   ButtonDiv,
   DownloadIcon,
-  ButtonDiv2,
+  UploadButton,
   DownloadLink,
 } from "./Styles";
 import { validationSchema } from "./utils";
@@ -133,13 +133,14 @@ export default function VideoPage() {
 
               <ButtonDiv>
                 {isAdmin && (
+                  <UploadButton>
                   <FormSubmit
                     schema={validationSchema()}
                     inputs={inputs}
                     onSubmit={handleSubmit}
                     loading={false}
                     buttonText={translation.send}
-                  />
+                  /></UploadButton>
                 )}
 
                 {displayDownloadButton && manualTranscription && (
@@ -152,15 +153,16 @@ export default function VideoPage() {
                     {translation.download}
                   </DownloadLink>
                 )}
-              </ButtonDiv>
+              
 
-              <ButtonDiv2>
+              
                 {pdfUrl && isAdmin && (
                   <DownloadButton onClick={handleDownload}>
                     {translation.buttonpdf}
                   </DownloadButton>
                 )}
-              </ButtonDiv2>
+              
+              </ButtonDiv>
             </>
           )}
         </VideoContainer>

@@ -3,9 +3,7 @@ import { breakpoints, colors, fonts } from "../../styles/stylesVariables";
 import { MdFileDownload } from "react-icons/md";
 
 export const DownloadButton = styled.button`
-  margin-top: 1%;
-  margin-bottom: 5%;
-  margin-right: 10%;
+ 
   padding: 0.6rem 1rem;
   background-color: #ffa500;
   color: white;
@@ -16,7 +14,7 @@ export const DownloadButton = styled.button`
   cursor: pointer;
   font-size: 1 rem;
   transition: background-color 0.3s;
-
+  align-items: center;
   &:hover {
     background-color: #e69500;
   }
@@ -42,6 +40,7 @@ export const TranscriptionContainer = styled.div`
   border-radius: 8px;
   max-height: 300px;
   overflow-y: auto;
+  align-items: center;
 
   h3 {
     margin-bottom: 1rem;
@@ -146,26 +145,29 @@ export const Group = styled.div`
 
 export const ButtonDiv = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 4 rem;
+  flex-direction: column;
+  gap: 0.1rem;
   justify-content: center;
   align-items: center;
   width: 70%;
   align-self: center;
 `;
 
-export const ButtonDiv2 = styled.div`
-  display: flex;
-  flex-direction: row;
+export const UploadButton = styled.div`
+display: flex;
+
   justify-content: center;
-  align-items: center;
-  width: 70%;
+  align-items: center !important;
+  width: 100%;
+  margin-left: 50%;
+  {
+  flex-direction: column;
+  }
 `;
 
 export const DownloadLink = styled.a`
   margin-top: 1%;
   margin-bottom: 5%;
-  margin-right: 10%;
   padding: 0.6rem 1rem;
   background-color: #ffa500;
   color: white;
