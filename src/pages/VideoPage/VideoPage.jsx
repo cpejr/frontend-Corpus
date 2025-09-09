@@ -25,6 +25,7 @@ import { useUpdateVideos } from "../../hooks/query/videos";
 import { useGetManualTranscriptions } from "../../hooks/query/manualTranscription";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
+import ManualTranscriptionArchiveModel from "../../../../backend-Corpus/src/Models/ManualTranscriptionArchiveModel";
 
 export default function VideoPage() {
   const queryClient = useQueryClient();
@@ -38,10 +39,14 @@ export default function VideoPage() {
   const [displayDownloadButton, setDisplayDownloadButton] = useState(false);
 
   const archiveId = data?.archives;
-  const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
+
+  //  const manualTranscriptionID = data?.ManualTranscriptionArchive?._id;
+  const [currentManualTranscriptionId, setManualTranscriptionId] = useState(
+    data?.ManualTranscriptionArchive?._id
+  );
 
   const { data: archiveData, isLoading } = useGetArchives({
-    id: archiveId,
+    id: archiveId._id,
     name: data.title,
   });
 
@@ -53,27 +58,35 @@ export default function VideoPage() {
 
   // const vttURL = vttUrlFromS3 || "";
   //
-   console.log("VTTURL", vttURL);
+  console.log("VTTURL", vttURL);
+
   const { data: manualTranscription } = useGetManualTranscriptions({
-    id: manualTranscriptionID,
+    id: currentManualTranscriptionId,
     onError: () => {},
   });
+
+  console.log("Valor da manualTranscription:", manualTranscription);
 
   useEffect(() => {
     setDisplayDownloadButton(!!manualTranscription);
   }, [manualTranscription]);
 
-  const { data: transcriptionData} = useGetTranscriptionUrl ({
-    transcriptionId: data?.transcription,
+  const { data: transcriptionData } = useGetTranscriptionUrl({
+    transcriptionId: data?.transcription?._id,
   });
   const pdfUrl = transcriptionData?.url;
- 
-
 
   const { mutate: updateVideos } = useUpdateVideos({
-    onSuccess: () => {
+    onSuccess: (updatedVideo) => {
+      setManualTranscriptionId(updatedVideo.ManualTranscriptionArchive);
+
       queryClient.invalidateQueries({ queryKey: ["videos"] });
-      queryClient.invalidateQueries({ queryKey: ["transcription"] });
+      queryClient.invalidateQueries({
+        queryKey: [
+          "manualTranscriptions",
+          updatedVideo.ManualTranscriptionArchive,
+        ],
+      });
       toast.success(translation.transcriptionUpload);
     },
   });
@@ -106,7 +119,13 @@ export default function VideoPage() {
       "Arquivo recebido no submit:",
       archive.ManualTranscriptionArchive
     );
-    updateVideos({ _id: data._id, body: archive });
+
+    updateVideos({
+      _id: data._id,
+      body: {
+        ManualTranscriptionArchive: archive.ManualTranscriptionArchive,
+      },
+    });
   };
 
   return (
@@ -121,7 +140,7 @@ export default function VideoPage() {
           {!isLoading && (
             <>
               <Video controls title={data.title}>
-                <source src={archiveData.videoURL} type="video/mp4" />
+                <source src={archiveData?.videoURL || ""} type="video/mp4" />
                 <track
                   label="Português"
                   kind="subtitles"
@@ -145,7 +164,7 @@ export default function VideoPage() {
 
                 {displayDownloadButton && manualTranscription && (
                   <DownloadLink
-                    href={manualTranscription}
+                    href={manualTranscription?.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
