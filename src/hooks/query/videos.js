@@ -12,7 +12,7 @@ import {
 
 export function useGetVideos({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["videos"],
@@ -24,21 +24,21 @@ export function useGetVideos({
 
 export function useCreateVideos({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useMutation({ mutationFn: createVideos, onSuccess, onError });
 }
 
 export function useDeleteVideos({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useMutation({ mutationFn: deleteVideos, onSuccess, onError });
 }
 
 export function useUpdateVideos({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useMutation({ mutationFn: updateVideos, onSuccess, onError });
 }
@@ -48,7 +48,7 @@ export function useGetVideosByCategoryId({
   transcription,
 
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["videos", { id, title, transcription }],
@@ -61,7 +61,7 @@ export function useGetVideosByParameters({
   filters,
 
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["videos", filters],
@@ -74,7 +74,7 @@ export function useGetVideosByParameters({
 export function useGetTranscriptionUrl({ 
   transcriptionId,
   onSuccess = () => {},
-  onError = (err )=> console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["transcriptionUrl", transcriptionId],
@@ -87,7 +87,7 @@ export function useGetTranscriptionUrl({
 
 export function useGetVTTUrl ({ videoId,
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["vttUrl", videoId],

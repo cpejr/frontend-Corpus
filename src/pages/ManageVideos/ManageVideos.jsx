@@ -191,7 +191,7 @@ export default function ManageVideosPage() {
 
       createVideo(formData);
     } catch (error) {
-      console.error("Erro ao enviar dados:", error);
+
       toast.error("Erro ao enviar dados");
     }
   };

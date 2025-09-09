@@ -4,7 +4,7 @@ import { getManualTranscription } from "../../services/endpoints";
 export function useGetManualTranscriptions({
   id,
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["transcription", id],

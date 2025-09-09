@@ -4,7 +4,7 @@ import useAuthStore from "../../stores/auth";
 
 export function useLogin({
     onSuccess = () => {},
-    onError = (err) => console.error(err),
+    onError = () => {},
   } = {}) {
     return useMutation({
       mutationFn: login,
@@ -15,7 +15,7 @@ export function useLogin({
   
   export function useLogout({
     onSuccess = () => {},
-    onError = (err) => console.error(err),
+    onError = () => {},
   } = {}) {
     return useMutation({
       mutationFn: logout,

@@ -5,7 +5,7 @@ import { getLanguages } from "../../services/endpoints";
 export function useGetLanguages({
   filters,
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["language", filters],

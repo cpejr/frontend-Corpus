@@ -3,7 +3,7 @@ import { getArchives } from "../../services/endpoints";
 
 export function useGetArchives({
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
   id,
   name,
 } = {}) {

@@ -5,7 +5,7 @@ import { getCountries } from "../../services/endpoints";
 export function useGetCountries({
   filters,
   onSuccess = () => {},
-  onError = (err) => console.error(err),
+  onError = () => {},
 } = {}) {
   return useQuery({
     queryKey: ["countries", filters],

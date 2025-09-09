@@ -58,14 +58,14 @@ export default function VideoPage() {
 
   // const vttURL = vttUrlFromS3 || "";
   //
-  console.log("VTTURL", vttURL);
+
 
   const { data: manualTranscription } = useGetManualTranscriptions({
     id: currentManualTranscriptionId,
     onError: () => {},
   });
 
-  console.log("Valor da manualTranscription:", manualTranscription);
+
 
   useEffect(() => {
     setDisplayDownloadButton(!!manualTranscription);
@@ -75,7 +75,6 @@ export default function VideoPage() {
     transcriptionId: data?.transcription,
   });
   const pdfUrl = transcriptionData?.url;
-  console.log("URL TRANSCRIÇÃO", transcriptionData);
 
   const { mutate: updateVideos } = useUpdateVideos({
     onSuccess: (updatedVideo) => {
@@ -117,10 +116,7 @@ export default function VideoPage() {
   ]);
 
   const handleSubmit = (archive) => {
-    console.log(
-      "Arquivo recebido no submit:",
-      archive.ManualTranscriptionArchive
-    );
+
 
     updateVideos({
       _id: data._id,

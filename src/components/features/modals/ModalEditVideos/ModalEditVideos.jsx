@@ -30,7 +30,7 @@ export default function ModalEditVideos({ video, modal, close, id }) {
   const [inputs, setInputs] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [countries, setCountries] = useState([]);
-  console.log(video);
+
   useEffect(() => {
     if (languagesData) {
       setLanguages(languagesData);
@@ -122,7 +122,7 @@ export default function ModalEditVideos({ video, modal, close, id }) {
       },
     ]);
   }, [languages, countries, globalLanguage, video]);
-  console.log(video?.language[0]?._id);
+
   const { mutate: updateVideos } = useUpdateVideos({
     onSuccess: () => {
       queryClient.invalidateQueries({
